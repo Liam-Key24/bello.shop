@@ -1,101 +1,110 @@
-import Image from "next/image";
+"use client"
+
+import { motion } from "framer-motion"
+import { Navbar } from "@/app/components/Navbar"
+import { Hero } from "@/app/components/Hero"
+import { Feature } from "@/app/components/Feature"
+import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div>
+      <Navbar />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Hero Section */}
+        
+          <Hero />
+          <Feature />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        {/* Featured Products */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-primary-800 mb-8">Featured Products</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          </div>
+        </section>
+
+        {/* Categories */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-primary-800 mb-8">Shop by Category</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {["Supplements", "Skincare", "Nutrition", "Wellness"].map((category) => (
+              <motion.div
+                key={category}
+                whileHover={{ scale: 1.05 }}
+                className="relative h-40 rounded-lg overflow-hidden"
+              >
+                <Image src="/placeholder.svg" alt={category} width={240} height={160} className="object-cover" />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                  <h3 className="text-white font-medium text-lg">{category}</h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Deal Section */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="bg-accent-light rounded-lg p-8 text-center mb-16"
+        >
+          <h2 className="text-3xl font-bold text-accent-dark mb-4">Special Offer</h2>
+          <p className="text-primary-600 mb-6">Get 20% off on your first purchase with code WELCOME20</p>
+          <button className="bg-accent-dark hover:bg-accent text-white px-8 py-3 rounded-lg font-medium transition-colors">
+            Shop Now
+          </button>
+        </motion.section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="bg-primary-800 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div>
+              <h3 className="text-lg font-medium mb-4">About Us</h3>
+              <p className="text-primary-200">
+                Dedicated to bringing you the finest natural health and wellness products.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium mb-4">Quick Links</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-primary-200 hover:text-white transition-colors">
+                    Shop
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-primary-200 hover:text-white transition-colors">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-primary-200 hover:text-white transition-colors">
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium mb-4">Newsletter</h3>
+              <form className="flex gap-2">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="px-4 py-2 rounded flex-1 text-primary-800"
+                />
+                <button className="bg-accent hover:bg-accent-dark px-4 py-2 rounded transition-colors">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
+
