@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react'
 import { FeaturedCarouselProductCard } from './FeaturedCarouselProductCard'
+import { ArrowRight } from 'lucide-react'
 
 const products = [
   { id: 1, title: 'Product 1', price: '9.99', description: 'hello' },
@@ -56,9 +57,9 @@ export function ProductCarousel() {
       
       <button
         onClick={scrollCarousel}
-        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow-md hover:bg-white"
+        className="absolute -right-12 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow-md hover:bg-white hidden md:block"
       >
-        →
+        <ArrowRight /> 
       </button>
     </div>
   )

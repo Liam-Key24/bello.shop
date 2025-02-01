@@ -3,7 +3,7 @@ import React from 'react'
 
 export function Hero() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 bg-">
       <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 lg:gap-12">
         <div className="w-full md:w-1/2 space-y-4 sm:space-y-6 text-center md:text-left">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
