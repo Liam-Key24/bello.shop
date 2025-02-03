@@ -57,9 +57,9 @@ export function ProductCarousel() {
       
       <button
         onClick={scrollCarousel}
-        className="absolute -right-12 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow-md hover:bg-white hidden md:block"
+        className="absolute -right-12 top-1/2 -translate-y-1/2 z-10 bg-green-200/80 p-2 rounded-full shadow-md hover:bg-green-200 hidden md:block"
       >
-        <ArrowRight /> 
+        <ArrowRight className='text-green-100'/> 
       </button>
     </div>
   )

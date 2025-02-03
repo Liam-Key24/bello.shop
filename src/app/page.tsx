@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Navbar } from "@/app/components/Navbar"
 import { Hero } from "@/app/components/Hero"
 import { Feature } from "@/app/components/Feature"
@@ -9,7 +8,7 @@ import {ProductShowcaseSection} from  '@/app/components/ProductShowcaseSection'
 import { SocialsSection } from "@/app/components/SocialsSection"
 import { ProductBanner } from "@/app/components/ProductBanner"
 import { Footer } from "@/app/components/Footer"
-import { ArrowRight } from "lucide-react"
+import { ProductSuggestions } from "@/app/components/ProductSuggestions"
 
 export default function Home() {
   return (
@@ -47,6 +46,10 @@ export default function Home() {
 
         <section className="w-full">
           <SocialsSection />
+        </section>
+
+        <section className="w-full">
+            <ProductSuggestions />
         </section>
       </main>
 
