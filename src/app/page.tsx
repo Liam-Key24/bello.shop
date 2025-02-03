@@ -20,6 +20,11 @@ export default function Home() {
           <Hero />
         </section>
 
+
+        {/* Categories */}
+        <Categories />
+
+
         {/* Featured Products */}
         <section className="w-full">
           <ProductBanner />
@@ -32,7 +37,6 @@ export default function Home() {
 
         {/* Categories */}
         <section className="w-full">
-          <Categories />
         </section>
 
         {/* Deal Section */}
@@ -41,7 +45,7 @@ export default function Home() {
         </section>
 
         <section className="w-full">
-          <ProductBanner />
+          <ProductSuggestions />
         </section>
 
         <section className="w-full">
@@ -49,7 +53,7 @@ export default function Home() {
         </section>
 
         <section className="w-full">
-            <ProductSuggestions />
+        <ProductBanner />
         </section>
       </main>
 

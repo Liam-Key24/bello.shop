@@ -33,7 +33,7 @@ export function Feature() {
         </div>
 
         <div className="w-full flex flex-col md:block md:space-y-10 md:my-auto gap-4">
-          <div className='rounded bg-green-100 w-full h-40 md:h-96 mx-auto py-3'>
+          <div className='w-full  h-40 rounded bg-green-100  md:h-96 mx-auto py-3'>
             <div className='relative w-[95%] md:aspect-[2/1] mx-auto'>
             <Image
               src='/media/trinh-minh-th-h4cM5JQmxoQ-unsplash.jpg'
@@ -43,17 +43,23 @@ export function Feature() {
               priority
             />
             </div>
-            <div className='w-full inline-flex justify-evenly items-center'>
-              <h2 className='text-left px-2 sm:px-3 md:px-4'>Discover our Limited Bundle Offers</h2>
-              <button className="group flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out hover:scale-110 md:text-base text-sm">
-              <span className="transition-colors duration-300">
-                View Item
-              </span>
-              <ArrowUpRight className='block md:hidden' />
-              <ArrowRight className="hidden md:block group-hover:-rotate-45 transition-all duration-300" />
-            </button>
+
+            <div className='w-auto h-24 flex flex-col justify-center items-center text-center px-auto'>
+              <h2 className='text-lg sm:text-xl md:text-2xl'>
+                Discover our Limited Bundle Offers
+              </h2>
+              <button className="group inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm md:text-base transition-all duration-300 ease-in-out hover:scale-110">
+                <span className="duration-300">
+                  View Items
+                </span>
+                <ArrowUpRight className='block md:hidden w-4 h-4 sm:w-5 sm:h-5' />
+                <ArrowRight className="hidden md:block w-4 h-4 sm:w-5 sm:h-5 group-hover:-rotate-45 transition-all duration-300" />
+              </button>
+              
             </div>
+
           </div>
+
           <div className="rounded p-4 flex justify-between items-center bg-[#F5A3BE] text-red-700 w-auto h-24">
             <div className="flex-col text-center p-5">
               <h2 className="font-semibold md:text-4xl text-2xl">Valentines Deal</h2>

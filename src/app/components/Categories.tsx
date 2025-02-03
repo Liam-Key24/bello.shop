@@ -6,7 +6,7 @@ export function Categories () {
     <section className="w-full bg-white  flex flex-wrap">
       <div className="container mx-auto px-4">
         <h2 className="text-xl text-center md:text-left md:text-3xl font-bold mb-8 text-green-300">Categories</h2>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-2">
           
           <div className="md:h-20 h-14 border  bg-green-100/30 text-green-300 p-2 w-auto rounded-lg flex items-center gap-2 transition-all duration-300 ease-in-out hover:scale-105 hover:-rotate-1 hover:bg-green-100 hover:text-green-300">
             <img
