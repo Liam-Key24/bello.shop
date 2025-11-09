@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+
+
+:root {
+  --background: #DAE7DA;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #DAE7DA;
+    --foreground: #ededed;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply rounded-lg shadow-lg transition-all;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+  .glass:hover {
+    background-color: rgba(218, 231, 218, 0.3);
+    transform: scale(1.03);
+  }
+}
+
+/* --- Melodrama Fonts --- */
+
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/font/Melodrama-Bold.woff2') format('woff2');
+  font-weight: 700; /* Bold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/font/Melodrama-Light.woff2') format('woff2');
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/font/Melodrama-Medium.woff2') format('woff2');
+  font-weight: 500; /* Medium */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/font/Melodrama-Regular.woff2') format('woff2');
+  font-weight: 400; /* Regular */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/font/Melodrama-Semibold.woff2') format('woff2');
+  font-weight: 600; /* Semibold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Melodrama';
+  src: url('/font/Melodrama-Variable.woff2') format('woff2');
+  font-weight: 100 900; /* Defines the weight range for the variable font */
+  font-style: normal;
+}
+
+/* --- Nunito Fonts --- */
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-BoldItalic.woff2') format('woff2');
+  font-weight: 700; /* Bold */
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-ExtraBold.woff2') format('woff2');
+  font-weight: 800; /* ExtraBold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-ExtraLight.woff2') format('woff2');
+  font-weight: 200; /* ExtraLight */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-ExtraLightItalic.woff2') format('woff2');
+  font-weight: 200; /* ExtraLight */
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-Italic.woff2') format('woff2');
+  font-weight: 400; /* Assumed Regular */
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-Light.woff2') format('woff2');
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-LightItalic.woff2') format('woff2');
+  font-weight: 300; /* Light */
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-MediumItalic.woff2') format('woff2');
+  font-weight: 500; /* Medium */
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-Regular.woff2') format('woff2');
+  font-weight: 400; /* Regular */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-SemiBold.woff2') format('woff2');
+  font-weight: 600; /* SemiBold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-Variable.woff2') format('woff2');
+  font-weight: 200 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/font/Nunito-VariableItalic.woff2') format('woff2');
+  font-weight: 200 900; 
+  font-style: italic;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--background);
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+h1,h2,h3,h4,h5{
+  font-family: 'Melodrama', serif;
+}

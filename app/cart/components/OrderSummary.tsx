@@ -1,0 +1,45 @@
+"use client";
+
+import { useCartContext } from "../CartProvider";
+
+export default function OrderSummary() {
+  const { cart } = useCartContext();
+
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+  const subtotal = cart.reduce(
+    (sum, item) => sum + (Number(item.price ?? 0) * (item.quantity || 0)),
+    0
+  );
+
+  return (
+    
+      <div className="glass rounded-4xl p-6 w-full ">
+        <div className="space-y-6">
+          {/* Subtotal */}
+          <div className="flex justify-between items-center">
+            <h2 className="text-lg">
+              Subtotal ({totalItems} {totalItems === 1 ? "item" : "items"})
+            </h2>
+            <span className="text-lg font-medium">
+              £{subtotal.toFixed(2)}
+            </span>
+          </div>
+
+          {/* Shipping (free) */}
+          <div className="flex justify-between items-center">
+            <h2 className="text-lg">Shipping cost</h2>
+            <span className="text-lg font-medium ">free</span>
+          </div>
+
+          {/* Total */}
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-semibold ">Total</h2>
+            <span className="text-xl font-semibold">
+              £{subtotal.toFixed(2)}
+            </span>
+          </div>
+        </div>
+      </div>
+   
+  );
+}
