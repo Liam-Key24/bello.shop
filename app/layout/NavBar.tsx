@@ -1,16 +1,45 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
-import NavCartIcon from "../components/ui/NavCartIcon"
-import { Search, User, X, Menu, ChevronDown, ExternalLink, } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { useRouter } from "next/navigation"
+import { NavCartIcon } from "../components/common"
+import { useAuth } from "../contexts/AuthContext"
+import { Search, User, X, Menu, ChevronDown, ExternalLink, LogOut } from "lucide-react"
 
 export default function NavBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [showUserMenu, setShowUserMenu] = useState(false)
+    const { isAuthenticated, customer, logout } = useAuth()
+    const router = useRouter()
+    const userMenuRef = useRef<HTMLDivElement>(null)
+
+    const handleLogout = async () => {
+        await logout()
+        setShowUserMenu(false)
+        router.push('/account/login')
+    }
+
+    // Close user menu when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+                setShowUserMenu(false)
+            }
+        }
+
+        if (showUserMenu) {
+            document.addEventListener('mousedown', handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [showUserMenu])
 
     return (
         <>
-            <div className="w-[90%] glass h-12 rounded-full inline-flex justify-between items-center px-6 fixed z-10 top-5 left-1/2 -translate-x-1/2 transition-all duration-300">
+            <div className="fixed z-50 w-[90%] glass h-12 rounded-full inline-flex justify-between items-center px-6 top-5 left-1/2 -translate-x-1/2 transition-all duration-300">
                 <Link href={'/'} className="cursor-pointer">
                     <h1 className="text-xl">Bello.today</h1>
                 </Link>
@@ -20,7 +49,44 @@ export default function NavBar() {
                         className="w-5 h-5 text-gray-700 cursor-pointer"
                         onClick={() => setIsMenuOpen(true)}
                     />
-                    <User className="w-5 h-5 text-gray-700 cursor-pointer" />
+                    {isAuthenticated ? (
+                        <div className="relative" ref={userMenuRef}>
+                            <button
+                                onClick={() => setShowUserMenu(!showUserMenu)}
+                                className="flex items-center gap-1"
+                                aria-label="User menu"
+                            >
+                                <User className="w-5 h-5 text-gray-700 cursor-pointer" />
+                                {customer?.firstName && (
+                                    <span className="text-sm text-gray-700 hidden sm:inline">
+                                        {customer.firstName}
+                                    </span>
+                                )}
+                            </button>
+                            {showUserMenu && (
+                                <div className="absolute right-0 mt-2 w-48 glass rounded-4xl p-2 shadow-lg z-50">
+                                    <Link
+                                        href="/account/profile"
+                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg mb-1"
+                                        onClick={() => setShowUserMenu(false)}
+                                    >
+                                        Profile
+                                    </Link>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg flex items-center gap-2"
+                                    >
+                                        <LogOut className="w-4 h-4" />
+                                        Logout
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <Link href="/account/login" aria-label="Login">
+                            <User className="w-5 h-5 text-gray-700 cursor-pointer" />
+                        </Link>
+                    )}
                     {isMenuOpen ? (
                         <X
                             className="w-5 h-5 text-gray-700 cursor-pointer"
@@ -48,7 +114,7 @@ export default function NavBar() {
                 <div className="p-6 pt-8">
 
                     {/* Search Bar */}
-                    <div className="glass border-[#DAE7DA] rounded-full mb-6 h-12">
+                    <div className="glass border-frosty-green rounded-full mb-6 h-12">
                         <div className="px-6 py-3 flex items-center gap-3">
                             <Search className="w-5 h-5 text-gray-500" />
                             <input

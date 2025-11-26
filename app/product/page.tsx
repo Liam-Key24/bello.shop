@@ -1,8 +1,8 @@
-import { getAllProducts } from '../../lib/shopify';
+import { getAllProductsSimple } from '@/lib/shopify/products';
 import Link from 'next/link';
 
 export default async function ProductsPage() {
-  const products = await getAllProducts();
+  const products = await getAllProductsSimple();
 
   if (!products?.length) {
     return <div className="text-center py-10">No products found.</div>;
@@ -23,8 +23,7 @@ export default async function ProductsPage() {
           />
           <h2 className="text-lg font-medium">{product.title}</h2>
           <p className="text-sm text-gray-600">
-            {product.priceRange?.minVariantPrice.amount}{' '}
-            {product.priceRange?.minVariantPrice.currencyCode}
+            £{product.price.toFixed(2)}
           </p>
         </Link>
       ))}

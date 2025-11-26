@@ -1,16 +1,15 @@
 "use client";
 
-import BackButton from "../components/ui/BackButton";
+import { BackButton } from "../components/common";
 import CartItemCard from "./components/CartItemCard";
-import CheckOutButton from "../components/ui/CheckOutButton";
-import { useCartContext } from "./CartProvider";
 import OrderSummary from "./components/OrderSummary";
 import ContinueCheckout from "./components/ContinueCheckout";
 
-export default function CartPage() {
-  const { cart, checkoutCart } = useCartContext();
+import {useCart} from "./CartProvider";
 
-  console.log("Cart state in CartPage:", cart);
+export default function CartPage() {
+  const { cart } = useCart();
+
   return (
 
     <div className="mt-20 space-y-4 mb-6 flex flex-col items-center">
@@ -26,11 +25,11 @@ export default function CartPage() {
         <p>Your cart is empty.</p>
       )}
       {/* Checkout button */}
-      {cart.length > 0 && (
-        <CheckOutButton onClick={checkoutCart} />
-      )}
+      
     <OrderSummary/>
-    <ContinueCheckout/> 
+    {cart.length > 0 && (
+        <ContinueCheckout/>
+      )}
     </div>
 
   );

@@ -1,67 +1,58 @@
-// filepath: /Users/liamgk/Desktop/belloshop2025/my-ecommerce-app/app/product/[handle]/page.tsx
-import { getProductByHandle } from '../../../lib/shopify';
-import ProductImageGallery from '../../layout/ProductShopGallery';
-import ProductTitle from '../../components/ui/ProductTitle';
-import BrandBadge from '../../components/ui/BrandBadge';
-import ProductDescription from '../../components/ui/ProductDescription';
-import Rating from '../../components/ui/Rating';
-import DetailsDropdown from '../../components/ui/DetailsDropdown';
-import QuantitySelector from '../../components/ui/QuantitySelector';
-import ActionButtons from '../../cart/components/Actionbuttons';
-import BackButton from '../../components/ui/BackButton';
+// filepath: app/product/[handle]/page.tsx
+import { getProductByHandle } from "@/lib/shopify/products";
+import ProductImageGallery from "../../layout/ProductShopGallery";
+import { 
+  ProductTitle, 
+  BrandBadge, 
+  ProductDescription, 
+  Rating, 
+  DetailsDropdown, 
+  QuantitySelector, 
+  BackButton 
+} from "../../components/common";
+import ActionButtons from "../../cart/components/ActionButtons";
+
 
 interface ProductPageProps {
-  params: Promise<{ handle: string }>;
+  params: {
+    handle: string;
+  };
 }
 
+
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { handle } = await params;
+    const resolvedParams = await params; // <-- unwrap the promise
+  const handle = resolvedParams.handle;
+
+  if (!handle) return <div className="p-8 text-center">Invalid product handle.</div>;
+
   const product = await getProductByHandle(handle);
 
-  if (!product) {
-    return <div className="p-8 text-center">Product not found.</div>;
-  }
+  if (!product) return <div className="p-8 text-center">Product not found.</div>;
 
-  const images =
-    product.images?.map((img: any) => ({
-      url: img.url,
-      altText: img.altText || product.title,
-    })) || [];
-
-  const variantNode = product.variants?.edges?.[0]?.node;
-  const variantId = variantNode?.id || "";
-  const variantPrice = Number(product.priceRange?.minVariantPrice?.amount ?? 0);
-  const productImage = product.images?.[0]?.url ?? "/placeholder.svg";
-  const productTitle = product.title ?? "";
-
+  const { title, description, images, price, variants } = product;
+  const variantId = variants?.[0]?.id ?? "";
+  const image = images?.[0]?.url ?? "/placeholder.svg";
 
   return (
-    <div className="w-full mt-10 mb-6">
-      <div className="flex items-center mb-4">
-        <BackButton />
-      </div>
+    <div className="w-full mt-10 mb-6 space-y-6">
+      <BackButton />
 
       <ProductImageGallery images={images} />
 
-      <div className="w-full flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
         <BrandBadge />
-        <ProductTitle name={product.title} />
+        <ProductTitle name={title} />
         <Rating rating={5} reviewCount={12} />
-        <ProductDescription description={product.description || ''} />
+        <ProductDescription description={description || ""} />
       </div>
 
-      <div className="flex gap-4 mb-6">
+      <div className="flex gap-4">
         <DetailsDropdown />
         <QuantitySelector />
       </div>
 
-      {/* pass real props to ActionButtons */}
-      <ActionButtons
-        variantId={variantId}
-        title={productTitle}
-        price={variantPrice}
-        image={productImage}
-      />
+      <ActionButtons variantId={variantId} title={title} price={price} image={image} />
     </div>
   );
 }

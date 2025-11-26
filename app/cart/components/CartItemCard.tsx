@@ -3,14 +3,15 @@
 import Image from "next/image";
 import {useTransition } from "react";
 import CartItemQuantitySelector from "./CartItemQuantitySelector"; // keep your existing selector
-import { useCartContext, CartItem } from "../CartProvider";
+import { useCart } from "../CartProvider";
+import { ShopifyCartItem } from "@/lib/shopify/types";
 
 interface CartItemCardProps {
-  item: CartItem;
+  item: ShopifyCartItem;
 }
 
 export default function CartItemCard({ item }: CartItemCardProps) {
-  const { removeItem, updateQuantity } = useCartContext();
+  const { removeItem, updateQuantity } = useCart();
   const [isPending, startTransition] = useTransition();
 
   const handleRemove = () => {

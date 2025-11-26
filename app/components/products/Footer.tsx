@@ -2,7 +2,7 @@
 
 export default function Footer(){
     return(
-        <div className="glass w-full h-96 rounded-4xl p-3 flex flex-col items-center justify-between p-5 ">
+        <div className="glass w-full h-96 rounded-4xl p-5 flex flex-col items-center justify-between">
             <h2 className="text-7xl text-center">Bello.today</h2>
 
             <div className="w-auto h-auto inline-flex space-x-10">

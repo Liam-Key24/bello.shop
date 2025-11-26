@@ -1,43 +1,43 @@
 "use client";
+import { ShoppingCart } from "lucide-react";
+import { performCheckout } from "@/lib/shopify/cart-utils";
+import type { ShopifyCartItem } from "@/lib/shopify/types";
 
-import React from "react";
+const CHECKOUT_EXPIRY_MS = 5 * 60 * 1000; // 5 minutes
 
 const handleCheckout = async () => {
   if (typeof window === "undefined") return;
 
-  const stored = localStorage.getItem("cart");
-  if (!stored) {
-    alert("Your cart is empty.");
-    return;
-  }
-
-  let cartItems: any[] = [];
+  let cartItems: ShopifyCartItem[] = [];
   try {
-    cartItems = JSON.parse(stored);
+    const storedCart = localStorage.getItem("cart");
+    if (!storedCart) {
+      alert("Your cart is empty.");
+      return;
+    }
+    cartItems = JSON.parse(storedCart);
+    if (!Array.isArray(cartItems) || !cartItems.length) {
+      alert("Your cart is empty.");
+      return;
+    }
   } catch (err) {
-    console.error("Failed to parse cart from localStorage:", err);
+    console.error("Failed to parse cart:", err);
+    localStorage.removeItem("cart");
     alert("There was a problem with your cart data.");
     return;
   }
 
-  if (!Array.isArray(cartItems) || cartItems.length === 0) {
-    alert("Your cart is empty.");
-    return;
-  }
-
-  const res = await fetch("/api/create-cart", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ items: cartItems }),
-  });
-
-  const data = await res.json().catch(() => ({}));
-
-  if (res.ok && data.checkoutUrl) {
-    window.location.href = data.checkoutUrl;
+  const checkoutUrl = await performCheckout(cartItems);
+  
+  if (checkoutUrl) {
+    window.location.href = checkoutUrl;
+    // Clear cart after 5 minutes
+    setTimeout(() => {
+      localStorage.removeItem("cart");
+      console.log("Cart cleared from localStorage after 5 minutes");
+    }, CHECKOUT_EXPIRY_MS);
   } else {
-    console.error("create-cart error:", data);
-    alert(data?.error || "There was a problem creating your checkout");
+    alert("There was a problem creating your checkout");
   }
 };
 
@@ -46,9 +46,10 @@ export default function ContinueCheckout() {
     <div className="mt-6">
       <button
         onClick={handleCheckout}
-        className="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+        className="glass w-full h-16 rounded-4xl flex items-center justify-center gap-7"
       >
-        Continue to Checkout
+        <p className="text-lg font-medium">Continue to Checkout</p>
+        <ShoppingCart />
       </button>
     </div>
   );

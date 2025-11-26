@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@utilities tailwindcss;
+@theme tailwindcss;
+
 
 @layer base {
   html {
@@ -10,7 +11,94 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-accent-dark hover:bg-accent text-white px-8 py-3 rounded-lg font-medium transition-colors;
+    background-color: rgb(var(--color-accent-dark));
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  .btn-primary:hover {
+    background-color: rgb(var(--color-accent));
+  }
+  .glass {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(35px) saturate(220%) contrast(130%);
+    -webkit-backdrop-filter: blur(35px) saturate(220%) contrast(130%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 2rem;
+    box-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.05),
+      0 8px 40px rgba(255, 255, 255, 0.1);
+    background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    transition: all 0.45s ease-in-out;
+  }
+  .glass:hover {
+    background-color: rgba(245, 248, 250, 0.5);
+    transform: scale(1.06);
+    box-shadow: 
+      0 0 40px rgba(255, 255, 255, 0.1),
+      0 12px 60px rgba(255, 255, 255, 0.15);
+  }
+  .bg-frosty-green {
+    background-color: #DAE7DA;
+  }
+  .border-frosty-green {
+    border-color: #DAE7DA;
+  }
+  .rounded-4xl {
+    border-radius: 30px;
+  }
+
+  /* Custom Width Utilities - Used in product cards and components */
+  .w-custom-87-5 {
+    width: 350px;
+  }
+  .w-custom-41-5 {
+    width: 166px;
+  }
+
+  /* Custom Height Utilities - Used in hero cards and banners */
+  .h-105 {
+    height: 105px;
+  }
+  .h-custom-41-5 {
+    height: 166px;
+  }
+
+  /* Primary Color Utility - Used for primary actions and accents */
+  .text-primary {
+    color: #6B46C1;
+  }
+  .bg-primary {
+    background-color: #6B46C1;
+  }
+
+  /* Font Family Utilities - Used throughout the app */
+  .font-melodrama {
+    font-family: 'Melodrama', serif;
+  }
+  .font-nunito {
+    font-family: 'Nunito', sans-serif;
   }
 }
 
+/* Tailwind v4 Theme Configuration */
+@theme {
+  --font-family-melodrama: 'Melodrama', serif;
+  --font-family-nunito: 'Nunito', sans-serif;
+  
+  --color-primary: #6B46C1;
+  --color-frosty-green: #DAE7DA;
+  
+  --radius-4xl: 30px;
+  
+  --width-custom-87-5: 350px;
+  --width-custom-41-5: 166px;
+  --height-105: 105px;
+  --height-custom-41-5: 166px;
+}

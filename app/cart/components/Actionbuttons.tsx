@@ -1,48 +1,24 @@
 "use client";
 
-import { useCartContext } from "../CartProvider";
 import { useTransition } from "react";
-import { createCheckout } from "../../../lib/shopify"; // if you use it for buy now
-import {ArrowUpRightIcon, ShoppingCartSimpleIcon } from "@phosphor-icons/react";
-interface ActionButtonsProps {
-  variantId: string;
-  title: string;
-  price: number;
-  image?: string;
-}
+import { ArrowUpRightIcon, ShoppingCartSimpleIcon } from "@phosphor-icons/react";
+import { useCart } from "../CartProvider";
+import { createCartItem } from "@/lib/shopify/cart-utils";
+import type { CartButtonProps } from "@/lib/shopify/types";
 
-export default function ActionButtons({ variantId, title, price, image }: ActionButtonsProps) {
-  const { addToCart } = useCartContext();
+export default function ActionButtons({ variantId, title, price, image }: CartButtonProps) {
+  const { addItem, buyNow } = useCart();
   const [isPending, startTransition] = useTransition();
 
   const handleAddToCart = () => {
     startTransition(() => {
-      try {
-        const item = {
-          variantId,
-          title: title || "Untitled product",
-          price: Number(price ?? 0),
-          image: image || "/placeholder.svg",
-          quantity: 1,
-        };
-        console.log("Adding to cart:", item);
-        addToCart(item);
-      } catch (err) {
-        console.error("Add to cart failed:", err);
-      }
+      addItem(createCartItem({ variantId, title, price, image }));
     });
   };
 
   const handleBuyNow = () => {
-    startTransition(async () => {
-      try {
-        const checkout = await createCheckout(variantId, 1);
-        if (checkout?.webUrl) {
-          window.location.href = checkout.webUrl;
-        }
-      } catch (err) {
-        console.error("Buy Now failed:", err);
-      }
+    startTransition(() => {
+      buyNow(createCartItem({ variantId, title, price, image }));
     });
   };
 
@@ -54,21 +30,17 @@ export default function ActionButtons({ variantId, title, price, image }: Action
         className="glass rounded-4xl w-1/2 h-12"
       >
         Buy now
-        <span>
-          <ArrowUpRightIcon className="inline-block w-4 h-4" />
-        </span>
+        <ArrowUpRightIcon className="inline-block w-4 h-4 ml-1" />
       </button>
+
       <button
         onClick={handleAddToCart}
         disabled={isPending}
         className="glass rounded-4xl w-1/2 h-12"
       >
         Add to cart
-        <span>
-          <ShoppingCartSimpleIcon className="inline-block w-4 h-4 ml-1" />
-        </span>
+        <ShoppingCartSimpleIcon className="inline-block w-4 h-4 ml-1" />
       </button>
-
     </div>
   );
 }

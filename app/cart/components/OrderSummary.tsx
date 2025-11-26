@@ -1,9 +1,9 @@
 "use client";
 
-import { useCartContext } from "../CartProvider";
+import { useCart } from "../CartProvider";
 
 export default function OrderSummary() {
-  const { cart } = useCartContext();
+  const { cart } = useCart();
 
   const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
   const subtotal = cart.reduce(

@@ -1,40 +1,67 @@
-'use client';
-import { useState, useEffect } from 'react';
-import ProductsGrid from '../components/products/ProductsGrid';
-import {ProductItem} from '../components/products/ProductsGrid';
-import { getAllProducts, ShopifyProduct } from './/../../lib/shopify';
+'use client'
 
-// Map ShopifyProduct[] -> ProductItem[]
-function mapShopifyProducts(products: ShopifyProduct[]): ProductItem[] {
-  return products.map(p => ({
-    id: p.id || p.handle,
-    handle: p.handle,
-    title: p.title,
-    price: parseFloat(p.priceRange?.minVariantPrice.amount || '0'),
-    categoryId: p.categoryId || undefined,
-    images: p.images?.map(img => ({ url: img.url, altText: img.altText || p.title })) || [],
-  }));
-}
+import { useSearchParams } from "next/navigation"
+import { useEffect, useState, useMemo } from "react"
+import { getAllProductsSimple } from "@/lib/shopify/products"
+import { mapShopifyToProductItem } from "@/lib/shopify/filter"
+import type { ProductItem } from "@/lib/shopify/types"
 
-export default function ProductsGridClient() {
-  const [products, setProducts] = useState<ProductItem[]>([]);
-  const [loading, setLoading] = useState(true);
+import ProductGrid from "./components/ProductGrid"
+import FilterMenu from "./components/FilterMenu"
+
+
+
+export default function ShopPage() {
+  const [products, setProducts] = useState<ProductItem[]>([])
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+  const searchParams = useSearchParams()
 
   useEffect(() => {
-    async function fetchProducts() {
-      const shopifyProducts: ShopifyProduct[] = await getAllProducts();
-      setProducts(mapShopifyProducts(shopifyProducts));
-      setLoading(false);
+    async function loadProducts() {
+      const data = await getAllProductsSimple(50)
+      const mapped = mapShopifyToProductItem(data)
+      setProducts(mapped)
     }
-    fetchProducts();
-  }, []);
+    loadProducts()
+  }, [])
 
-  if (loading) return <div>Loading products...</div>;
+  const filteredProducts = useMemo(() => {
+    let result = [...products]
+
+    const brand = searchParams.get("brand")
+    const rating = searchParams.get("rating")
+    const price = searchParams.get("price")
+
+    if (brand) {
+      result = result.filter(p => p.vendor === brand)
+    }
+
+    if (rating) {
+      result = result.filter(p => (p.rating ?? 0) >= Number(rating))
+    }
+
+    if (price) {
+      // simple tier mock (you can refine)
+      if (price === "£") result = result.filter(p => p.price < 30)
+      if (price === "££") result = result.filter(p => p.price >= 30 && p.price < 80)
+      if (price === "£££") result = result.filter(p => p.price >= 80)
+    }
+
+    return result
+  }, [products, searchParams])
 
   return (
-  
-  <div>
-
-    <ProductsGrid products={products} />;
-  </div>)
+    <div className="shop-page container mx-auto px-4">
+      <FilterMenu
+        priceTiers={["£", "££", "£££"]}
+        ratings={[1, 2, 3, 4, 5]}
+       brands={[...new Set(products.map(p => p.vendor).filter((v): v is string => Boolean(v)))]}
+      />
+      <ProductGrid
+        products={filteredProducts}
+        viewMode={viewMode}
+        onViewChange={setViewMode}
+      />
+    </div>
+  )
 }

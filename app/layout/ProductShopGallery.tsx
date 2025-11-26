@@ -1,12 +1,8 @@
 'use client';
 import { useState } from 'react';
+import type { ShopifyImage } from '@/lib/shopify/types';
 
-interface GalleryImage {
-  url: string;
-  altText?: string;
-}
-
-export default function ProductImageGallery({ images }: { images: GalleryImage[] }) {
+export default function ProductImageGallery({ images }: { images: ShopifyImage[] }) {
   const mainImage = images[0] || { url: '/placeholder.svg', altText: 'No image' };
   const [selected, setSelected] = useState(mainImage);
   const thumbnails = images.slice(1, 3);
