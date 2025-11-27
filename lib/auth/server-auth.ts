@@ -1,9 +1,11 @@
 import { cookies } from 'next/headers';
 import { getCustomer, customerAccessTokenRenew } from '@/lib/shopify/customer';
 
+import type { GetCustomerResponse } from '@/lib/shopify/types';
+
 export interface ServerAuthResult {
   isAuthenticated: boolean;
-  customer: any | null;
+  customer: GetCustomerResponse['customer'] | null;
   token: string | null;
 }
 
@@ -35,9 +37,15 @@ export async function getServerAuth(): Promise<ServerAuthResult> {
       };
     }
 
+    // Transform addresses from edges structure to flat array
+    const transformedCustomer = {
+      ...customer,
+      addresses: customer.addresses?.edges?.map((edge: { node: any }) => edge.node) || [],
+    };
+
     return {
       isAuthenticated: true,
-      customer,
+      customer: transformedCustomer,
       token,
     };
   } catch (error) {
@@ -54,7 +62,7 @@ export async function getServerAuth(): Promise<ServerAuthResult> {
  * Require authentication - throws error if not authenticated
  * Use in Server Components that require auth
  */
-export async function requireAuth(): Promise<{ customer: any; token: string }> {
+export async function requireAuth(): Promise<{ customer: NonNullable<GetCustomerResponse['customer']>; token: string }> {
   const auth = await getServerAuth();
 
   if (!auth.isAuthenticated || !auth.customer || !auth.token) {

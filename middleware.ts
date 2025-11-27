@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { validateTokenPresence } from '@/lib/auth/token-utils';
 
 /**
  * Middleware for server-side authentication and route protection
  * Runs on every request before the page renders
  * 
  * Location: Root of project (required by Next.js)
+ * 
+ * Note: Token expiration is validated in API routes via Shopify API calls.
+ * Middleware only checks token presence and format for performance.
  */
 
 // Routes that require authentication
@@ -17,20 +21,21 @@ const authRoutes = ['/account/login', '/account/register'];
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get('shopifyCustomerToken')?.value;
+  const hasValidToken = validateTokenPresence(token);
 
   // Check if route is protected
   const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
   const isAuthRoute = authRoutes.some(route => pathname.startsWith(route));
 
-  // Redirect to login if accessing protected route without token
-  if (isProtectedRoute && !token) {
+  // Redirect to login if accessing protected route without valid token
+  if (isProtectedRoute && !hasValidToken) {
     const loginUrl = new URL('/account/login', request.url);
     loginUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(loginUrl);
   }
 
   // Redirect to profile if accessing auth routes while authenticated
-  if (isAuthRoute && token) {
+  if (isAuthRoute && hasValidToken) {
     return NextResponse.redirect(new URL('/account/profile', request.url));
   }
 

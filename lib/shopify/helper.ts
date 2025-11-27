@@ -14,7 +14,7 @@ const getShopifyConfig = () => {
 
 export async function shopifyFetch<T>(
   query: string,
-  variables?: Record<string, any>,
+  variables?: Record<string, unknown>,
   options?: { cache?: RequestCache; revalidate?: number }
 ): Promise<T> {
   const { domain, token } = getShopifyConfig();
@@ -37,7 +37,12 @@ export async function shopifyFetch<T>(
     throw new Error(`Shopify HTTP error ${res.status} ${res.statusText}`);
   }
 
-  let data: any;
+  interface ShopifyResponse<T> {
+    data?: T;
+    errors?: Array<{ message: string; locations?: unknown[]; path?: unknown[] }>;
+  }
+
+  let data: ShopifyResponse<T>;
   try {
     data = await res.json();
   } catch (err) {
@@ -47,7 +52,7 @@ export async function shopifyFetch<T>(
 
   if (data.errors) {
     console.dir(data.errors, { depth: null });
-    const messages = data.errors.map((e: any) => e.message).join("; ");
+    const messages = data.errors.map((e) => e.message).join("; ");
     throw new Error(`Shopify GraphQL error: ${messages}`);
   }
 

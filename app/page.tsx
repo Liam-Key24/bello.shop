@@ -1,6 +1,6 @@
 import { HeroCard } from "./components/products/cards";
 import NewProductLanding from "./layout/NewProductsLanding";
-import FeautedSection from './layout/FeaturedSection';
+import FeaturedSection from './layout/FeaturedSection';
 import LastLanding from './layout/LastLanding';
 import { getProductsByCollection, getCollectionHandleByTitle } from "@/lib/shopify/collection";
 
@@ -27,7 +27,7 @@ export default async function Home() {
    <div className="space-y-10 mt-28">
    <HeroCard product={heroProducts[0]} />
    <NewProductLanding products={newProducts} />
-   <FeautedSection lovedProducts={lovedProducts} productOfWeek={productOfWeek[0]} />
+   <FeaturedSection lovedProducts={lovedProducts} productOfWeek={productOfWeek[0]} />
    <LastLanding/>
    </div>
    </>

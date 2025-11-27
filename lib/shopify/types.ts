@@ -142,6 +142,67 @@ export interface CustomerAddress {
   countryCodeV2?: string
   zip?: string
   phone?: string
+  firstName?: string
+  lastName?: string
+}
+
+export interface MailingAddressInput {
+  address1: string
+  address2?: string
+  city: string
+  province?: string
+  country: string
+  zip: string
+  phone?: string
+  firstName?: string
+  lastName?: string
+}
+
+export interface CustomerAddressCreateResponse {
+  customerAddressCreate: {
+    customerAddress: CustomerAddress | null
+    customerUserErrors: {
+      code?: string
+      field?: string[]
+      message: string
+    }[]
+  }
+}
+
+export interface CustomerAddressUpdateResponse {
+  customerAddressUpdate: {
+    customerAddress: CustomerAddress | null
+    customerUserErrors: {
+      code?: string
+      field?: string[]
+      message: string
+    }[]
+  }
+}
+
+export interface CustomerAddressDeleteResponse {
+  customerAddressDelete: {
+    deletedCustomerAddressId: string | null
+    customerUserErrors: {
+      code?: string
+      field?: string[]
+      message: string
+    }[]
+  }
+}
+
+export interface CustomerDefaultAddressUpdateResponse {
+  customerDefaultAddressUpdate: {
+    customer: {
+      id: string
+      defaultAddress: CustomerAddress | null
+    } | null
+    customerUserErrors: {
+      code?: string
+      field?: string[]
+      message: string
+    }[]
+  }
 }
 
 export interface CustomerOrder {

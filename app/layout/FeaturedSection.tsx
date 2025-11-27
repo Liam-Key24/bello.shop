@@ -8,7 +8,7 @@ interface FeaturedSectionProps {
   productOfWeek?: ShopifyProduct;
 }
 
-export default function FeautedSection({ lovedProducts = [], productOfWeek }: FeaturedSectionProps) {
+export default function FeaturedSection({ lovedProducts = [], productOfWeek }: FeaturedSectionProps) {
     return (
         <>
             <div className="w-full h-auto flex flex-col gap-6 mb-10">

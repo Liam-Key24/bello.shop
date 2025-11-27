@@ -14,12 +14,18 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    // Transform addresses from edges structure to flat array for client
+    const transformedCustomer = auth.customer ? {
+      ...auth.customer,
+      addresses: auth.customer.addresses?.edges?.map((edge: { node: any }) => edge.node) || [],
+    } : null;
+
     // Optionally try to renew token if it's close to expiring
     // This is a silent refresh to keep the session alive
     try {
       const renewedToken = await customerAccessTokenRenew(auth.token);
       if (renewedToken.customerAccessToken?.accessToken) {
-        const response = NextResponse.json({ customer: auth.customer });
+        const response = NextResponse.json({ customer: transformedCustomer });
         // Update cookie with new token
         response.cookies.set({
           name: "shopifyCustomerToken",
@@ -37,7 +43,7 @@ export async function GET(req: NextRequest) {
       console.warn("Token renewal failed, using existing token:", renewError);
     }
 
-    return NextResponse.json({ customer: auth.customer });
+    return NextResponse.json({ customer: transformedCustomer });
   } catch (err) {
     console.error("Profile fetch error:", err);
     return NextResponse.json(

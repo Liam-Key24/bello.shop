@@ -12,8 +12,9 @@ export async function POST(req: Request) {
 
     const checkoutUrl = await createShopifyCart(items);
     return NextResponse.json({ checkoutUrl });
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
     console.error("Cart creation failed:", err);
-    return NextResponse.json({ error: err?.message || String(err) }, { status: 500 });
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

@@ -1,10 +1,17 @@
 import { ShopifyProduct, ShopifyImage } from "../types";
+import type {
+  GraphQLImageEdge,
+  GraphQLPriceRange,
+  GraphQLMetafield,
+  GraphQLProductNode,
+  GraphQLVariantEdge,
+} from "../types/graphql";
 
 /**
  * Parse Shopify image edges into ShopifyImage array
  */
-export const parseImages = (edges: any[], fallbackAlt?: string): ShopifyImage[] =>
-  (edges || []).map((edge: any) => ({
+export const parseImages = (edges: GraphQLImageEdge[], fallbackAlt?: string): ShopifyImage[] =>
+  (edges || []).map((edge) => ({
     url: edge.node.url,
     altText: edge.node.altText || fallbackAlt || null,
   }));
@@ -12,20 +19,20 @@ export const parseImages = (edges: any[], fallbackAlt?: string): ShopifyImage[] 
 /**
  * Parse Shopify priceRange into numeric price
  */
-export const parsePrice = (priceRange: any): number =>
+export const parsePrice = (priceRange: GraphQLPriceRange): number =>
   parseFloat(priceRange?.minVariantPrice?.amount || "0");
 
 /**
  * Parse Shopify metafield rating into number
  */
-export const parseRating = (metafield: any): number | undefined =>
+export const parseRating = (metafield: GraphQLMetafield | null | undefined): number | undefined =>
   metafield?.value ? parseFloat(metafield.value) : undefined;
 
 /**
  * Parse a single product node from Shopify GraphQL response
  */
 export const parseProductNode = (
-  node: any,
+  node: GraphQLProductNode,
   collectionInfo?: { handle: string; title: string }
 ): ShopifyProduct => ({
   id: node.id,
@@ -40,6 +47,6 @@ export const parseProductNode = (
   collectionHandle: collectionInfo?.handle,
   collectionTitle: collectionInfo?.title,
   data: JSON.stringify(node),
-  variants: node.variants?.edges?.map((edge: any) => ({ id: edge.node.id })) || [],
+  variants: node.variants?.edges?.map((edge: GraphQLVariantEdge) => ({ id: edge.node.id })) || [],
 });
 

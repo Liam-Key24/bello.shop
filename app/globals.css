@@ -1,9 +1,20 @@
 @import "tailwindcss";
-
-
+@layer theme, base, components, utilities;
 
 :root {
-  --background: #DAE7DA;
+  --background: #e9edc9;
+  --main-font-family: "Satoshi", sans-serif;
+  --heading-font-family: "CabinetGrotesk", serif;
+  --heading-font-weight: 900;
+
+  --color-green-primary: #e9edc9;
+  --color-green-secondary: #ccd5ae;
+  --color-green-teritary: #fefae0;
+
+  --color-black: #131515;
+  --color-white: #f8f9fa;
+
+  --color-red: #f25c54;
 }
 
 @theme inline {
@@ -15,165 +26,210 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #DAE7DA;
-    --foreground: #ededed;
+    --background: var(--color-green-primary);
+    --foreground: var(--color-white);
   }
-}
-
-@layer components {
-  .glass {
-    @apply rounded-lg shadow-lg transition-all;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
-  }
-  .glass:hover {
-    background-color: rgba(218, 231, 218, 0.3);
-    transform: scale(1.03);
-  }
-}
-
-/* --- Melodrama Fonts --- */
-
-@font-face {
-  font-family: 'Melodrama';
-  src: url('/font/Melodrama-Bold.woff2') format('woff2');
-  font-weight: 700; /* Bold */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Melodrama';
-  src: url('/font/Melodrama-Light.woff2') format('woff2');
-  font-weight: 300; /* Light */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Melodrama';
-  src: url('/font/Melodrama-Medium.woff2') format('woff2');
-  font-weight: 500; /* Medium */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Melodrama';
-  src: url('/font/Melodrama-Regular.woff2') format('woff2');
-  font-weight: 400; /* Regular */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Melodrama';
-  src: url('/font/Melodrama-Semibold.woff2') format('woff2');
-  font-weight: 600; /* Semibold */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Melodrama';
-  src: url('/font/Melodrama-Variable.woff2') format('woff2');
-  font-weight: 100 900; /* Defines the weight range for the variable font */
-  font-style: normal;
-}
-
-/* --- Nunito Fonts --- */
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-BoldItalic.woff2') format('woff2');
-  font-weight: 700; /* Bold */
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-ExtraBold.woff2') format('woff2');
-  font-weight: 800; /* ExtraBold */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-ExtraLight.woff2') format('woff2');
-  font-weight: 200; /* ExtraLight */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-ExtraLightItalic.woff2') format('woff2');
-  font-weight: 200; /* ExtraLight */
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-Italic.woff2') format('woff2');
-  font-weight: 400; /* Assumed Regular */
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-Light.woff2') format('woff2');
-  font-weight: 300; /* Light */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-LightItalic.woff2') format('woff2');
-  font-weight: 300; /* Light */
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-MediumItalic.woff2') format('woff2');
-  font-weight: 500; /* Medium */
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-Regular.woff2') format('woff2');
-  font-weight: 400; /* Regular */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-SemiBold.woff2') format('woff2');
-  font-weight: 600; /* SemiBold */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-Variable.woff2') format('woff2');
-  font-weight: 200 900;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('/font/Nunito-VariableItalic.woff2') format('woff2');
-  font-weight: 200 900; 
-  font-style: italic;
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--main-font-family);
   background: var(--background);
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 2rem;
 }
 
-h1,h2,h3,h4,h5{
-  font-family: 'Melodrama', serif;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--heading-font-family);
+  font-weight: var(--heading-font-weight);
+  font-style: bold;
+}
+
+/* --- CabinetGrotesk Font --- */
+
+@font-face {
+  font-family: "CabinetGrotesk";
+  src: url("/font/CabinetGrotesk-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CabinetGrotesk";
+  src: url("/font/CabinetGrotesk-Extralight.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CabinetGrotesk";
+  src: url("/font/CabinetGrotesk-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CabinetGrotesk";
+  src: url("/font/CabinetGrotesk-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CabinetGrotesk";
+  src: url("/font/CabinetGrotesk-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CabinetGrotesk";
+  src: url("/font/CabinetGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CabinetGrotesk";
+  src: url("/font/CabinetGrotesk-Extrabold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CabinetGrotesk";
+  src: url("/font/CabinetGrotesk-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CabinetGrotesk";
+  src: url("/font/CabinetGrotesk-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+/* --- Satoshi Font --- */
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Satoshi Italic Variants */
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/font/Satoshi-VariableItalic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+/*--- Tailwind CSS Components ---*/
+
+/*--- Glass Component ---*/
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+/*---colors---*/
+
+@layer utilities {
+  .green-primary {
+    color: var(--color-green-primary);
+  }
+  .green-secondary {
+    color: var(--color-green-secondary);
+  }
+  .green-teritary {
+    color: var(--color-green-teritary);
+  }
 }

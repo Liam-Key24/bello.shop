@@ -7,6 +7,7 @@ import {
   cartLinesRemove,
 } from "@/lib/shopify/cart-manager";
 import type { CartItem } from "@/lib/shopify/types";
+import { validateCartRequest } from "@/lib/validation/cart-schema";
 
 export async function GET(req: NextRequest) {
   try {
@@ -18,16 +19,34 @@ export async function GET(req: NextRequest) {
 
     const cart = await getCart(cartId);
     return NextResponse.json({ cart });
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : "Failed to get cart";
     console.error("Get cart error:", err);
-    return NextResponse.json({ error: err.message || "Failed to get cart" }, { status: 500 });
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { action, cartId, items, updates, lineIds } = body;
+    // Parse and validate request body
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON in request body" }, { status: 400 });
+    }
+
+    // Validate request structure
+    const validation = validateCartRequest(body);
+    if (!validation.valid || !validation.data) {
+      return NextResponse.json({ error: validation.error || "Invalid request" }, { status: 400 });
+    }
+
+    const { action } = validation.data;
+    const cartId = 'cartId' in validation.data ? validation.data.cartId : undefined;
+    const items = 'items' in validation.data ? validation.data.items : undefined;
+    const updates = 'updates' in validation.data ? validation.data.updates : undefined;
+    const lineIds = 'lineIds' in validation.data ? validation.data.lineIds : undefined;
 
     let cart;
     let response = NextResponse.json({});
@@ -81,9 +100,10 @@ export async function POST(req: NextRequest) {
       default:
         return NextResponse.json({ error: "Invalid action" }, { status: 400 });
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : "Cart operation failed";
     console.error("Cart operation error:", err);
-    return NextResponse.json({ error: err.message || "Cart operation failed" }, { status: 500 });
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
 

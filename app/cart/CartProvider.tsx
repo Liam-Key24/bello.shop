@@ -101,8 +101,8 @@ export default function CartProvider({ children }: { children: React.ReactNode }
             setCart(merged);
             // Clear localStorage after merge
             localStorage.removeItem("cart");
-            // Sync merged cart to Shopify
-            setTimeout(() => syncToShopify(merged), 100);
+            // Sync merged cart to Shopify (await to prevent race conditions)
+            await syncToShopify(merged);
           } else {
             setCart(shopifyCart);
           }

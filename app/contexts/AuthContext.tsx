@@ -2,6 +2,31 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
+interface CustomerAddress {
+  id: string;
+  address1?: string;
+  address2?: string;
+  city?: string;
+  province?: string;
+  provinceCode?: string;
+  country?: string;
+  countryCodeV2?: string;
+  zip?: string;
+  phone?: string;
+}
+
+interface CustomerOrder {
+  id: string;
+  orderNumber: string;
+  processedAt: string;
+  financialStatus: string;
+  fulfillmentStatus: string | null;
+  totalPriceV2: {
+    amount: string;
+    currencyCode: string;
+  };
+}
+
 interface Customer {
   id: string;
   email: string;
@@ -9,9 +34,9 @@ interface Customer {
   lastName?: string;
   acceptsMarketing: boolean;
   createdAt: string;
-  defaultAddress?: any;
-  addresses?: any;
-  orders?: any;
+  defaultAddress?: CustomerAddress;
+  addresses?: CustomerAddress[];
+  orders?: CustomerOrder[];
 }
 
 interface AuthContextType {
@@ -61,8 +86,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       const data = await res.json();
       setCustomer(data.customer);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to check authentication';
+      setError(errorMessage);
       setCustomer(null);
     } finally {
       setLoading(false);
@@ -88,8 +114,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Fetch customer data after successful login
       await checkAuth();
       return true;
-    } catch (err: any) {
-      setError(err.message || 'Login failed');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Login failed';
+      setError(errorMessage);
       return false;
     }
   };
@@ -111,8 +138,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (typeof document !== 'undefined') {
         document.cookie = 'shopifyCartId=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Logout failed';
+      setError(errorMessage);
     }
   };
 
