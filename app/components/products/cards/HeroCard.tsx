@@ -14,7 +14,7 @@ export default function HeroCard({ product }: HeroCardProps) {
     
     return ( 
         <div 
-          className="glass w-full h-105 rounded-4xl relative p-5 overflow-hidden"
+          className="neumorphism-bg w-full h-105 rounded-4xl relative p-5 overflow-hidden"
           style={{
             backgroundImage: heroImage ? `url(${heroImage.url})` : undefined,
             backgroundSize: 'cover',

@@ -1,7 +1,5 @@
 import { ShopifyProduct, ProductItem } from "./types"
 
-
-
 export interface FilterObject {
     price?: { min: number; max: number }
     rating?: number

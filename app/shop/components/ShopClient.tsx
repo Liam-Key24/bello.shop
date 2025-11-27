@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { useSearchParams } from "next/navigation"
-import { filterByPriceTier } from "@/lib/config/price-tiers"
+import { filterByPriceTier, getPriceTierLabels } from "@/lib/config/price-tiers"
 import type { ProductItem } from "@/lib/shopify/types"
+import { DEFAULT_RATINGS } from "./filters"
 
 import ProductGrid from "./ProductGrid"
 import FilterMenu from "./FilterMenu"
@@ -39,10 +40,10 @@ export default function ShopClient({ products }: ShopClientProps) {
   }, [products, searchParams])
 
   return (
-    <div className="shop-page container mx-auto px-4">
+    <div className="shop-page container mx-auto px-4 pt-10 pb-20">
       <FilterMenu
-        priceTiers={["£", "££", "£££"]}
-        ratings={[1, 2, 3, 4, 5]}
+        priceTiers={getPriceTierLabels()}
+        ratings={[...DEFAULT_RATINGS]}
         brands={[...new Set(products.map(p => p.vendor).filter((v): v is string => Boolean(v)))]}
       />
       <ProductGrid

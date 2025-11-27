@@ -40,8 +40,12 @@ export function getPriceTierByLabel(label: string): PriceTier | undefined {
 
 /**
  * Filter products by price tier
+ * Uses generics to preserve the full product type
  */
-export function filterByPriceTier(products: Array<{ price: number }>, tierLabel: string): Array<{ price: number }> {
+export function filterByPriceTier<T extends { price: number }>(
+  products: T[],
+  tierLabel: string
+): T[] {
   const tier = getPriceTierByLabel(tierLabel);
   if (!tier) return products;
 
