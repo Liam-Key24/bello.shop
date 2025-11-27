@@ -2,12 +2,12 @@
 @layer theme, base, components, utilities;
 
 :root {
-  --background: #e9edc9;
+  --background: #CCD5AE;
   --main-font-family: "Satoshi", sans-serif;
   --heading-font-family: "CabinetGrotesk", serif;
   --heading-font-weight: 900;
 
-  --color-green-primary: #e9edc9;
+  --color-green-primary: #CCD5AE;
   --color-green-secondary: #ccd5ae;
   --color-green-teritary: #fefae0;
 

@@ -5,13 +5,6 @@ export default function Footer(){
         <div className="glass w-full h-96 rounded-4xl p-5 flex flex-col items-center justify-between">
             <h2 className="text-7xl text-center">Bello.today</h2>
 
-            <div className="w-auto h-auto inline-flex space-x-10">
-                <img src="/icons/tik-tok.svg" alt="icon" className="w-6 h-6"/>
-                <img src="/icons/tik-tok.svg" alt="icon" className="w-6 h-6"/>
-                <img src="/icons/tik-tok.svg" alt="icon" className="w-6 h-6"/>
-                <img src="/icons/tik-tok.svg" alt="icon" className="w-6 h-6"/>
-            </div>
-
             <div className="w-auto h-auto">
                 <div className="w-full h-auto inline-flex items-baseline space-x-5">
                 <div>
