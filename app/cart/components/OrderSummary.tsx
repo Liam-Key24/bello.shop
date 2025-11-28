@@ -13,7 +13,7 @@ export default function OrderSummary() {
 
   return (
     
-      <div className="glass rounded-4xl p-6 w-full ">
+      <div className="p-6 w-full ">
         <div className="space-y-6">
           {/* Subtotal */}
           <div className="flex justify-between items-center">

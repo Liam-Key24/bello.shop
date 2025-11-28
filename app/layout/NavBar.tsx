@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState} from "react";
 import { useRouter } from "next/navigation";
 import { NavCartIcon } from "../components/common";
 import { useAuth } from "../contexts/AuthContext";
@@ -18,6 +18,7 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, customer, logout } = useAuth();
   const router = useRouter();
+
 
   const handleLogout = async () => {
     await logout();
@@ -52,13 +53,13 @@ export default function NavBar() {
       <div className={`w-[90%] glass backdrop-blur-xl rounded-4xl fixed z-[9998] left-1/2 -translate-x-1/2 overflow-hidden transition-all duration-400 ease-in-out ${isMenuOpen ? "top-15 opacity-100 max-h-fit-content" : "top-16 opacity-0 max-h-0"}`}>
         <div className="p-6 pt-2">
           {isAuthenticated && (
-            <div className="w-full border-b border-gray-300 mb-2 py-2">
+            <div className="w-full mb-2 py-2">
               <div className="flex items-center justify-center gap-6">
-                <Link href="/account/profile" className="text-sm text-gray-700 hover:bg-gray-100 px-3 py-1 rounded transition-colors flex items-center gap-2" onClick={closeMenu}>
+                <Link href="/account/profile" className="text-sm text-gray-700 hover:bg-gray-100 px-3 py-1 rounded-4xl transition-colors flex items-center gap-2" onClick={closeMenu}>
                   <User className="w-5 h-5 text-gray-700" />
                   {customer?.firstName && <span className="text-lg text-gray-800 font-medium">{customer.firstName}</span>}
                 </Link>
-                <button onClick={handleLogout} className="text-sm text-red-custom hover:bg-red-50 flex items-center gap-2 px-3 py-1 rounded transition-colors">
+                <button onClick={handleLogout} className="text-sm text-red-custom hover:bg-red-50 flex items-center gap-2 px-3 py-1 rounded-4xl transition-colors">
                   <LogOut className="w-4 h-4" /> Logout
                 </button>
               </div>
@@ -67,12 +68,12 @@ export default function NavBar() {
 
           <div className="glass rounded-full mb-6 h-12">
             <div className="px-6 py-3 flex items-center gap-3">
-              <Search className="w-5 h-5 text-gray-500" />
+         <Search className="w-5 h-5 text-gray-500" />
               <input type="text" placeholder="Search products..." className="flex-1 bg-transparent outline-none text-gray-800 placeholder-gray-500" />
             </div>
           </div>
 
-          <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-300">
+          <div className="flex items-center justify-between mb-2 pb-4">
             <span className="text-xl text-gray-800">Categories</span>
             <ChevronDown className="w-5 h-5 text-gray-700" />
           </div>
@@ -86,7 +87,12 @@ export default function NavBar() {
         </div>
       </div>
 
-      {isMenuOpen && <div className="fixed inset-0 backdrop-blur-sm bg-black/20 z-[9997] transition-opacity duration-500" onClick={closeMenu} />}
+      {isMenuOpen && (
+        <div 
+          className="fixed inset-0 backdrop-blur-sm bg-black/20 z-[9997] transition-opacity duration-500" 
+          onClick={closeMenu}
+        />
+      )}
     </>
   );
 }

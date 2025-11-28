@@ -12,7 +12,7 @@ export default function CartPage() {
 
   return (
 
-    <div className="mt-20 space-y-4 mb-6 flex flex-col items-center">
+    <div className="mt-20 space-y-4 mb-6 flex flex-col items-center neumorphism-bg pb-20">
       <div className="w-full flex justify-start p-2">
         <BackButton />
       </div>
@@ -20,15 +20,13 @@ export default function CartPage() {
       <h1 className="text-2xl font-semibold">Cart</h1>
 
       {cart.length > 0 ? (
-        cart.map((item) => <CartItemCard key={item.variantId} item={item} />)
+        <>
+          {cart.map((item) => <CartItemCard key={item.variantId} item={item} />)}
+          <OrderSummary/>
+          <ContinueCheckout/>
+        </>
       ) : (
         <p>Your cart is empty.</p>
-      )}
-      {/* Checkout button */}
-      
-    <OrderSummary/>
-    {cart.length > 0 && (
-        <ContinueCheckout/>
       )}
     </div>
 

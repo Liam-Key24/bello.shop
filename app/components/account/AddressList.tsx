@@ -54,7 +54,7 @@ export default function AddressList({
         <button
           onClick={() => setShowAddForm(true)}
           disabled={isLoading}
-          className="w-full glass p-4 rounded-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2 font-semibold text-green-600 border-2 border-dashed border-green-300"
+          className="w-full n  p-4 rounded-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2 font-semibold text-green-600 border-2 border-dashed border-green-300"
         >
           <Plus className="w-5 h-5" />
           <span>Add New Address</span>
@@ -172,7 +172,7 @@ export default function AddressList({
           <p className="text-gray-600 mb-4">No addresses saved yet</p>
           <button
             onClick={() => setShowAddForm(true)}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold"
+            className="px-6 py-3  text-white rounded-lg hover:bg-green-700 transition-colors font-semibold"
           >
             Add Your First Address
           </button>

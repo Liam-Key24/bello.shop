@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/app/contexts/AuthContext";
-import { User, Mail, Lock, ArrowRight, AlertCircle, CheckCircle } from "lucide-react";
+import { User, ArrowRight, AlertCircle, CheckCircle } from "lucide-react";
+import { EmailInput, PasswordInput } from "@/app/components/common/forms";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -45,72 +46,53 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-8rem)]">
+    <div className="flex items-center justify-center">
       <div className="w-full max-w-md">
-        <div className="glass p-8 md:p-10 rounded-4xl shadow-2xl">
+        <div className="neumorphism-bg p-8 md:p-10 rounded-4xl shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-green-700 to-green-500 bg-clip-text text-transparent">
-              Create Account
+          <h1 className="text-4xl font-bold mb-2 text-green-tertiary">
+              Register
             </h1>
-            <p className="text-gray-600">Join Bello Shop today</p>
+            <p>Create an account</p>
           </div>
 
-          {/* Success Message */}
-          {success && (
-            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-green-600 font-semibold text-sm">Account created successfully!</p>
-                <p className="text-green-600 text-xs mt-1">Redirecting to your profile...</p>
-              </div>
-            </div>
-          )}
-
-          {/* Error Message */}
-          {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-red-600 text-sm">{error}</p>
-            </div>
-          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Name Row */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="firstName" className="block text-sm font-medium mb-2">
                   First Name
                 </label>
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
                   <input
                     id="firstName"
                     type="text"
                     placeholder="John"
                     value={firstName}
                     onChange={e => setFirstName(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
+                    className="w-full pl-12 pr-4 py-3 neumorphism-input-style"
                     required
                     disabled={isLoading}
                   />
                 </div>
               </div>
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="lastName" className="block text-sm font-medium mb-2">
                   Last Name
                 </label>
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
                   <input
                     id="lastName"
                     type="text"
                     placeholder="Doe"
                     value={lastName}
                     onChange={e => setLastName(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
-                    required
+                    className="w-full pl-12 pr-4 py-3 neumorphism-input-style"
                     disabled={isLoading}
                   />
                 </div>
@@ -119,51 +101,62 @@ export default function RegisterPage() {
 
             {/* Email Input */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email Address
               </label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
-                  required
-                  disabled={isLoading}
-                />
-              </div>
+              <EmailInput
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                required
+                disabled={isLoading}
+                showValidation={true}
+              />
             </div>
 
             {/* Password Input */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-custom-black mb-2">
                 Password
               </label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="Create a strong password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
-                  required
-                  disabled={isLoading}
-                />
-              </div>
-              <p className="mt-1 text-xs text-gray-500">Must be at least 8 characters</p>
+              <PasswordInput
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Create a strong password"
+                required
+                disabled={isLoading}
+                showValidation={true}
+              />
             </div>
 
+            {/* Success Message */}
+          {success && (
+            <div className="mb-6 p-4 neumorphism-bg border border-green-500/30 rounded-lg flex items-start gap-3">
+              <CheckCircle className="w-5 h-5 text-green-600" />
+              <div>
+                <p className="text-black font-semibold text-sm">Account created successfully!</p>
+                <p className="text-black text-xs mt-1">Redirecting to your profile...</p>
+              </div>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-6 p-4 bg-white border border-red-600 rounded-lg flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
+              <p className="text-red-600 text-sm">{error}</p>
+            </div>
+          )}
+
             {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading || success}
-              className="w-full bg-gradient-to-r from-green-600 to-green-500 text-white py-3 rounded-lg font-semibold hover:from-green-700 hover:to-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
-            >
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                disabled={isLoading || success}
+                className="epic-button"
+              >
               {isLoading ? (
                 <>
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -181,15 +174,16 @@ export default function RegisterPage() {
                 </>
               )}
             </button>
+            </div>
           </form>
 
           {/* Login Link */}
           <div className="mt-6 text-center">
-            <p className="text-gray-600 text-sm">
+            <p className="text-black-custom text-sm">
               Already have an account?{' '}
               <Link 
                 href="/account/login" 
-                className="text-green-600 font-semibold hover:text-green-700 transition-colors underline underline-offset-2"
+                className="text-green-tertiary font-semibold transition-colors underline underline-offset-2"
               >
                 Sign in here
               </Link>

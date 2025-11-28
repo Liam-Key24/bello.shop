@@ -3,7 +3,7 @@
 
 export default function PromiseCard(){
     return ( 
-        <div className="glass w-full h-96 rounded-4xl p-5">
+        <div className="neumorphism-bg w-full h-96 rounded-4xl p-5">
             <h1 className="text-center text-3xl">
                 Our Promise 
             </h1>

@@ -7,7 +7,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 import NavBar from "./layout/NavBar";
-import Footer from "./components/products/Footer";
+import Footer from "./layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,15 +31,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-full`}
       >
         <ErrorBoundary>
           <AuthProvider>
             <CartProvider>
               <NavBar />
-              {children}
+              <main className="flex-1">
+                {children}
+              </main>
               <Footer/>
             </CartProvider>
           </AuthProvider>

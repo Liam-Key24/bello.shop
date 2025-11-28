@@ -1,38 +1,36 @@
-import FilterSectionHeader from "./FilterSectionHeader"
+'use client'
 
-type PriceFilterProps = {
-  priceTiers: string[]
-  selectedPrice: string | null
-  isOpen: boolean
-  onToggle: () => void
-  onPriceChange: (price: string | null) => void
-}
+import { ChevronDown } from "lucide-react"
+import { useFilterState } from '../hooks'
+import { useSectionToggle } from '../hooks'
+import { getPriceTierLabels } from '@/lib/config/price-tiers'
 
-export default function PriceFilter({
-  priceTiers,
-  selectedPrice,
-  isOpen,
-  onToggle,
-  onPriceChange,
-}: PriceFilterProps) {
+export default function PriceFilter() {
+  const { selectedPrice, updateFilter } = useFilterState()
+  const { openSections, toggleSection } = useSectionToggle()
+  const isOpen = openSections.price
+  const priceTiers = getPriceTierLabels()
   return (
     <>
       <div className="mb-4">
-        <FilterSectionHeader title="Price" isOpen={isOpen} onToggle={onToggle} />
+        <button onClick={() => toggleSection('price')} className="filter-section-header  w-full flex items-center justify-between p-3 rounded-full mb-2">
+          <h3 className="filter-section-title">Price</h3>
+          <ChevronDown size={18} className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+        </button>
 
         {isOpen && (
           <div className="filter-section-content">
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex items-center justify-center gap-2 flex-wrap">
               {priceTiers.map((tier) => (
                 <button
                   key={tier}
-                  className={`filter-button px-3 py-1.5 glass rounded-full text-xs font-medium ${
+                  className={`filter-button cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium ${
                     selectedPrice === tier
-                      ? "bg-gray-800 text-white shadow-lg scale-105"
-                      : "text-gray-700 hover:bg-gray-100"
+                      ? " text-black-custom bg-green-primary"
+                      : "text-gray-700 "
                   }`}
                   onClick={() =>
-                    onPriceChange(selectedPrice === tier ? null : tier)
+                    updateFilter('price', selectedPrice === tier ? null : tier)
                   }
                 >
                   {tier}

@@ -1,9 +1,10 @@
 'use client';
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/app/contexts/AuthContext";
-import { Mail, Lock, ArrowRight, AlertCircle } from "lucide-react";
+import { ArrowRight, AlertCircle } from "lucide-react";
+import { EmailInput, PasswordInput, type EmailInputRef, type PasswordInputRef } from "@/app/components/common/forms";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,9 +12,20 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { login, error: authError } = useAuth();
   const router = useRouter();
+  const emailRef = useRef<EmailInputRef>(null);
+  const passwordRef = useRef<PasswordInputRef>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate before submission
+    const isEmailValid = emailRef.current?.validate() ?? false;
+    const isPasswordValid = passwordRef.current?.validate() ?? false;
+    
+    if (!isEmailValid || !isPasswordValid) {
+      return; // Validation messages will show from components
+    }
+    
     setIsLoading(true);
 
     const success = await login(email, password);
@@ -26,76 +38,74 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-8rem)]">
+    <div className="flex items-center justify-center">
       <div className="w-full max-w-md">
-        <div className="glass p-8 md:p-10 rounded-4xl shadow-2xl">
+        <div className="neumorphism-bg p-8 md:p-10">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-green-700 to-green-500 bg-clip-text text-transparent">
-              Welcome Back
+          <h1 className="text-4xl font-bold mb-2 text-green-tertiary">
+              Welcome Back!
             </h1>
-            <p className="text-gray-600">Sign in to your account</p>
+            <p>Sign in to your account</p>
           </div>
 
-          {/* Error Message */}
-          {authError && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-red-600 text-sm">{authError}</p>
-            </div>
-          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email Input */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email Address
               </label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
-                  required
-                  disabled={isLoading}
-                />
-              </div>
+              <EmailInput
+                ref={emailRef}
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                required
+                disabled={isLoading}
+                showValidation={true}
+                simpleError={true}
+              />
             </div>
 
             {/* Password Input */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium mb-2">
                 Password
               </label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
-                  required
-                  disabled={isLoading}
-                />
-              </div>
+              <PasswordInput
+                ref={passwordRef}
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+                disabled={isLoading}
+                showValidation={true}
+                simpleError={true}
+              />
             </div>
 
+            {/* Error Message */}
+          {authError && (
+            <div className="mb-6 p-4 bg-white rounded-lg flex items-center gap-3">
+              <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
+              <p className="text-red-600 text-sm">{authError}</p>
+            </div>
+          )}
+
             {/* Submit Button */}
+            <div className="flex justify-center">
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-green-600 to-green-500 text-white py-3 rounded-lg font-semibold hover:from-green-700 hover:to-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full neumorphism-button gap-3 flex items-center justify-center"
             >
               {isLoading ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
                   <span>Logging in...</span>
                 </>
               ) : (
@@ -105,6 +115,7 @@ export default function LoginPage() {
                 </>
               )}
             </button>
+            </div>
           </form>
 
           {/* Register Link */}
@@ -113,7 +124,7 @@ export default function LoginPage() {
               Don't have an account?{' '}
               <Link 
                 href="/account/register" 
-                className="text-green-600 font-semibold hover:text-green-700 transition-colors underline underline-offset-2"
+                className="text-green-tertiary font-semibold hover:text-green-700 transition-colors underline underline-offset-2"
               >
                 Create one now
               </Link>

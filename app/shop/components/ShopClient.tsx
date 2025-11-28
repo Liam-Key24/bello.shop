@@ -1,13 +1,9 @@
 'use client'
 
-import { useMemo, useState } from "react"
-import { useSearchParams } from "next/navigation"
-import { filterByPriceTier, getPriceTierLabels } from "@/lib/config/price-tiers"
+import { useState } from "react"
 import type { ProductItem } from "@/lib/shopify/types"
-import { DEFAULT_RATINGS } from "./filters"
-
 import ProductGrid from "./ProductGrid"
-import FilterMenu from "./FilterMenu"
+import FilterMenu from "./filters/FilterMenu"
 
 interface ShopClientProps {
   products: ProductItem[];
@@ -15,43 +11,17 @@ interface ShopClientProps {
 
 export default function ShopClient({ products }: ShopClientProps) {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const searchParams = useSearchParams()
-
-  const filteredProducts = useMemo(() => {
-    let result = [...products]
-
-    const brand = searchParams.get("brand")
-    const rating = searchParams.get("rating")
-    const price = searchParams.get("price")
-
-    if (brand) {
-      result = result.filter(p => p.vendor === brand)
-    }
-
-    if (rating) {
-      result = result.filter(p => (p.rating ?? 0) >= Number(rating))
-    }
-
-    if (price) {
-      result = filterByPriceTier(result, price)
-    }
-
-    return result
-  }, [products, searchParams])
 
   return (
     <div className="shop-page container mx-auto px-4 pt-10 pb-20">
-      <FilterMenu
-        priceTiers={getPriceTierLabels()}
-        ratings={[...DEFAULT_RATINGS]}
-        brands={[...new Set(products.map(p => p.vendor).filter((v): v is string => Boolean(v)))]}
-      />
+      <div className="mb-6 sticky top-20 z-[9997]">
+        <FilterMenu />
+      </div>
       <ProductGrid
-        products={filteredProducts}
+        products={products}
         viewMode={viewMode}
         onViewChange={setViewMode}
       />
     </div>
   )
 }
-

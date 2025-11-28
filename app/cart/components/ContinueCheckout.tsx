@@ -46,7 +46,9 @@ export default function ContinueCheckout() {
     <div className="mt-6">
       <button
         onClick={handleCheckout}
-        className="glass w-full h-16 rounded-4xl flex items-center justify-center gap-7"
+        className="epic-button w-full h-16 rounded-4xl flex items-center justify-center gap-7"
+        aria-label="Continue to checkout"
+        
       >
         <p className="text-lg font-medium">Continue to Checkout</p>
         <ShoppingCart />

@@ -23,7 +23,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
   };
 
   return (
-    <div className="glass w-full h-44 rounded-4xl flex items-center justify-between px-3">
+    <div className=" w-[90%] h-44 rounded-4xl flex items-center justify-between px-3 mx-1">
       {/* Product image */}
       <div className="w-40 h-40 bg-amber-400 rounded-4xl overflow-hidden">
         {item.image ? (

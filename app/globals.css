@@ -17,21 +17,6 @@
   --color-red: #f25c54;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  
-  /* Map custom colors to Tailwind */
-  --color-green-primary: var(--color-green-primary);
-  --color-green-secondary: var(--color-green-secondary);
-  --color-green-tertiary: var(--color-green-teritary);
-  --color-black: var(--color-black);
-  --color-white: var(--color-white);
-  --color-red: var(--color-red);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--color-green-primary);
@@ -39,17 +24,22 @@
   }
 }
 
+
+html {
+  height: 100%;
+}
+
 body {
   font-family: var(--main-font-family);
   background: var(--background);
   margin: 2rem;
+  position: relative;
+  min-height: 100vh;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
+
+
+h1,h2,h3,h4,h5 {
   font-family: var(--heading-font-family);
   font-weight: var(--heading-font-weight);
   font-style: bold;
@@ -213,10 +203,9 @@ h5 {
 /*--- Glass Component ---*/
 @layer components {
   .glass {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(204, 213, 174, 0.6);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 16px;
     box-shadow: 
       0 8px 32px rgba(0, 0, 0, 0.1),
@@ -239,13 +228,13 @@ h5 {
 
 @layer components {
   .neumorphism-bg {
-    background: var(--color-green-secondary);
+    background: var(--color-green-primary);
     backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(0px) saturate(180%);
     border-radius: 16px;
     box-shadow: 
-      8px 8px 16px rgba(0, 0, 0, 0.1),
-      -8px -8px 16px rgba(255, 255, 255, 0.5),
+      8px 8px 8px rgba(0, 0, 0, 0.1),
+      -8px -8px 8px rgba(0, 0, 0, 0.1),
       inset 0 0 0 rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
   }
@@ -253,11 +242,138 @@ h5 {
   .neumorphism-bg:hover {
     box-shadow: 
       12px 12px 24px rgba(0, 0, 0, 0.12),
-      -12px -12px 24px rgba(255, 255, 255, 0.6),
+      -12px -12px 24px rgba(255, 255, 255, 0.12),
       inset 0 0 0 rgba(0, 0, 0, 0.05);
     transform: translateY(-2px);
   }
 
+  .neumorphism-input-style {
+    border: none;
+    outline: none;
+    border-radius: 100px;
+    padding: 1em;
+    background-color: var(--color-green-secondary);
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+    transition: 300ms ease-in-out;
+  }
+    
+  .neumorphism-input-style:focus {
+    background-color: var(--color-white);
+    transform: scale(1.01);
+  }
+
+  .neumorphism-button {
+    padding: 0.7em 1.7em;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: var(--color-green-primary);
+    cursor: pointer;
+    border: 1px solid var(--color-green-primary);
+    transition: all 0.3s;
+    box-shadow: 
+    8px 8px 8px rgba(0, 0, 0, 0.1),
+    -8px -8px 8px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 rgba(0, 0, 0, 0.05);
+    outline: none;
+    font-family: inherit;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .neumorphism-button:hover,
+  .neumorphism-button:focus {
+    background: var(--color-green-tertiary);
+     box-shadow: 
+      8px 8px 8px rgba(0, 0, 0, 0.1),
+      -8px -8px 8px rgba(0, 0, 0, 0.1),
+      inset 0 0 0 rgba(0, 0, 0, 0.05);
+    outline: none;
+    border-color: var(--color-green-primary);
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .neumorphism-button:active {
+    background: var(--color-green-primary);
+    box-shadow: inset 4px 4px 12px var(--color-green-secondary), inset -4px -4px 12px var(--color-secondary);
+    transform: scale(0.99);
+  }
+
+  .epic-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75em 1.25em;
+    font: 1em/1.2 Courier, monospace;
+    color: #4a4a4a;
+    background: linear-gradient(#e0e0e0, #f0f0f0);
+    border: none;
+    border-radius: 999em;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    isolation: isolate;
+    transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .epic-button::before,
+  .epic-button::after {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+    transition: all 0.12s ease;
+  }
+  
+  .epic-button::before {
+    inset: -0.6em;
+    background: radial-gradient(circle at top center, rgba(255, 200, 135, 0.6) 0%, transparent 50%),
+      radial-gradient(circle at top left, rgba(102, 190, 240, 0.6) 0%, transparent 50%),
+      radial-gradient(circle at top right, rgba(255, 100, 100, 0.6) 0%, transparent 50%),
+      radial-gradient(circle at bottom center, rgba(147, 112, 190, 0.6) 0%, transparent 80%);
+    filter: blur(0.3em);
+    opacity: 0.9;
+    z-index: -2;
+  }
+  
+  .epic-button::after {
+    inset: -0.4em;
+    background: linear-gradient(165deg, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.2) 30%, rgba(255, 255, 255, 0.05) 80%, rgba(0, 0, 0, 0.02));
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 -1px 1px rgba(0, 0, 0, 0.15), 0 0 20px 1px rgb(200 200 200 / 60%);
+    z-index: -1;
+  }
+  
+  .epic-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .epic-button:hover::after {
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(0, 0, 0, 0.15), 0 0 30px 2px rgb(220 220 220 / 70%);
+  }
+  
+  .epic-button:hover::before {
+    opacity: 1;
+    filter: blur(0.4em);
+    transform: scale(1.05);
+  }
+  
+  .epic-button:active {
+    transform: translateY(1px) scale(0.98);
+    background: linear-gradient(#ececec, #dcdcdc);
+  }
+  
+  .epic-button:active::after {
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), inset 0 -1px 1px rgba(0, 0, 0, 0.1), 0 0 15px 0 rgb(200 200 200 / 50%);
+    opacity: 0.3;
+  }
+  
+  .epic-button:active::before {
+    opacity: 1;
+    filter: blur(0.5em);
+    transform: scale(1.05);
+  }
 }
 
 /*--- Color Components ---*/
@@ -273,13 +389,13 @@ h5 {
   .bg-green-tertiary {
     background-color: var(--color-green-teritary);
   }
-  .bg-black {
+  .bg-black-custom {
     background-color: var(--color-black);
   }
-  .bg-white {
+  .bg-white-custom {
     background-color: var(--color-white);
   }
-  .bg-red {
+  .bg-red-custom {
     background-color: var(--color-red);
   }
   

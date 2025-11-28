@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { X, Save, Loader2 } from 'lucide-react';
+import { useState } from 'react';
+import { X, Save, User, MapPin, Building2, Phone, Globe } from 'lucide-react';
 import type { CustomerAddress, MailingAddressInput } from '@/lib/shopify/types';
 
 interface AddressFormProps {
@@ -54,8 +54,8 @@ export default function AddressForm({ address, onSave, onCancel, isLoading = fal
   };
 
   return (
-    <div className="glass p-6 rounded-2xl shadow-lg">
-      <div className="flex items-center justify-between mb-6">
+    <div className="neumorphism-bg p-8 md:p-10">
+      <div className="flex items-center justify-between mb-8">
         <h3 className="text-xl font-semibold">
           {address ? 'Edit Address' : 'Add New Address'}
         </h3>
@@ -68,189 +68,156 @@ export default function AddressForm({ address, onSave, onCancel, isLoading = fal
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Name Fields */}
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              First Name
-            </label>
-            <input
-              type="text"
-              value={formData.firstName}
-              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
-              disabled={isLoading}
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Last Name
-            </label>
-            <input
-              type="text"
-              value={formData.lastName}
-              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
-              disabled={isLoading}
-            />
-          </div>
-        </div>
-
+      <form onSubmit={handleSubmit} className="space-y-5">
         {/* Street Address */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="address1" className="block text-sm font-medium mb-2">
             Street Address <span className="text-red-500">*</span>
           </label>
-          <input
-            type="text"
-            value={formData.address1}
-            onChange={(e) => setFormData({ ...formData, address1: e.target.value })}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm ${
-              errors.address1 ? 'border-red-500' : 'border-gray-300'
-            }`}
-            disabled={isLoading}
-            required
-          />
+          <div className="relative">
+            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
+            <input
+              id="address1"
+              type="text"
+              value={formData.address1}
+              onChange={(e) => setFormData({ ...formData, address1: e.target.value })}
+              className="w-full pl-12 pr-4 py-3 neumorphism-input-style"
+              disabled={isLoading}
+              required
+            />
+          </div>
           {errors.address1 && (
-            <p className="text-red-500 text-xs mt-1">{errors.address1}</p>
+            <p className="mt-1 text-xs text-red-600">{errors.address1}</p>
           )}
         </div>
 
         {/* Address Line 2 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="address2" className="block text-sm font-medium mb-2">
             Apartment, suite, etc. (optional)
           </label>
-          <input
-            type="text"
-            value={formData.address2}
-            onChange={(e) => setFormData({ ...formData, address2: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
-            disabled={isLoading}
-          />
+          <div className="relative">
+            <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
+            <input
+              id="address2"
+              type="text"
+              value={formData.address2}
+              onChange={(e) => setFormData({ ...formData, address2: e.target.value })}
+              className="w-full pl-12 pr-4 py-3 neumorphism-input-style"
+              disabled={isLoading}
+            />
+          </div>
         </div>
 
-        {/* City, Province, ZIP */}
-        <div className="grid grid-cols-3 gap-4">
+        {/* Province, ZIP */}
+        
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              City <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.city}
-              onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm ${
-                errors.city ? 'border-red-500' : 'border-gray-300'
-              }`}
-              disabled={isLoading}
-              required
-            />
-            {errors.city && (
-              <p className="text-red-500 text-xs mt-1">{errors.city}</p>
-            )}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="province" className="block text-xs font-medium mb-2">
               State/Province
             </label>
-            <input
-              type="text"
-              value={formData.province}
-              onChange={(e) => setFormData({ ...formData, province: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
-              disabled={isLoading}
-            />
+            <div className="relative">
+              <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4" />
+              <input
+                id="province"
+                type="text"
+                value={formData.province}
+                onChange={(e) => setFormData({ ...formData, province: e.target.value })}
+                className="w-full pl-12 pr-4 py-3 neumorphism-input-style"
+                disabled={isLoading}
+              />
+            </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="zip" className="block text-xs font-medium mb-2">
               ZIP/Postal Code <span className="text-red-500">*</span>
             </label>
-            <input
-              type="text"
-              value={formData.zip}
-              onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm ${
-                errors.zip ? 'border-red-500' : 'border-gray-300'
-              }`}
-              disabled={isLoading}
-              required
-            />
+            <div className="relative">
+              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
+              <input
+                id="zip"
+                type="text"
+                value={formData.zip}
+                onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
+                className="w-full pl-12 pr-4 py-3 neumorphism-input-style"
+                disabled={isLoading}
+                required
+              />
+            </div>
             {errors.zip && (
-              <p className="text-red-500 text-xs mt-1">{errors.zip}</p>
+              <p className="mt-1 text-xs text-red-600">{errors.zip}</p>
             )}
           </div>
-        </div>
 
-        {/* Country and Phone */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* Country and City */}
+        
+        <div>
+            <label htmlFor="city" className="block text-sm font-medium mb-2">
+              City <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
+              <input
+                id="city"
+                type="text"
+                value={formData.city}
+                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                className="w-full pl-12 pr-4 py-3 neumorphism-input-style"
+                disabled={isLoading}
+                required
+              />
+            </div>
+            {errors.city && (
+              <p className="mt-1 text-xs text-red-600">{errors.city}</p>
+            )}
+          </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="country" className="block text-sm font-medium mb-2">
               Country <span className="text-red-500">*</span>
             </label>
-            <select
-              value={formData.country}
-              onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm ${
-                errors.country ? 'border-red-500' : 'border-gray-300'
-              }`}
-              disabled={isLoading}
-              required
-            >
-              <option value="United States">United States</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="Canada">Canada</option>
-              <option value="Australia">Australia</option>
-              <option value="Germany">Germany</option>
-              <option value="France">France</option>
-              <option value="Spain">Spain</option>
-              <option value="Italy">Italy</option>
-            </select>
+            <div className="relative">
+              <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
+              <select
+                id="country"
+                value={formData.country}
+                onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                className="w-full pl-12 pr-4 py-3 neumorphism-input-style appearance-none"
+                disabled={isLoading}
+                required
+              >
+                <option value="United States">United States</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+                <option value="Spain">Spain</option>
+                <option value="Italy">Italy</option>
+              </select>
+            </div>
             {errors.country && (
-              <p className="text-red-500 text-xs mt-1">{errors.country}</p>
+              <p className="mt-1 text-xs text-red-600">{errors.country}</p>
             )}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
-              disabled={isLoading}
-            />
-          </div>
-        </div>
+          </div>         
+        
 
         {/* Action Buttons */}
-        <div className="flex gap-3 pt-4">
+        <div className="flex justify-center pt-4">
           <button
             type="submit"
             disabled={isLoading}
-            className="flex-1 bg-gradient-to-r from-green-600 to-green-500 text-white py-3 rounded-lg font-semibold hover:from-green-700 hover:to-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+            className="w-full neumorphism-button gap-3 flex items-center justify-center"
           >
             {isLoading ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 <span>Saving...</span>
               </>
             ) : (
               <>
-                <Save className="w-5 h-5" />
                 <span>Save Address</span>
+                <Save className="w-5 h-5" />
               </>
             )}
-          </button>
-          <button
-            type="button"
-            onClick={onCancel}
-            disabled={isLoading}
-            className="px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            Cancel
           </button>
         </div>
       </form>

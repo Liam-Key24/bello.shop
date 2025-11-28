@@ -1,10 +1,10 @@
 /**
  * Barrel export for filter components
- * Provides clean imports: import { FilterMenu, FilterHeader, CategoryFilter } from './filters'
+ * Provides clean imports: import { FilterMenu, FilterHeader, FilterBar, CategoryFilter } from './filters'
  */
 
-export { default as FilterHeader } from './FilterHeader'
-export { default as FilterSectionHeader } from './FilterSectionHeader'
+
+export { default as FilterBar } from './FilterBar'
 export { default as CategoryFilter } from './CategoryFilter'
 export { default as PriceFilter } from './PriceFilter'
 export { default as RatingsFilter } from './RatingsFilter'

@@ -1,28 +1,22 @@
-import FilterSectionHeader from "./FilterSectionHeader"
+'use client'
 
-type RatingsFilterProps = {
-  ratings: number[]
-  selectedRating: number | null
-  isOpen: boolean
-  onToggle: () => void
-  onRatingChange: (rating: number | null) => void
-}
+import { ChevronDown } from "lucide-react"
+import { useFilterState } from '../hooks'
+import { useSectionToggle } from '../hooks'
+import { DEFAULT_RATINGS } from './types'
 
-export default function RatingsFilter({
-  ratings,
-  selectedRating,
-  isOpen,
-  onToggle,
-  onRatingChange,
-}: RatingsFilterProps) {
+export default function RatingsFilter() {
+  const { selectedRating, updateFilter } = useFilterState()
+  const { openSections, toggleSection } = useSectionToggle()
+  const isOpen = openSections.ratings
+  const ratings = [...DEFAULT_RATINGS]
   return (
     <>
       <div className="mb-4">
-        <FilterSectionHeader
-          title="Ratings"
-          isOpen={isOpen}
-          onToggle={onToggle}
-        />
+        <button onClick={() => toggleSection('ratings')} className="filter-section-header  w-full flex items-center justify-between p-3 rounded-full mb-2">
+          <h3 className="filter-section-title">Ratings</h3>
+          <ChevronDown size={18} className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+        </button>
 
         {isOpen && (
           <div className="filter-section-content">
@@ -33,11 +27,12 @@ export default function RatingsFilter({
                   className={`filter-button text-2xl transition-all duration-200 ${
                     selectedRating === star
                       ? "text-yellow-400 scale-110"
-                      : "text-gray-400 hover:text-yellow-400 hover:scale-110"
+                      : "text-yellow-400 hover:text-yellow-400 hover:scale-110"
                   }`}
-                  onClick={() =>
-                    onRatingChange(selectedRating === star ? null : star)
-                  }
+                  onClick={() => {
+                    const newValue = selectedRating === star ? null : star.toString()
+                    updateFilter('rating', newValue)
+                  }}
                 >
                   {selectedRating && selectedRating >= star ? "★" : "☆"}
                 </button>
