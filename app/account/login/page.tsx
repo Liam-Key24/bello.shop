@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
 import { useAuth } from "@/lib/contexts";
 import { ArrowRightIcon, WarningCircleIcon } from "@phosphor-icons/react";
 import { EmailInput, PasswordInput } from "@/app/components/common/forms";
