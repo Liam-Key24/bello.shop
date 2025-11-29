@@ -1,6 +1,7 @@
 "use client";
 
-import { useCart } from "../CartProvider";
+import { useCart } from "@/lib/contexts";
+import { formatPrice } from "@/lib/utils/product";
 
 export default function OrderSummary() {
   const { cart } = useCart();
@@ -21,7 +22,7 @@ export default function OrderSummary() {
               Subtotal ({totalItems} {totalItems === 1 ? "item" : "items"})
             </h2>
             <span className="text-lg font-medium">
-              £{subtotal.toFixed(2)}
+              {formatPrice(subtotal)}
             </span>
           </div>
 
@@ -35,7 +36,7 @@ export default function OrderSummary() {
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold ">Total</h2>
             <span className="text-xl font-semibold">
-              £{subtotal.toFixed(2)}
+              {formatPrice(subtotal)}
             </span>
           </div>
         </div>

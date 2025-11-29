@@ -1,20 +1,17 @@
-import { ShopButton, DiscoverButton } from '../../common';
-import { getProductImage, getProductTitle } from '../shared/utils';
-import type { ProductCardBaseProps } from '../shared/types';
+import  ShopButton  from '@/app/components/common/buttons/ShopButton';
+import  DiscoverButton  from '@/app/components/common/buttons/DiscoverButtonSmall';
 
-interface HeroCardProps extends ProductCardBaseProps {}
+import { getProductImage, getProductTitle } from '@/lib/utils/product';
+import type { ProductCardBaseProps } from '@/lib/types/product';
 
-/**
- * Hero card - large banner card for featured hero product
- * Used on landing page as main hero section
- */
-export default function HeroCard({ product }: HeroCardProps) {
+export default function HeroCard(props: ProductCardBaseProps) {
+    const { product } = props;
     const heroImage = getProductImage(product);
     const title = getProductTitle(product, 'Your new Favourite Obsession.');
     
     return ( 
         <div 
-          className="neumorphism-bg w-full h-105 rounded-4xl relative p-5 overflow-hidden"
+          className="neumorphism-bg w-full h-[calc(100vh-10rem)] rounded-4xl relative p-5 overflow-hidden"
           style={{
             backgroundImage: heroImage ? `url(${heroImage.url})` : undefined,
             backgroundSize: 'cover',

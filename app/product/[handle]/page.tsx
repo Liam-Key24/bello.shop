@@ -1,27 +1,19 @@
 // filepath: app/product/[handle]/page.tsx
 import { getProductByHandle } from "@/lib/shopify/products";
-import ProductImageGallery from "../../layout/ProductShopGallery";
-import { 
-  ProductTitle, 
-  BrandBadge, 
-  ProductDescription, 
-  Rating, 
-  DetailsDropdown, 
-  QuantitySelector, 
-  BackButton 
-} from "../../components/common";
-import ActionButtons from "../../cart/components/ActionButtons";
+import ProductImageGallery from "@/app/product/landing/ProductImageGallery";
+import ProductTitle from "@/app/components/common/product/ProductTitle";
+import BrandBadge from "@/app/components/common/product/BrandBadge";
 
-
-interface ProductPageProps {
-  params: {
-    handle: string;
-  };
-}
-
+import ProductDescription from "@/app/components/common/product/ProductDescription";
+import Rating from "@/app/components/common/product/Rating";
+import DetailsDropdown from "@/app/components/common/product/DetailsDropdown";
+import QuantitySelector from "@/app/components/common/product/QuantitySelector";
+import BackButton from "@/app/components/common/buttons/BackButton";
+import ActionButtons from "@/app/cart/components/ActionButtons";
+import type { ProductPageProps } from "@/lib/types/product";
 
 export default async function ProductPage({ params }: ProductPageProps) {
-    const resolvedParams = await params; // <-- unwrap the promise
+  const resolvedParams = await params;
   const handle = resolvedParams.handle;
 
   if (!handle) return <div className="p-8 text-center">Invalid product handle.</div>;

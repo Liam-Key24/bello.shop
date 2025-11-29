@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react';
+import { Star } from '@phosphor-icons/react';
 
 /**
  * Rating component - displays product rating with stars and review count
@@ -10,6 +10,7 @@ export default function Rating({ rating = 0, reviewCount = 0 }: { rating?: numbe
         <Star
           key={index}
           className={`w-5 h-5 ${index < rating ? 'text-yellow-500' : 'text-gray-300'}`}
+          weight={index < rating ? 'fill' : 'regular'}
           aria-hidden="true"
         />
       ))}

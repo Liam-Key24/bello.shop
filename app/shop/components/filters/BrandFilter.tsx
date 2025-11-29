@@ -1,9 +1,8 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import { ChevronDown } from "lucide-react"
-import { useFilterState } from '../hooks'
-import { useSectionToggle } from '../hooks'
+import { CaretDown } from "@phosphor-icons/react"
+import { useFilterState, useSectionToggle } from '@/lib/hooks/shop'
 import { getAllProductsSimple } from '@/lib/shopify/products'
 import { mapShopifyToProductItem } from '@/lib/shopify/filter'
 import type { ProductItem } from '@/lib/shopify/types'
@@ -38,7 +37,7 @@ export default function BrandFilter() {
       <div className="mb-4">
         <button onClick={() => toggleSection('brand')} className="filter-section-header  w-full flex items-center justify-between p-3 rounded-full mb-2">
           <h3 className="filter-section-title">Brand</h3>
-          <ChevronDown size={18} className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+          <CaretDown size={18} weight="regular" className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
         </button>
 
         {isOpen && (

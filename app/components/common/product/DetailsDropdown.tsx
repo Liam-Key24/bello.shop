@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react';
+import { CaretDown } from '@phosphor-icons/react';
 
 /**
  * Details dropdown - collapsible section for product details
@@ -10,7 +10,7 @@ export default function DetailsDropdown(){
       aria-label="Toggle product details"
     >
       <span className="text-base">Details</span>
-      <ChevronDown className="w-5 h-5 text-gray-700" />
+      <CaretDown className="w-5 h-5 text-gray-700" weight="regular" />
     </button>
   );
 };

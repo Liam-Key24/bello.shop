@@ -2,7 +2,7 @@
 
 import { useTransition } from "react";
 import { ArrowUpRightIcon, ShoppingCartSimpleIcon } from "@phosphor-icons/react";
-import { useCart } from "../CartProvider";
+import { useCart } from "@/lib/contexts";
 import { createCartItem } from "@/lib/shopify/cart-utils";
 import type { CartButtonProps } from "@/lib/shopify/types";
 

@@ -1,4 +1,5 @@
 import { getAllProductsSimple } from '@/lib/shopify/products';
+import { formatPrice } from '@/lib/utils/product';
 import Link from 'next/link';
 
 export default async function ProductsPage() {
@@ -23,7 +24,7 @@ export default async function ProductsPage() {
           />
           <h2 className="text-lg font-medium">{product.title}</h2>
           <p className="text-sm text-gray-600">
-            £{product.price.toFixed(2)}
+            {formatPrice(product.price)}
           </p>
         </Link>
       ))}

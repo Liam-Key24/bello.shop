@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react';
+import { CaretDown } from '@phosphor-icons/react';
 
 /**
  * Quantity selector - dropdown for selecting product quantity
@@ -10,7 +10,7 @@ export default function QuantitySelector(){
       aria-label="Select quantity"
     >
       <span className="text-base">Qty 1</span>
-      <ChevronDown className="w-5 h-5 text-gray-700" />
+      <CaretDown className="w-5 h-5 text-gray-700" weight="regular" />
     </button>
   );
 };

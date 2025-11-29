@@ -1,4 +1,4 @@
-import CardRedirectIcon from "../../../cart/components/CardRedirectIcon"
+import CardRedirectIcon from "../../../cart/components/CardRedirectIcon";
 import Link from "next/link";
 
 /**

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/app/contexts/AuthContext';
+import { useAuth } from '@/lib/contexts';
 
 export default function LogoutButton() {
   const { logout } = useAuth();

@@ -9,5 +9,5 @@ export { default as CategoryFilter } from './CategoryFilter'
 export { default as PriceFilter } from './PriceFilter'
 export { default as RatingsFilter } from './RatingsFilter'
 export { default as BrandFilter } from './BrandFilter'
-export * from './types'
+// Types are now in @/lib/types/filter
 

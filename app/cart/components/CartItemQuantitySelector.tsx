@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { CaretDown, CaretUp } from "@phosphor-icons/react";
 
 interface CartItemQuantitySelectorProps {
   qty: number;
@@ -26,11 +26,11 @@ export default function CartItemQuantitySelector({
   return (
     <div className="glass w-24 h-fit rounded-4xl flex items-center justify-center p-2">
       <button onClick={decrease} disabled={disabled} className="px-2">
-        <ChevronDown className="w-5 h-5 text-gray-700" />
+        <CaretDown className="w-5 h-5 text-gray-700" weight="regular" />
       </button>
       <span className="text-sm px-2">{qty}</span>
       <button onClick={increase} disabled={disabled} className="px-2">
-        <ChevronUp className="w-5 h-5 text-gray-700" />
+        <CaretUp className="w-5 h-5 text-gray-700" weight="regular" />
       </button>
     </div>
   );

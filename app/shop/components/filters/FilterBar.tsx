@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { ChevronDown } from "lucide-react"
+import { CaretDown } from "@phosphor-icons/react"
 
 type FilterBarProps = {
   title?: string
@@ -46,8 +46,9 @@ export default function FilterBar({
         ) : (
           <h3 className={titleClass}>{title}</h3>
         )}
-        <ChevronDown
+        <CaretDown
           size={18}
+          weight="regular"
           className={`transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           } ${variant === 'section' ? "filter-chevron" : ""}`}

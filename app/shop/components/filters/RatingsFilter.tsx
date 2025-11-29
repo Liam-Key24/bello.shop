@@ -1,9 +1,8 @@
 'use client'
 
-import { ChevronDown } from "lucide-react"
-import { useFilterState } from '../hooks'
-import { useSectionToggle } from '../hooks'
-import { DEFAULT_RATINGS } from './types'
+import { CaretDown } from "@phosphor-icons/react"
+import { useFilterState, useSectionToggle } from '@/lib/hooks/shop'
+import { DEFAULT_RATINGS } from '@/lib/types/filter'
 
 export default function RatingsFilter() {
   const { selectedRating, updateFilter } = useFilterState()
@@ -15,7 +14,7 @@ export default function RatingsFilter() {
       <div className="mb-4">
         <button onClick={() => toggleSection('ratings')} className="filter-section-header  w-full flex items-center justify-between p-3 rounded-full mb-2">
           <h3 className="filter-section-title">Ratings</h3>
-          <ChevronDown size={18} className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+          <CaretDown size={18} weight="regular" className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
         </button>
 
         {isOpen && (

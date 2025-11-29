@@ -3,8 +3,9 @@
 import Image from "next/image";
 import {useTransition } from "react";
 import CartItemQuantitySelector from "./CartItemQuantitySelector"; // keep your existing selector
-import { useCart } from "../CartProvider";
+import { useCart } from "@/lib/contexts";
 import { ShopifyCartItem } from "@/lib/shopify/types";
+import { formatPrice } from "@/lib/utils/product";
 
 interface CartItemCardProps {
   item: ShopifyCartItem;
@@ -23,7 +24,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
   };
 
   return (
-    <div className=" w-[90%] h-44 rounded-4xl flex items-center justify-between px-3 mx-1">
+    <div className="w-[90%] h-44 rounded-4xl flex items-center justify-between px-3 mx-1">
       {/* Product image */}
       <div className="w-40 h-40 bg-amber-400 rounded-4xl overflow-hidden">
         {item.image ? (
@@ -42,7 +43,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
       {/* Product info */}
       <div className="w-full flex flex-col justify-center px-5 gap-2">
         <h2 className="text-lg font-medium">{item.title}</h2>
-        <p className="text-gray-600">£{(item.price * item.quantity).toFixed(2)}</p>
+        <p className="text-gray-600">{formatPrice(item.price * item.quantity)}</p>
 
         <div className="w-full flex items-center justify-between">
           <button

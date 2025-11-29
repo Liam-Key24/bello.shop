@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useImperativeHandle, forwardRef } from "react";
-import { Mail, AlertCircle } from "lucide-react";
+import { Envelope, WarningCircle } from "@phosphor-icons/react";
 
 type EmailInputProps = {
   id: string;
@@ -102,7 +102,7 @@ const EmailInput = forwardRef<EmailInputRef, EmailInputProps>(({
   return (
     <div>
       <div className="relative">
-        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
+        <Envelope className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" weight="regular" />
         <input
           id={id}
           type="email"
@@ -123,7 +123,7 @@ const EmailInput = forwardRef<EmailInputRef, EmailInputProps>(({
             <ul className="text-red-600 text-xs space-y-0.5">
               {emailErrors.map((err, index) => (
                 <li key={index} className="flex items-center gap-2">
-                  <AlertCircle className="w-3 h-3 shrink-0" />
+                  <WarningCircle className="w-3 h-3 shrink-0" weight="regular" />
                   <span>{err}</span>
                 </li>
               ))}

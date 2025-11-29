@@ -1,12 +1,10 @@
-import { NewProductCard } from '../components/products/cards'
+import NewProductCard from '../components/products/cards/NewProductCard';
 import type { ShopifyProduct } from '@/lib/shopify/types';
 
-interface NewProductLandingProps {
-  products?: ShopifyProduct[];
-}
 
-export default function NewProductLanding({ products = [] }: NewProductLandingProps){
-    // Show up to 4 products, or empty placeholders if no products
+export default function NewProductLanding(props: { products: ShopifyProduct[] }){
+    const { products } = props;
+    // Show up to 4 products, or empty placeholders if no 
     const displayProducts = products.slice(0, 4);
     const placeholders = Array.from({ length: Math.max(0, 4 - displayProducts.length) });
 

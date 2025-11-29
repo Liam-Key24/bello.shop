@@ -1,4 +1,4 @@
-import { ChevronLeft } from 'lucide-react';
+import { CaretLeft } from '@phosphor-icons/react';
 import Link from 'next/link';
 
 /**
@@ -11,7 +11,7 @@ export default function BackButton(){
         className="rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/10 hover:shadow-md hover:shadow-black/50 transition-all duration-100 hover:backdrop-blur-3xl"
         aria-label="Back to shop"
       >
-        <ChevronLeft className="w-8 h-8" />
+        <CaretLeft className="w-8 h-8" weight="regular" />
       </Link>
   );
 };

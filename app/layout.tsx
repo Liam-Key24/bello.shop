@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import CartProvider from './cart/CartProvider';
-import { AuthProvider } from './contexts/AuthContext';
-import { ErrorBoundary } from './components/ErrorBoundary';
+import { CartProvider, AuthProvider } from '@/lib/contexts';
+import { ErrorBoundary } from './edgecases/ErrorBoundary';
 
 import NavBar from "./layout/NavBar";
 import Footer from "./layout/Footer";

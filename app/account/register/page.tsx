@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useAuth } from "@/app/contexts/AuthContext";
-import { User, ArrowRight, AlertCircle, CheckCircle } from "lucide-react";
+import { useAuth } from "@/lib/contexts";
+import { User, ArrowRight, WarningCircle, CheckCircle } from "@phosphor-icons/react";
 import { EmailInput, PasswordInput } from "@/app/components/common/forms";
 
 export default function RegisterPage() {
@@ -67,7 +67,7 @@ export default function RegisterPage() {
                   First Name
                 </label>
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" weight="regular" />
                   <input
                     id="firstName"
                     type="text"
@@ -85,7 +85,7 @@ export default function RegisterPage() {
                   Last Name
                 </label>
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" weight="regular" />
                   <input
                     id="lastName"
                     type="text"
@@ -134,7 +134,7 @@ export default function RegisterPage() {
             {/* Success Message */}
           {success && (
             <div className="mb-6 p-4 neumorphism-bg border border-green-500/30 rounded-lg flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-green-600" />
+              <CheckCircle className="w-5 h-5 text-green-600" weight="regular" />
               <div>
                 <p className="text-black font-semibold text-sm">Account created successfully!</p>
                 <p className="text-black text-xs mt-1">Redirecting to your profile...</p>
@@ -145,7 +145,7 @@ export default function RegisterPage() {
           {/* Error Message */}
           {error && (
             <div className="mb-6 p-4 bg-white border border-red-600 rounded-lg flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
+              <WarningCircle className="w-5 h-5 text-red-600 mt-0.5" weight="regular" />
               <p className="text-red-600 text-sm">{error}</p>
             </div>
           )}
@@ -170,7 +170,7 @@ export default function RegisterPage() {
               ) : (
                 <>
                   <span>Create Account</span>
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-5 h-5" weight="regular" />
                 </>
               )}
             </button>

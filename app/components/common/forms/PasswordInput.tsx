@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useImperativeHandle, forwardRef } from "react";
-import { Lock, AlertCircle } from "lucide-react";
+import { Lock, WarningCircle } from "@phosphor-icons/react";
 
 type PasswordInputProps = {
   id: string;
@@ -100,7 +100,7 @@ const PasswordInput = forwardRef<PasswordInputRef, PasswordInputProps>(({
   return (
     <div>
       <div className="relative">
-        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" />
+        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" weight="regular" />
         <input
           id={id}
           type="password"
@@ -121,7 +121,7 @@ const PasswordInput = forwardRef<PasswordInputRef, PasswordInputProps>(({
             <ul className="text-red-600 text-xs space-y-0.5">
               {passwordErrors.map((err, index) => (
                 <li key={index} className="flex items-center gap-2">
-                  <AlertCircle className="w-3 h-3 shrink-0" />
+                  <WarningCircle className="w-3 h-3 shrink-0" weight="regular" />
                   <span>{err}</span>
                 </li>
               ))}

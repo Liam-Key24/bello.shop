@@ -1,5 +1,5 @@
-import { ShoppingCart } from "lucide-react";
-import { useCart } from '../../../cart/CartProvider';
+import { ShoppingCart } from "@phosphor-icons/react";
+import { useCart } from '@/lib/contexts';
 
 /**
  * Navigation cart icon - displays cart icon with item count badge
@@ -12,7 +12,7 @@ export default function NavCartIcon() {
 
   return (
     <div className="relative">
-      <ShoppingCart className="w-6 h-6 text-gray-700" aria-label="Shopping cart" />
+      <ShoppingCart className="w-6 h-6 text-gray-700" aria-label="Shopping cart" weight="regular" />
 
       {totalItems > 0 && (
         <span 

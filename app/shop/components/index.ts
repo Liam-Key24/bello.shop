@@ -7,7 +7,6 @@ export { default as ShopClient } from './ShopClient'
 export { default as FilterMenu } from './filters/FilterMenu'
 export { default as ProductGrid } from './ProductGrid'
 
-// Re-export filters and hooks for convenience
-export * from './filters'
-export * from './hooks'
+// Hooks are now in @/lib/hooks/shop
+// Types are now in @/lib/types/filter
 

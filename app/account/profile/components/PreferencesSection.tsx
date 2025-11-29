@@ -1,8 +1,6 @@
 'use client';
 
-type Customer = {
-  acceptsMarketing: boolean;
-};
+import type { Customer } from '@/lib/shopify/types';
 
 interface PreferencesSectionProps {
   customer: Customer;

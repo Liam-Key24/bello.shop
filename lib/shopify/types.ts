@@ -217,6 +217,19 @@ export interface CustomerOrder {
   }
 }
 
+export interface Customer {
+  id: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string
+  acceptsMarketing: boolean
+  createdAt: string
+  defaultAddress?: CustomerAddress
+  addresses?: CustomerAddress[]
+  orders?: CustomerOrder[]
+}
+
 export interface GetCustomerResponse {
   customer: {
     id: string

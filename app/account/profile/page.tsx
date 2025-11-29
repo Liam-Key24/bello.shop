@@ -1,18 +1,18 @@
 'use client';
-
-import { useAuth } from "@/app/contexts/AuthContext";
-import ProtectedRoute from "@/app/components/auth/ProtectedRoute";
 import { useRouter } from "next/navigation";
-import { useAddressOperations, useCustomerAddresses } from "../hooks";
-import {
-  ProfileHeader,
-  PersonalInfoSection,
-  PreferencesSection,
-  AddressSection,
-  ProfileLoading,
-  ProfileError,
-  LogoutButton,
-} from "./components";
+
+import { useAuth } from "@/lib/contexts";
+import { useAddressOperations, useCustomerAddresses } from "@/lib/hooks/account";
+import ProtectedRoute from "@/lib/componet/auth/ProtectedRoute";
+
+import ProfileHeader from './components/ProfileHeader';
+import PersonalInfoSection from './components/PersonalInfoSection';
+import PreferencesSection from './components/PreferencesSection';
+import AddressSection from './components/address/AddressSection';
+import ProfileLoading from './components/ProfileLoading';
+import ProfileError from './components/ProfileError';
+import LogoutButton from './components/LogoutButton';
+
 
 export default function ProfilePage() {
   const { customer, loading, error, logout, checkAuth } = useAuth();

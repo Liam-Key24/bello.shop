@@ -1,11 +1,14 @@
 "use client";
 
-import { BackButton } from "../components/common";
+import BackButton  from '@/app/components/common/buttons/BackButton';
 import CartItemCard from "./components/CartItemCard";
 import OrderSummary from "./components/OrderSummary";
 import ContinueCheckout from "./components/ContinueCheckout";
+import Link from "next/link";
 
-import {useCart} from "./CartProvider";
+
+import { useCart } from "@/lib/contexts";
+import { ArrowRight } from "@phosphor-icons/react";
 
 export default function CartPage() {
   const { cart } = useCart();
@@ -26,7 +29,15 @@ export default function CartPage() {
           <ContinueCheckout/>
         </>
       ) : (
+        <>
         <p>Your cart is empty.</p>
+        <Link href="/shop" className="underline flex items-center gap-2">
+          <span>
+          Continue Shopping!
+          </span>
+          <ArrowRight className="w-4 h-4" />
+        </Link> 
+        </>
       )}
     </div>
 

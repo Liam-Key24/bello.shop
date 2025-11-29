@@ -2,9 +2,10 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useAuth } from "@/app/contexts/AuthContext";
-import { ArrowRight, AlertCircle } from "lucide-react";
-import { EmailInput, PasswordInput, type EmailInputRef, type PasswordInputRef } from "@/app/components/common/forms";
+import { useAuth } from "@/lib/contexts";
+import { ArrowRightIcon, WarningCircleIcon } from "@phosphor-icons/react";
+import { EmailInput, PasswordInput } from "@/app/components/common/forms";
+import type { EmailInputRef, PasswordInputRef } from "@/lib/types/form";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -91,7 +92,7 @@ export default function LoginPage() {
             {/* Error Message */}
           {authError && (
             <div className="mb-6 p-4 bg-white rounded-lg flex items-center gap-3">
-              <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
+              <WarningCircleIcon className="w-5 h-5 text-red-600 mt-0.5" weight="regular" />
               <p className="text-red-600 text-sm">{authError}</p>
             </div>
           )}
@@ -111,7 +112,7 @@ export default function LoginPage() {
               ) : (
                 <>
                   <span>Sign In</span>
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRightIcon className="w-5 h-5" weight="regular" />
                 </>
               )}
             </button>
