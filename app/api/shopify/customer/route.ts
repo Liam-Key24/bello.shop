@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getCustomer, customerAccessTokenRenew } from "@/lib/shopify/customer";
+import { customerAccessTokenRenew } from "@/lib/shopify/customer";
 import { getServerAuth } from "@/lib/auth/server-auth";
 
 export async function GET(req: NextRequest) {

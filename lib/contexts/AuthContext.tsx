@@ -37,23 +37,38 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch('/api/shopify/customer');
+      const res = await fetch('/api/shopify/customer', {
+        credentials: 'include', // Ensure cookies are sent
+      });
       
       if (!res.ok) {
+        // 401 is expected when not logged in - not an error
         if (res.status === 401) {
           setCustomer(null);
           setLoading(false);
           return;
         }
-        throw new Error('Failed to check authentication');
+        // Only set error for actual errors (not 401)
+        const errorData = await res.json().catch(() => ({}));
+        setError(errorData.error || 'Failed to check authentication');
+        setCustomer(null);
+        setLoading(false);
+        return;
       }
 
       const data = await res.json();
       setCustomer(data.customer);
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to check authentication';
-      setError(errorMessage);
-      setCustomer(null);
+      // Network errors or other exceptions
+      // Don't set error for network issues on initial load - user might be offline
+      if (err instanceof TypeError && err.message.includes('fetch')) {
+        // Network error - silently fail, user might be offline
+        setCustomer(null);
+      } else {
+        const errorMessage = err instanceof Error ? err.message : 'Failed to check authentication';
+        setError(errorMessage);
+        setCustomer(null);
+      }
     } finally {
       setLoading(false);
     }

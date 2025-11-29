@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { MapPin, PencilSimple, Trash, Star, Plus } from '@phosphor-icons/react';
+import { MapPinIcon, PencilSimpleIcon, TrashIcon, StarIcon, PlusIcon } from '@phosphor-icons/react';
 import AddressForm from './AddressForm';
 
 import type { AddressListProps } from '@/lib/shopify/address-list'; 
@@ -48,7 +48,7 @@ export default function AddressList({
           disabled={isLoading}
           className="w-full p-4 rounded-lg transition-all flex items-center justify-center gap-2 font-semibold bg-white-custom text-green-primary"
         >
-          <Plus className="w-5 h-5" weight="regular" />
+          <PlusIcon className="w-5 h-5" weight="regular" />
           <span>Add New Address</span>
         </button>
       )}
@@ -87,7 +87,7 @@ export default function AddressList({
             {/* Default Badge */}
             {isDefault && (
               <div className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
-                <Star className="w-3 h-3 fill-current" weight="fill" />
+                <StarIcon className="w-3 h-3 fill-current" weight="fill" />
                 <span>Default</span>
               </div>
             )}
@@ -95,7 +95,7 @@ export default function AddressList({
             {/* Address Content */}
             <div className="pr-20">
               <div className="flex items-start gap-3 mb-3">
-                <MapPin className="w-5 h-5 text-green-600" weight="regular" />
+                <MapPinIcon className="w-5 h-5 text-green-600" weight="regular" />
                 <div className="flex-1">
                   {(address.firstName || address.lastName) && (
                     <p className="font-semibold text-gray-800 mb-1">
@@ -137,7 +137,7 @@ export default function AddressList({
                 disabled={isLoading}
                 className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50"
               >
-                <PencilSimple className="w-4 h-4" weight="regular" />
+                <PencilSimpleIcon className="w-4 h-4" weight="regular" />
                 <span>Edit</span>
               </button>
               <button
@@ -148,7 +148,7 @@ export default function AddressList({
                 {deletingId === address.id ? (
                   <div className="w-4 h-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
                 ) : (
-                  <Trash className="w-4 h-4" weight="regular" />
+                  <TrashIcon className="w-4 h-4" weight="regular" />
                 )}
                 <span>Delete</span>
               </button>
@@ -160,7 +160,7 @@ export default function AddressList({
       {/* Empty State */}
       {addresses.length === 0 && !showAddForm && (
         <div className="p-12 rounded-2xl text-center">
-          <MapPin className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+          <MapPinIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
           <p className="text-sm">No addresses saved yet</p>
           <button
             onClick={() => setShowAddForm(true)}

@@ -4,7 +4,7 @@ import { useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { filterByPriceTier } from "@/lib/config/price-tiers"
-import { ProductCard } from "@/app/components/products/cards"
+import ProductCard from "@/app/components/products/cards/ProductCard"
 import type { ProductsGridProps, ShopifyProduct } from "@/lib/shopify/types"
 
 export default function ProductGrid({ products, viewMode }: ProductsGridProps) {

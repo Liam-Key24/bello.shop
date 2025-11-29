@@ -6,7 +6,6 @@ import {
   cartLinesUpdate,
   cartLinesRemove,
 } from "@/lib/shopify/cart-manager";
-import type { CartItem } from "@/lib/shopify/types";
 import { validateCartRequest } from "@/lib/validation/cart-schema";
 
 export async function GET(req: NextRequest) {
@@ -80,6 +79,9 @@ export async function POST(req: NextRequest) {
           });
           return NextResponse.json({ cart }, { headers: response.headers });
         }
+        if (!items) {
+          return NextResponse.json({ error: "Items required" }, { status: 400 });
+        }
         cart = await cartLinesAdd(cartId, items);
         return NextResponse.json({ cart });
 
@@ -87,12 +89,18 @@ export async function POST(req: NextRequest) {
         if (!cartId) {
           return NextResponse.json({ error: "Cart ID required" }, { status: 400 });
         }
+        if (!updates) {
+          return NextResponse.json({ error: "Updates required" }, { status: 400 });
+        }
         cart = await cartLinesUpdate(cartId, updates);
         return NextResponse.json({ cart });
 
       case "remove":
         if (!cartId) {
           return NextResponse.json({ error: "Cart ID required" }, { status: 400 });
+        }
+        if (!lineIds) {
+          return NextResponse.json({ error: "Line IDs required" }, { status: 400 });
         }
         cart = await cartLinesRemove(cartId, lineIds);
         return NextResponse.json({ cart });

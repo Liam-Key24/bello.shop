@@ -2,11 +2,8 @@
 
 import type { Customer } from '@/lib/shopify/types';
 
-interface PreferencesSectionProps {
-  customer: Customer;
-}
-
-export default function PreferencesSection({ customer }: PreferencesSectionProps) {
+export default function PreferencesSection( props : { customer: Customer }) {
+  const { customer } = props;
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
