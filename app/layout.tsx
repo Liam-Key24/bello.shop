@@ -1,10 +1,9 @@
+import React from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { CartProvider, AuthProvider } from '@/lib/contexts';
-import { ErrorBoundary } from './edgecases/ErrorBoundary';
-
+import Providers from "./providers";
 import NavBar from "./layout/NavBar";
 import Footer from "./layout/Footer";
 
@@ -17,7 +16,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 
 export const metadata: Metadata = {
   title: "Bello Shop - Premium Health & Beauty Products",
@@ -34,17 +32,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-full`}
       >
-        <ErrorBoundary>
-          <AuthProvider>
-            <CartProvider>
-              <NavBar />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer/>
-            </CartProvider>
-          </AuthProvider>
-        </ErrorBoundary>
+        <Providers>
+          <NavBar />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

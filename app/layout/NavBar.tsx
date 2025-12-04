@@ -5,7 +5,7 @@ import { useState} from "react";
 import { useRouter } from "next/navigation";
 import NavCartIcon from "@/app/components/common/navigation/NavCartIcon";
 import { useAuth } from "@/lib/contexts";
-import { MagnifyingGlassIcon, UserIcon, XIcon, ListIcon, CaretDownIcon, ArrowSquareOutIcon, SignOutIcon } from "@phosphor-icons/react";
+import { MagnifyingGlass, User, X, List, CaretDown, ArrowSquareOut, SignOut } from "@phosphor-icons/react";
 
 const iconClass = "w-5 h-5 text-gray-700 cursor-pointer";
 const menuItems = [
@@ -38,14 +38,14 @@ export default function NavBar() {
         <div className="inline-flex gap-x-4 items-center">
           {isAuthenticated ? (
             <button onClick={() => setIsMenuOpen(true)} className="flex items-center gap-1" aria-label="User menu">
-              <UserIcon className={iconClass} weight="regular" />
+              <User className={iconClass} weight="regular" />
               {customer?.firstName && <span className="text-sm text-gray-700 hidden sm:inline">{customer.firstName}</span>}
             </button>
           ) : (
-            <Link href="/account/login" aria-label="Login"><UserIcon className={iconClass} /></Link>
+                <Link href="/account/login" aria-label="Login"><User className={iconClass} /></Link>
           )}
-          <MagnifyingGlassIcon className={iconClass} onClick={() => setIsMenuOpen(true)} weight="regular" />
-          {isMenuOpen ? <XIcon className={iconClass} onClick={closeMenu} weight="regular" /> : <ListIcon className={iconClass} onClick={() => setIsMenuOpen(true)} weight="regular" />}
+          <MagnifyingGlass className={iconClass} onClick={() => setIsMenuOpen(true)} weight="regular" />
+          {isMenuOpen ? <X className={iconClass} onClick={closeMenu} weight="regular" /> : <List className={iconClass} onClick={() => setIsMenuOpen(true)} weight="regular" />}
           <Link href="/cart"><NavCartIcon /></Link>
         </div>
       </div>
@@ -56,11 +56,11 @@ export default function NavBar() {
             <div className="w-full mb-2 py-2">
               <div className="flex items-center justify-center gap-6">
                 <Link href="/account/profile" className="text-sm text-gray-700 hover:bg-gray-100 px-3 py-1 rounded-4xl transition-colors flex items-center gap-2" onClick={closeMenu}>
-                  <UserIcon className="w-5 h-5 text-gray-700" weight="regular" />
+                  <User className="w-5 h-5 text-gray-700" weight="regular" />
                   {customer?.firstName && <span className="text-lg text-gray-800 font-medium">{customer.firstName}</span>}
                 </Link>
                 <button onClick={handleLogout} className="text-sm text-red-custom hover:bg-red-50 flex items-center gap-2 px-3 py-1 rounded-4xl transition-colors">
-                  <SignOutIcon className="w-4 h-4" weight="regular" /> Logout
+                  <SignOut className="w-4 h-4" weight="regular" /> Logout
                 </button>
               </div>
             </div>
@@ -68,20 +68,20 @@ export default function NavBar() {
 
           <div className="glass rounded-full mb-6 h-12">
             <div className="px-6 py-3 flex items-center gap-3">
-         <MagnifyingGlassIcon className="w-5 h-5 text-gray-500" weight="regular" />
+         <MagnifyingGlass className="w-5 h-5 text-gray-500" weight="regular" />
               <input type="text" placeholder="Search products..." className="flex-1 bg-transparent outline-none text-gray-800 placeholder-gray-500" />
             </div>
           </div>
 
           <div className="flex items-center justify-between mb-2 pb-4">
             <span className="text-xl text-gray-800">Categories</span>
-            <CaretDownIcon className="w-5 h-5 text-gray-700" weight="regular" />
+            <CaretDown className="w-5 h-5 text-gray-700" weight="regular" />
           </div>
 
           {menuItems.map((item, i) => (
             <Link key={item.href} href={item.href} className={`flex items-center justify-between ${i < menuItems.length - 1 ? "mb-6" : ""} group cursor-pointer`} onClick={closeMenu}>
               <span className="text-lg text-gray-800 group-hover:text-gray-600 transition-colors">{item.label}</span>
-              <ArrowSquareOutIcon className="w-5 h-5 text-gray-700 group-hover:text-gray-600 transition-colors" weight="regular" />
+              <ArrowSquareOut className="w-5 h-5 text-gray-700 group-hover:text-gray-600 transition-colors" weight="regular" />
             </Link>
           ))}
         </div>

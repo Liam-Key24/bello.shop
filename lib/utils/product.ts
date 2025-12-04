@@ -1,20 +1,21 @@
-/**
- * Shared utilities for product components
- */
-
 import type { ShopifyProduct, ShopifyImage } from "@/lib/shopify/types";
 import type { ProductCardProps } from "@/lib/types/product";
 
-/**
- * Format price to display format
- */
+const priceCache = new Map<number, string>();
+
 export const formatPrice = (price: number): string => {
-  return `£${price.toFixed(2)}`;
+  if (priceCache.has(price)) {
+    return priceCache.get(price)!;
+  }
+  const formatted = `£${price.toFixed(2)}`;
+  if (priceCache.size > 1000) {
+    const firstKey = priceCache.keys().next().value;
+    priceCache.delete(firstKey);
+  }
+  priceCache.set(price, formatted);
+  return formatted;
 };
 
-/**
- * Get product image with fallback
- */
 export const getProductImage = (
   product: ShopifyProduct | undefined,
   index: number = 0
@@ -22,23 +23,39 @@ export const getProductImage = (
   return product?.images?.[index] || null;
 };
 
-/**
- * Get product link
- */
 export const getProductLink = (handle: string | undefined): string => {
   return handle ? `/product/${handle}` : '/shop';
 };
 
-/**
- * Get product display title
- */
 export const getProductTitle = (product: ShopifyProduct | undefined, fallback: string = 'Product'): string => {
   return product?.title || fallback;
 };
 
-/**
- * Normalized product data from ProductCard props
- */
+export function getFirstVariantId(product: ShopifyProduct): string {
+  return product.variants?.[0]?.id ?? "";
+}
+
+export function getPrimaryImage(product: ShopifyProduct): ShopifyImage | null {
+  return product.images?.[0] || null;
+}
+
+export function getProductUrl(handle: string): string {
+  return `/product/${handle}`;
+}
+
+export function sanitizeDescription(description: string | null | undefined): string {
+  if (!description) return "";
+  return description.replace(/\s+/g, " ").trim();
+}
+
+export function hasProductImages(product: ShopifyProduct): boolean {
+  return product.images && product.images.length > 0;
+}
+
+export function isProductAvailable(product: ShopifyProduct): boolean {
+  return product.variants && product.variants.length > 0;
+}
+
 export interface NormalizedProductData {
   title: string;
   price: number;
@@ -47,10 +64,6 @@ export interface NormalizedProductData {
   href: string;
 }
 
-/**
- * Normalize product data from either product object or legacy individual props
- * Handles backward compatibility with legacy API
- */
 export const normalizeProductData = (
   props: ProductCardProps
 ): NormalizedProductData => {

@@ -1,7 +1,5 @@
-/**
- * All custom React hooks
- */
+"use client";
+
 export * from './account';
-export * from './cart';
 export * from './shop';
 

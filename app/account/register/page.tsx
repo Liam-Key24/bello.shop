@@ -1,9 +1,9 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/lib/contexts";
-import { UserIcon, ArrowRightIcon, WarningCircleIcon, CheckCircleIcon } from "@phosphor-icons/react";
+import { User, ArrowRight, WarningCircle, CheckCircle } from "@phosphor-icons/react";
 import { EmailInput, PasswordInput } from "@/app/components/common/forms";
 
 export default function RegisterPage() {
@@ -16,6 +16,28 @@ export default function RegisterPage() {
   const [success, setSuccess] = useState(false);
   const { checkAuth } = useAuth();
   const router = useRouter();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (success) {
+      timeoutRef.current = setTimeout(() => {
+        router.push("/account/profile");
+      }, 1000);
+    }
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [success, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,26 +45,27 @@ export default function RegisterPage() {
     setError(null);
     setSuccess(false);
 
-    const res = await fetch("/api/shopify/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, firstName, lastName }),
-    });
+    try {
+      const res = await fetch("/api/shopify/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "register", email, password, firstName, lastName }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      setError(data.error || "Registration failed. Please try again.");
+      if (!res.ok) {
+        setError(data.error || "Registration failed. Please try again.");
+        setIsLoading(false);
+        return;
+      }
+
+      setSuccess(true);
+      await checkAuth();
+    } catch (err) {
+      setError("Registration failed. Please try again.");
       setIsLoading(false);
-      return;
     }
-
-    setSuccess(true);
-    // Refresh auth state after registration (which auto-logs in)
-    await checkAuth();
-    setTimeout(() => {
-      router.push("/account/profile");
-    }, 1000);
   };
 
   return (
@@ -67,7 +90,7 @@ export default function RegisterPage() {
                   First Name
                 </label>
                 <div className="relative">
-                  <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" weight="regular" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" weight="regular" />
                   <input
                     id="firstName"
                     type="text"
@@ -85,7 +108,7 @@ export default function RegisterPage() {
                   Last Name
                 </label>
                 <div className="relative">
-                  <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" weight="regular" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" weight="regular" />
                   <input
                     id="lastName"
                     type="text"
@@ -134,7 +157,7 @@ export default function RegisterPage() {
             {/* Success Message */}
           {success && (
             <div className="mb-6 p-4 neumorphism-bg border border-green-500/30 rounded-lg flex items-start gap-3">
-              <CheckCircleIcon className="w-5 h-5 text-green-600" weight="regular" />
+              <CheckCircle className="w-5 h-5 text-green-600" weight="regular" />
               <div>
                 <p className="text-black font-semibold text-sm">Account created successfully!</p>
                 <p className="text-black text-xs mt-1">Redirecting to your profile...</p>
@@ -145,7 +168,7 @@ export default function RegisterPage() {
           {/* Error Message */}
           {error && (
             <div className="mb-6 p-4 bg-white border border-red-600 rounded-lg flex items-start gap-3">
-              <WarningCircleIcon className="w-5 h-5 text-red-600 mt-0.5" weight="regular" />
+              <WarningCircle className="w-5 h-5 text-red-600 mt-0.5" weight="regular" />
               <p className="text-red-600 text-sm">{error}</p>
             </div>
           )}
@@ -164,13 +187,13 @@ export default function RegisterPage() {
                 </>
               ) : success ? (
                 <>
-                  <CheckCircleIcon className="w-5 h-5" weight="regular" />
+                  <CheckCircle className="w-5 h-5" weight="regular" />
                   <span>Success!</span>
                 </>
               ) : (
                 <>
                   <span>Create Account</span>
-                  <ArrowRightIcon className="w-5 h-5" weight="regular" />
+                  <ArrowRight className="w-5 h-5" weight="regular" />
                 </>
               )}
             </button>

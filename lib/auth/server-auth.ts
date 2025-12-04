@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers';
 import { getCustomer, customerAccessTokenRenew } from '@/lib/shopify/customer';
-
-import type { GetCustomerResponse } from '@/lib/shopify/types';
+import type { GetCustomerResponse, CustomerAddress } from '@/lib/shopify/types';
 
 export interface ServerAuthResult {
   isAuthenticated: boolean;
@@ -9,10 +8,21 @@ export interface ServerAuthResult {
   token: string | null;
 }
 
-/**
- * Server-side authentication utility
- * Use this in Server Components and API routes
- */
+interface AddressEdge {
+  node: CustomerAddress;
+}
+
+function transformAddresses(
+  addresses: GetCustomerResponse['customer']['addresses']
+): CustomerAddress[] {
+  if (!addresses) return [];
+  if (Array.isArray(addresses)) return addresses;
+  if ('edges' in addresses && Array.isArray(addresses.edges)) {
+    return addresses.edges.map((edge: AddressEdge) => edge.node);
+  }
+  return [];
+}
+
 export async function getServerAuth(): Promise<ServerAuthResult> {
   try {
     const cookieStore = await cookies();
@@ -26,7 +36,6 @@ export async function getServerAuth(): Promise<ServerAuthResult> {
       };
     }
 
-    // Validate token by fetching customer
     const customer = await getCustomer(token);
 
     if (!customer) {
@@ -37,10 +46,9 @@ export async function getServerAuth(): Promise<ServerAuthResult> {
       };
     }
 
-    // Transform addresses from edges structure to flat array
     const transformedCustomer = {
       ...customer,
-      addresses: customer.addresses?.edges?.map((edge: { node: any }) => edge.node) || [],
+      addresses: transformAddresses(customer.addresses),
     };
 
     return {
@@ -49,7 +57,6 @@ export async function getServerAuth(): Promise<ServerAuthResult> {
       token,
     };
   } catch (error) {
-    console.error('Server auth error:', error);
     return {
       isAuthenticated: false,
       customer: null,
@@ -58,10 +65,6 @@ export async function getServerAuth(): Promise<ServerAuthResult> {
   }
 }
 
-/**
- * Require authentication - throws error if not authenticated
- * Use in Server Components that require auth
- */
 export async function requireAuth(): Promise<{ customer: NonNullable<GetCustomerResponse['customer']>; token: string }> {
   const auth = await getServerAuth();
 
@@ -75,9 +78,6 @@ export async function requireAuth(): Promise<{ customer: NonNullable<GetCustomer
   };
 }
 
-/**
- * Renew customer access token if needed
- */
 export async function renewTokenIfNeeded(token: string): Promise<string | null> {
   try {
     const result = await customerAccessTokenRenew(token);
@@ -87,8 +87,7 @@ export async function renewTokenIfNeeded(token: string): Promise<string | null> 
     }
 
     return result.customerAccessToken.accessToken;
-  } catch (error) {
-    console.error('Token renewal error:', error);
+  } catch {
     return null;
   }
 }

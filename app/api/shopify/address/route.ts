@@ -23,12 +23,9 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Addresses are included in the customer query
-    // This endpoint can be used to refresh addresses
     return NextResponse.json({ message: "Use /api/shopify/customer to get addresses" });
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : "Failed to get addresses";
-    console.error("Get addresses error:", err);
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
@@ -77,7 +74,6 @@ export async function POST(req: NextRequest) {
     });
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : "Failed to create address";
-    console.error("Create address error:", err);
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
@@ -132,7 +128,6 @@ export async function PUT(req: NextRequest) {
     });
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : "Failed to update address";
-    console.error("Update address error:", err);
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
@@ -167,7 +162,6 @@ export async function DELETE(req: NextRequest) {
     });
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : "Failed to delete address";
-    console.error("Delete address error:", err);
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
@@ -202,7 +196,6 @@ export async function PATCH(req: NextRequest) {
     });
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : "Failed to set default address";
-    console.error("Set default address error:", err);
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

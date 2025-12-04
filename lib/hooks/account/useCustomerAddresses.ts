@@ -1,23 +1,42 @@
+"use client";
+
 import { useMemo } from 'react';
 import type { Customer, CustomerAddress } from '@/lib/shopify/types';
+
+interface AddressEdge {
+  node: CustomerAddress;
+}
+
+function isAddressEdgeArray(value: unknown): value is { edges: AddressEdge[] } {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'edges' in value &&
+    Array.isArray((value as { edges: unknown }).edges)
+  );
+}
 
 export function useCustomerAddresses(customer: Customer | null): CustomerAddress[] {
   return useMemo(() => {
     if (!customer) return [];
     
-    const addresses: CustomerAddress[] = [];
     const addressMap = new Map<string, CustomerAddress>();
     
-    // Add default address if it exists
     if (customer.defaultAddress) {
       addressMap.set(customer.defaultAddress.id, customer.defaultAddress);
     }
     
-    // Add other addresses from the addresses array
     if (customer.addresses) {
-      const addressArray = Array.isArray(customer.addresses) 
-        ? customer.addresses 
-        : (customer.addresses as any).edges?.map((e: any) => e.node) || [];
+      let addressArray: CustomerAddress[] = [];
+      
+      if (Array.isArray(customer.addresses)) {
+        addressArray = customer.addresses;
+      } else {
+        const addressesWithEdges = customer.addresses as { edges?: AddressEdge[] };
+        if (isAddressEdgeArray(addressesWithEdges)) {
+          addressArray = addressesWithEdges.edges.map((e: AddressEdge) => e.node);
+        }
+      }
       
       addressArray.forEach((addr: CustomerAddress) => {
         if (!addressMap.has(addr.id)) {

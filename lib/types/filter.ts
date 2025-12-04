@@ -1,7 +1,3 @@
-/**
- * Shared type definitions for filter components
- */
-
 export type Category = {
   id: string
   label: string

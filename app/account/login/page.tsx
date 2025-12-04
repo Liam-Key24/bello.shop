@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { useAuth } from "@/lib/contexts";
-import { ArrowRightIcon, WarningCircleIcon } from "@phosphor-icons/react";
+import { ArrowRight, WarningCircle } from "@phosphor-icons/react";
 import { EmailInput, PasswordInput } from "@/app/components/common/forms";
 import type { EmailInputRef, PasswordInputRef } from "@/lib/types/form";
 
@@ -93,7 +93,7 @@ export default function LoginPage() {
             {/* Error Message */}
           {authError && (
             <div className="mb-6 p-4 bg-white rounded-lg flex items-center gap-3">
-              <WarningCircleIcon className="w-5 h-5 text-red-600 mt-0.5" weight="regular" />
+              <WarningCircle className="w-5 h-5 text-red-600 mt-0.5" weight="regular" />
               <p className="text-red-600 text-sm">{authError}</p>
             </div>
           )}
@@ -113,7 +113,7 @@ export default function LoginPage() {
               ) : (
                 <>
                   <span>Sign In</span>
-                  <ArrowRightIcon className="w-5 h-5" weight="regular" />
+                  <ArrowRight className="w-5 h-5" weight="regular" />
                 </>
               )}
             </button>

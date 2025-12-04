@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { HeartIcon, ArrowSquareOutIcon } from '@phosphor-icons/react';
+import { Heart, ArrowSquareOut } from '@phosphor-icons/react';
 import ProductImage from '../shared/ProductImage';
 import { formatPrice, normalizeProductData } from '@/lib/utils/product';
 import type { ProductCardProps } from '@/lib/types/product';
@@ -33,7 +33,7 @@ export default function ProductCard(props: ProductCardProps) {
               // TODO: Implement favorite functionality
             }}
           >
-            <HeartIcon className="w-4 h-4 text-gray-700" weight="regular" />
+            <Heart className="w-4 h-4 text-gray-700" weight="regular" />
           </button>
           <button
             type="button"
@@ -44,7 +44,7 @@ export default function ProductCard(props: ProductCardProps) {
               window.open(href, '_blank');
             }}
           >
-            <ArrowSquareOutIcon className="w-4 h-4 text-gray-700" weight="regular" /> 
+            <ArrowSquareOut className="w-4 h-4 text-gray-700" weight="regular" /> 
           </button>
         </div>
 

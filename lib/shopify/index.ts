@@ -1,23 +1,9 @@
-/**
- * Barrel export for Shopify utilities
- * Provides a clean import interface for the entire Shopify module
- */
-
-// Types
 export * from "./types";
 export * from "./types/responses";
-
-// Core utilities
 export { shopifyFetch } from "./helper";
 export { CACHE_CONFIG } from "./utils/cache-config";
-
-// Parsers
 export * from "./parsers/product-parser";
-
-// Queries
 export * from "./queries/fragments";
-
-// Product functions
 export {
   getProductByHandle,
   getAllProducts,
@@ -25,8 +11,6 @@ export {
   type ProductsResponse,
   type ProductsPageInfo,
 } from "./products";
-
-// Collection functions
 export {
   getAllCollections,
   findCollectionByTitle,
@@ -34,14 +18,17 @@ export {
   getProductsByCollection,
   type ShopifyCollection,
 } from "./collection";
-
-// Cart functions
 export {
   createShopifyCart,
   createCheckout,
+  createCartItem,
+  performCheckout,
+  getCart,
+  cartLinesAdd,
+  cartLinesUpdate,
+  cartLinesRemove,
+  type ShopifyCart,
 } from "./cart";
-
-// Customer functions
 export {
   customerCreate,
   customerLogin,
@@ -49,8 +36,6 @@ export {
   getCustomer,
   customerLogout,
 } from "./customer";
-
-// Filter utilities
 export {
   mapShopifyToProductItem,
   applyFilters,
@@ -58,4 +43,12 @@ export {
   mapPriceTierToRange,
   type FilterObject,
 } from "./filter";
+export { getHomePageData, type HomePageData } from "./home-data";
+export {
+  PRICE_TIERS,
+  getPriceTierByLabel,
+  filterByPriceTier,
+  getPriceTierLabels,
+  type PriceTier,
+} from "./price-tiers";
 

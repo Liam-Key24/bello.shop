@@ -1,14 +1,16 @@
+"use client";
+
 import { ShoppingCart } from "@phosphor-icons/react";
-import { useCart } from '@/lib/contexts';
+import { useCartStore } from '@/lib/store/cart';
 
 /**
  * Navigation cart icon - displays cart icon with item count badge
  */
 export default function NavCartIcon() {
-  const { cart } = useCart();
+  const items = useCartStore((state) => state.items);
 
   // total quantity of all items
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="relative">

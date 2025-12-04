@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import {useTransition } from "react";
-import CartItemQuantitySelector from "./CartItemQuantitySelector"; // keep your existing selector
-import { useCart } from "@/lib/contexts";
+import CartItemQuantitySelector from "./CartItemQuantitySelector";
+import { cartActions } from "@/lib/store/cart";
 import { ShopifyCartItem } from "@/lib/shopify/types";
 import { formatPrice } from "@/lib/utils/product";
 
@@ -12,15 +12,14 @@ interface CartItemCardProps {
 }
 
 export default function CartItemCard({ item }: CartItemCardProps) {
-  const { removeItem, updateQuantity } = useCart();
   const [isPending, startTransition] = useTransition();
 
   const handleRemove = () => {
-    startTransition(() => removeItem(item.variantId));
+    startTransition(() => cartActions.removeItem(item.variantId));
   };
 
   const handleQuantityChange = (newQty: number) => {
-    startTransition(() => updateQuantity(item.variantId, newQty));
+    startTransition(() => cartActions.updateQuantity(item.variantId, newQty));
   };
 
   return (

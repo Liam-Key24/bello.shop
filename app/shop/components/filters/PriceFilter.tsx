@@ -2,7 +2,7 @@
 
 import { CaretDown } from "@phosphor-icons/react"
 import { useFilterState, useSectionToggle } from '@/lib/hooks/shop'
-import { getPriceTierLabels } from '@/lib/config/price-tiers'
+import { getPriceTierLabels } from '@/lib/shopify/price-tiers'
 
 export default function PriceFilter() {
   const { selectedPrice, updateFilter } = useFilterState()

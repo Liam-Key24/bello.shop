@@ -1,10 +1,10 @@
 "use client";
 
-import { useCart } from "@/lib/contexts";
+import { useCartStore } from "@/lib/store/cart";
 import { formatPrice } from "@/lib/utils/product";
 
 export default function OrderSummary() {
-  const { cart } = useCart();
+  const cart = useCartStore((state) => state.items);
 
   const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
   const subtotal = cart.reduce(

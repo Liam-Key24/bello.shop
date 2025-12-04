@@ -77,10 +77,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       setError(null);
-      const res = await fetch('/api/shopify/login', {
+      const res = await fetch('/api/shopify/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ action: 'login', email, password }),
       });
 
       const data = await res.json();
@@ -103,8 +103,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const logout = async () => {
     try {
       setError(null);
-      const res = await fetch('/api/shopify/logout', {
-        method: 'POST',
+      const res = await fetch('/api/shopify/auth', {
+        method: 'DELETE',
       });
 
       if (!res.ok) {

@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  createCart,
+  createShopifyCart as createCart,
   getCart,
   cartLinesAdd,
   cartLinesUpdate,
   cartLinesRemove,
-} from "@/lib/shopify/cart-manager";
-import { validateCartRequest } from "@/lib/validation/cart-schema";
+} from "@/lib/shopify/cart";
+import { validateCartRequest } from "@/lib/utils/validation";
 
 export async function GET(req: NextRequest) {
   try {
@@ -20,7 +20,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ cart });
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : "Failed to get cart";
-    console.error("Get cart error:", err);
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
@@ -110,7 +109,6 @@ export async function POST(req: NextRequest) {
     }
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : "Cart operation failed";
-    console.error("Cart operation error:", err);
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

@@ -1,9 +1,9 @@
 "use client";
 import { ShoppingCart } from "@phosphor-icons/react";
-import { useCart } from "@/lib/contexts";
+import { useCartStore, cartActions } from "@/lib/store/cart";
 
 export default function ContinueCheckout() {
-  const { cart, checkout } = useCart();
+  const cart = useCartStore((state) => state.items);
 
   const handleCheckout = async () => {
     if (!cart.length) {
@@ -11,7 +11,7 @@ export default function ContinueCheckout() {
       return;
     }
 
-    await checkout();
+    await cartActions.checkout();
   };
 
   return (

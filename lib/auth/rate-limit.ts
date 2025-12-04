@@ -1,24 +1,36 @@
-/**
- * Simple in-memory rate limiting for authentication endpoints
- * For production, consider using Redis or a dedicated rate limiting service
- */
-
 interface RateLimitEntry {
   count: number;
   resetTime: number;
 }
 
 const rateLimitStore = new Map<string, RateLimitEntry>();
+let cleanupInterval: NodeJS.Timeout | null = null;
 
-// Clean up old entries every 5 minutes
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, entry] of rateLimitStore.entries()) {
-    if (entry.resetTime < now) {
-      rateLimitStore.delete(key);
+function startCleanupInterval() {
+  if (cleanupInterval) return;
+  
+  cleanupInterval = setInterval(() => {
+    const now = Date.now();
+    for (const [key, entry] of rateLimitStore.entries()) {
+      if (entry.resetTime < now) {
+        rateLimitStore.delete(key);
+      }
     }
+  }, 5 * 60 * 1000);
+}
+
+if (typeof global !== 'undefined') {
+  startCleanupInterval();
+  
+  if (typeof process !== 'undefined' && process.on) {
+    process.on('SIGTERM', () => {
+      if (cleanupInterval) {
+        clearInterval(cleanupInterval);
+        cleanupInterval = null;
+      }
+    });
   }
-}, 5 * 60 * 1000);
+}
 
 export interface RateLimitOptions {
   maxRequests: number;

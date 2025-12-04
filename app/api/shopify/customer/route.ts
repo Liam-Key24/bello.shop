@@ -38,14 +38,11 @@ export async function GET(req: NextRequest) {
         });
         return response;
       }
-    } catch (renewError) {
-      // If renewal fails, still return customer data with existing token
-      console.warn("Token renewal failed, using existing token:", renewError);
+    } catch {
     }
 
     return NextResponse.json({ customer: transformedCustomer });
-  } catch (err) {
-    console.error("Profile fetch error:", err);
+  } catch {
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

@@ -33,7 +33,6 @@ export async function shopifyFetch<T>(
 
   if (!res.ok) {
     const text = await res.text().catch(() => "<no body>");
-    console.error(`Shopify HTTP error ${res.status} ${res.statusText}:`, text);
     throw new Error(`Shopify HTTP error ${res.status} ${res.statusText}`);
   }
 
@@ -45,19 +44,16 @@ export async function shopifyFetch<T>(
   let data: ShopifyResponse<T>;
   try {
     data = await res.json();
-  } catch (err) {
-    console.error("Failed to parse Shopify response as JSON:", err);
+  } catch {
     throw new Error("Invalid JSON response from Shopify");
   }
 
   if (data.errors) {
-    console.dir(data.errors, { depth: null });
     const messages = data.errors.map((e) => e.message).join("; ");
     throw new Error(`Shopify GraphQL error: ${messages}`);
   }
 
   if (!data.data) {
-    console.error("Shopify response missing data field:", data);
     throw new Error("Shopify response missing data");
   }
 

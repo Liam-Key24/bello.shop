@@ -1,7 +1,3 @@
-/**
- * Form-related types
- */
-
 export type EmailInputRef = {
   validate: () => boolean;
 };

@@ -42,8 +42,7 @@ export async function getAllCollections(): Promise<ShopifyCollection[]> {
     );
 
     return (data.collections.edges || []).map(edge => edge.node);
-  } catch (err) {
-    console.error("getAllCollections failed:", err);
+  } catch {
     return [];
   }
 }
@@ -121,8 +120,7 @@ export async function getProductsByCollection(
         title: collection.title,
       })
     );
-  } catch (err) {
-    console.error("getProductsByCollection failed for handle:", handle, err);
+  } catch {
     return [];
   }
 }

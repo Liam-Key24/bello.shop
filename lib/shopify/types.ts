@@ -45,7 +45,7 @@ export interface ShopifyCartItem {
   price: number;
   image?: string;
   quantity: number;
-  lineId?: string; // Shopify cart line ID for updates
+  lineId?: string;
 }
 
 
@@ -259,4 +259,15 @@ export interface CustomerAccessTokenDeleteResponse {
       message: string
     }[]
   }
+}
+
+// Address list component props
+export interface AddressListProps {
+  addresses: CustomerAddress[];
+  defaultAddressId?: string;
+  onAddressCreate: (address: MailingAddressInput) => Promise<void>;
+  onAddressUpdate: (addressId: string, address: MailingAddressInput) => Promise<void>;
+  onAddressDelete: (addressId: string) => Promise<void>;
+  onSetDefault: (addressId: string) => Promise<void>;
+  isLoading?: boolean;
 }

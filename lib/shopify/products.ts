@@ -55,8 +55,7 @@ export async function getProductByHandle(handle: string): Promise<ShopifyProduct
     if (!product) return null;
 
     return parseProductNode(product);
-  } catch (err) {
-    console.error("getProductByHandle failed for handle:", handle, err);
+  } catch {
     return null;
   }
 }
