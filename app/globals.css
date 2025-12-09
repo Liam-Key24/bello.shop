@@ -19,7 +19,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: var(--color-green-primary);
+    --background: var(--color-white);
     --foreground: var(--color-white);
   }
 }

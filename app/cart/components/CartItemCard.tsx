@@ -15,11 +15,15 @@ export default function CartItemCard({ item }: CartItemCardProps) {
   const [isPending, startTransition] = useTransition();
 
   const handleRemove = () => {
-    startTransition(() => cartActions.removeItem(item.variantId));
+    startTransition(async () => {
+      await cartActions.removeItem(item.variantId);
+    });
   };
 
   const handleQuantityChange = (newQty: number) => {
-    startTransition(() => cartActions.updateQuantity(item.variantId, newQty));
+    startTransition(async () => {
+      await cartActions.updateQuantity(item.variantId, newQty);
+    });
   };
 
   return (

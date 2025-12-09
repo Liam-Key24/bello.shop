@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import type { Customer } from '@/lib/shopify/types';
+import { cartActions } from '@/lib/store/cart';
 
 interface AuthContextType {
   customer: Customer | null;
@@ -113,9 +114,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       setCustomer(null);
       
-      // Clear cart cookie on logout (cart will fall back to localStorage)
+      // Clear cart cookie on logout
       if (typeof document !== 'undefined') {
         document.cookie = 'shopifyCartId=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      }
+      
+      // Clear localStorage cart on logout (per requirements: cart should not persist when logged out)
+      if (typeof window !== 'undefined') {
+        try {
+          cartActions.clearCart();
+          localStorage.removeItem('cartLastActivity');
+          localStorage.removeItem('cartLastShopifySync');
+        } catch (error) {
+          console.error('Error clearing cart on logout:', error);
+          // Fallback: clear localStorage directly
+          try {
+            localStorage.removeItem('cart');
+            localStorage.removeItem('cartLastActivity');
+            localStorage.removeItem('cartLastShopifySync');
+          } catch {
+            // Ignore
+          }
+        }
       }
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Logout failed';

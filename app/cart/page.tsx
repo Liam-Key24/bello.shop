@@ -5,8 +5,6 @@ import CartItemCard from "./components/CartItemCard";
 import OrderSummary from "./components/OrderSummary";
 import ContinueCheckout from "./components/ContinueCheckout";
 import Link from "next/link";
-
-
 import { useCartStore } from "@/lib/store/cart";
 import { ArrowRight } from "@phosphor-icons/react";
 

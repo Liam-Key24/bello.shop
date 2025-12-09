@@ -457,7 +457,7 @@ export async function createCheckout(
       quantity: Math.max(1, Math.min(999, quantity)),
     },
   ]);
-
+  
   if (!cart.checkoutUrl) {
     throw new Error("Failed to create checkout: missing checkout URL");
   }

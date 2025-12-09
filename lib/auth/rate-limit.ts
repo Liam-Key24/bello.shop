@@ -8,15 +8,15 @@ let cleanupInterval: NodeJS.Timeout | null = null;
 
 function startCleanupInterval() {
   if (cleanupInterval) return;
-  
+
   cleanupInterval = setInterval(() => {
-    const now = Date.now();
-    for (const [key, entry] of rateLimitStore.entries()) {
-      if (entry.resetTime < now) {
-        rateLimitStore.delete(key);
-      }
+  const now = Date.now();
+  for (const [key, entry] of rateLimitStore.entries()) {
+    if (entry.resetTime < now) {
+      rateLimitStore.delete(key);
     }
-  }, 5 * 60 * 1000);
+  }
+}, 5 * 60 * 1000);
 }
 
 if (typeof global !== 'undefined') {

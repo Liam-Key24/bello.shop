@@ -1,34 +1,25 @@
 "use client";
 
-import { useTransition, useState, useEffect, useRef } from "react";
+import { useState, useTransition } from "react";
 import { cartActions } from "@/lib/store/cart";
 import { createCartItem } from "@/lib/shopify/cart";
 import { showNotification } from "@/lib/utils/notifications";
 
-interface ProductActionsProps {
+interface ProductBuyButtonsProps {
   variantId: string;
   title: string;
   price: number;
   image?: string;
 }
 
-export default function ProductActions({
+export default function ProductBuyButtons({
   variantId,
   title,
   price,
   image,
-}: ProductActionsProps) {
+}: ProductBuyButtonsProps) {
   const [isPending, startTransition] = useTransition();
   const [addedToCart, setAddedToCart] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
 
   const handleBuyNow = async () => {
     if (!variantId) {
@@ -49,7 +40,7 @@ export default function ProductActions({
       }
 
       const data = await res.json();
-      
+
       if (data.checkout?.webUrl) {
         window.location.href = data.checkout.webUrl;
       } else if (data.error) {
@@ -58,8 +49,14 @@ export default function ProductActions({
         throw new Error("Failed to create checkout: No checkout URL received");
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Failed to start checkout";
-      showNotification(`Checkout error: ${errorMessage}. Please try again.`, "error");
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to start checkout";
+      showNotification(
+        `Checkout error: ${errorMessage}. Please try again.`,
+        "error"
+      );
     }
   };
 
@@ -69,35 +66,28 @@ export default function ProductActions({
       return;
     }
 
-    startTransition(() => {
+    startTransition(async () => {
       const item = createCartItem({ variantId, title, price, image });
-      cartActions.addItem(item);
+      // Cart syncs to Shopify automatically if logged in
+      await cartActions.addItem(item);
       setAddedToCart(true);
-      
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-      
-      timeoutRef.current = setTimeout(() => {
+
+      setTimeout(() => {
         setAddedToCart(false);
-        timeoutRef.current = null;
       }, 2000);
     });
   };
 
   return (
     <div className="flex gap-2 w-full">
-      {/* Checkout as Guest */}
       <button
         onClick={handleBuyNow}
         disabled={isPending || !variantId}
-        className="glass rounded-4xl w-1/2 h-12 flex flex-col items-center justify-center hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+        className="glass rounded-4xl w-1/2 h-12 flex items-center justify-center hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <span className="text-sm font-medium">Checkout as guest</span>
-        <span className="text-xs text-gray-600">No account required</span>
+        <span className="text-sm font-medium">Buy now</span>
       </button>
 
-      {/* Add to Cart */}
       <button
         onClick={handleAddToCart}
         disabled={isPending || !variantId}
@@ -110,3 +100,4 @@ export default function ProductActions({
     </div>
   );
 }
+

@@ -46,22 +46,22 @@ export default function RegisterPage() {
     setSuccess(false);
 
     try {
-      const res = await fetch("/api/shopify/auth", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "register", email, password, firstName, lastName }),
-      });
+    const res = await fetch("/api/shopify/auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "register", email, password, firstName, lastName }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (!res.ok) {
-        setError(data.error || "Registration failed. Please try again.");
-        setIsLoading(false);
-        return;
-      }
+    if (!res.ok) {
+      setError(data.error || "Registration failed. Please try again.");
+      setIsLoading(false);
+      return;
+    }
 
-      setSuccess(true);
-      await checkAuth();
+    setSuccess(true);
+    await checkAuth();
     } catch (err) {
       setError("Registration failed. Please try again.");
       setIsLoading(false);

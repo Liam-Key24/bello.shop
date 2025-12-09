@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     const checkout = await createCheckout(variantId, quantity);
     
     if (isJsonRequest) {
-      return NextResponse.json({ checkout });
+    return NextResponse.json({ checkout });
     } else {
       return NextResponse.redirect(checkout.webUrl);
     }
