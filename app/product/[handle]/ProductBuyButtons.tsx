@@ -4,6 +4,8 @@ import { useState, useTransition } from "react";
 import { cartActions } from "@/lib/store/cart";
 import { createCartItem } from "@/lib/shopify/cart";
 import { showNotification } from "@/lib/utils/notifications";
+import { Button } from "@/app/components/ui/Button";
+import { QuantitySelector } from "@/app/components/product/QuantitySelector";
 
 interface ProductBuyButtonsProps {
   variantId: string;
@@ -20,6 +22,7 @@ export default function ProductBuyButtons({
 }: ProductBuyButtonsProps) {
   const [isPending, startTransition] = useTransition();
   const [addedToCart, setAddedToCart] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   const handleBuyNow = async () => {
     if (!variantId) {
@@ -31,7 +34,7 @@ export default function ProductBuyButtons({
       const res = await fetch("/api/shopify/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ variantId, quantity: 1 }),
+        body: JSON.stringify({ variantId, quantity }),
       });
 
       if (!res.ok) {
@@ -50,9 +53,7 @@ export default function ProductBuyButtons({
       }
     } catch (error) {
       const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "Failed to start checkout";
+        error instanceof Error ? error.message : "Failed to start checkout";
       showNotification(
         `Checkout error: ${errorMessage}. Please try again.`,
         "error"
@@ -67,37 +68,35 @@ export default function ProductBuyButtons({
     }
 
     startTransition(async () => {
-      const item = createCartItem({ variantId, title, price, image });
-      // Cart syncs to Shopify automatically if logged in
+      const item = createCartItem(
+        { variantId, title, price, image },
+        quantity
+      );
       await cartActions.addItem(item);
       setAddedToCart(true);
-
-      setTimeout(() => {
-        setAddedToCart(false);
-      }, 2000);
+      setTimeout(() => setAddedToCart(false), 2000);
     });
   };
 
   return (
-    <div className="flex gap-2 w-full">
-      <button
-        onClick={handleBuyNow}
-        disabled={isPending || !variantId}
-        className="glass rounded-4xl w-1/2 h-12 flex items-center justify-center hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        <span className="text-sm font-medium">Buy now</span>
-      </button>
-
-      <button
+    <div className="space-y-6">
+      <QuantitySelector value={quantity} onChange={setQuantity} />
+      <Button
+        variant="primary"
+        className="w-full"
         onClick={handleAddToCart}
         disabled={isPending || !variantId}
-        className="glass rounded-4xl w-1/2 h-12 flex items-center justify-center hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <span className="text-sm font-medium">
-          {isPending ? "Adding..." : addedToCart ? "Added!" : "Add to cart"}
-        </span>
-      </button>
+        {addedToCart ? "Added to Cart" : isPending ? "Adding…" : "Add to Cart"}
+      </Button>
+      <Button
+        variant="glass"
+        className="w-full"
+        onClick={handleBuyNow}
+        disabled={!variantId}
+      >
+        Buy Now
+      </Button>
     </div>
   );
 }
-
