@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bello - Sustainable Living Made Simple</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-v2.css">
+    <style>
+        /* Hero Section */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 80px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 80px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            line-height: 0.95;
+            letter-spacing: -2px;
+        }
+
+        .hero-text .highlight {
+            color: var(--color-sage-green);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            color: var(--color-mid-gray);
+            margin-bottom: 40px;
+            max-width: 480px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .hero-image-container {
+            position: relative;
+        }
+
+        .hero-image {
+            position: relative;
+            height: 600px;
+            border-radius: 32px;
+            overflow: hidden;
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(32px);
+            border: 3px solid var(--glass-border);
+            box-shadow: var(--glass-shadow-strong);
+        }
+
+        .hero-image .placeholder-image {
+            height: 100%;
+            font-size: 16px;
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--color-sun-yellow);
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-weight: 700;
+            color: var(--color-deep-teal);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 2px solid var(--color-deep-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+        }
+
+        /* Sun Wave Decoration */
+        .sun-wave-decoration {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.4;
+        }
+
+        /* Trust Bar - Festival Band Style */
+        .trust-bar {
+            background: linear-gradient(135deg, var(--color-sun-yellow) 0%, var(--color-sage-green) 100%);
+            padding: 50px 20px;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trust-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(255, 255, 255, 0.05) 20px,
+                rgba(255, 255, 255, 0.05) 40px
+            );
+        }
+
+        .trust-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trust-item {
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 3px solid rgba(45, 70, 84, 0.3);
+            border-radius: 20px;
+            padding: 32px 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .trust-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .trust-item h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-deep-teal);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .trust-item p {
+            font-size: 14px;
+            color: var(--color-charcoal);
+            font-weight: 500;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: var(--section-padding) 20px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 56px;
+            margin-bottom: 16px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--color-mid-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .product-card {
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(32px) saturate(200%);
+            -webkit-backdrop-filter: blur(32px) saturate(200%);
+            border: 3px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 36px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--glass-shadow-strong);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border-color: rgba(152, 166, 93, 0.4);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            background: var(--color-soft-sand);
+        }
+
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .product-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--color-charcoal);
+            letter-spacing: -0.5px;
+        }
+
+        .product-price {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--color-sage-green);
+        }
+
+        .product-description {
+            color: var(--color-mid-gray);
+            font-size: 16px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .feature-tag {
+            background: var(--color-sun-yellow);
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-deep-teal);
+            border: 2px solid var(--color-deep-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .product-cta {
+            display: flex;
+            gap: 12px;
+        }
+
+        .product-cta button {
+            flex: 1;
+        }
+
+        /* Guarantees Section */
+        .guarantees-section {
+            background: var(--color-soft-sand);
+            padding: var(--section-padding) 20px;
+            position: relative;
+        }
+
+        .guarantees-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .guarantees-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .guarantee-card {
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 3px solid var(--glass-border);
+            padding: 36px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--glass-shadow-strong);
+        }
+
+        .guarantee-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-sun-yellow);
+            border: 3px solid var(--color-deep-teal);
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .guarantee-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--color-charcoal);
+            font-weight: 800;
+        }
+
+        .guarantee-card p {
+            color: var(--color-mid-gray);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: var(--section-padding) 20px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 48px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-content,
+            .guarantees-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-wrapper">
+        <nav>
+            <a href="v2-homepage.html" class="logo">Bello</a>
+            <ul class="nav-links">
+                <li><a href="v2-homepage.html">Home</a></li>
+                <li><a href="v2-about.html">Our Story</a></li>
+                <li><a href="v2-contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn" aria-label="Search">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+                <button class="icon-btn cart-badge" aria-label="Cart">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Live Better, <br><span class="highlight">Waste Less</span></h1>
+                <p>Discover sustainable essentials for your everyday life. Quality products that care for you and the planet.</p>
+                <div class="hero-cta">
+                    <button class="primary-button">Shop Now</button>
+                    <button class="glass-button">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <div class="hero-image">
+                    <div class="placeholder-image">
+                        [Hero Product Image]<br>
+                        Eco-friendly kitchen & home essentials<br>
+                        1200x800px
+                    </div>
+                </div>
+                <div class="hero-badge">🌿 100% Eco-Friendly</div>
+                <div class="sun-wave-decoration">
+                    <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="40" r="20" stroke="currentColor" stroke-width="3" fill="none" opacity="0.3"/>
+                        <line x1="60" y1="10" x2="60" y2="0" stroke="currentColor" stroke-width="3" opacity="0.3"/>
+                        <line x1="80" y1="17" x2="87" y2="10" stroke="currentColor" stroke-width="3" opacity="0.3"/>
+                        <line x1="90" y1="40" x2="100" y2="40" stroke="currentColor" stroke-width="3" opacity="0.3"/>
+                        <line x1="80" y1="63" x2="87" y2="70" stroke="currentColor" stroke-width="3" opacity="0.3"/>
+                        <line x1="40" y1="17" x2="33" y2="10" stroke="currentColor" stroke-width="3" opacity="0.3"/>
+                        <line x1="30" y1="40" x2="20" y2="40" stroke="currentColor" stroke-width="3" opacity="0.3"/>
+                        <line x1="40" y1="63" x2="33" y2="70" stroke="currentColor" stroke-width="3" opacity="0.3"/>
+                        <path d="M10 60 Q30 55, 50 60 T90 60 T110 60" stroke="currentColor" stroke-width="3" fill="none" opacity="0.3"/>
+                        <path d="M10 68 Q30 63, 50 68 T90 68 T110 68" stroke="currentColor" stroke-width="3" fill="none" opacity="0.3"/>
+                        <path d="M10 76 Q30 71, 50 76 T90 76 T110 76" stroke="currentColor" stroke-width="3" fill="none" opacity="0.3"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar - Festival Band -->
+    <div class="trust-bar">
+        <div class="trust-content">
+            <div class="trust-item">
+                <div class="trust-icon">🚚</div>
+                <h3>Free Shipping</h3>
+                <p>On orders over £30</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">♻️</div>
+                <h3>Eco-Certified</h3>
+                <p>100% sustainable materials</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">⭐</div>
+                <h3>Highly Rated</h3>
+                <p>By happy customers</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🔄</div>
+                <h3>30-Day Returns</h3>
+                <p>Hassle-free guarantee</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Products -->
+    <section class="products-section">
+        <div class="section-header">
+            <h2>Our Essentials</h2>
+            <p>Carefully curated products to help you live more sustainably without compromising on quality or style.</p>
+        </div>
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="placeholder-image">
+                        [Product Image 1]<br>
+                        Reusable kitchen essentials<br>
+                        Bamboo utensils & storage<br>
+                        800x800px
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Reusable Kitchen Set</h3>
+                    <span class="product-price">£34.99</span>
+                </div>
+                <p class="product-description">Complete zero-waste kitchen essentials. Includes bamboo utensils, beeswax wraps, and silicone storage bags.</p>
+                <div class="product-features">
+                    <span class="feature-tag">🌿 Plastic-Free</span>
+                    <span class="feature-tag">♻️ Reusable</span>
+                    <span class="feature-tag">🏡 Kitchen</span>
+                </div>
+                <div class="product-cta">
+                    <button class="primary-button">Add to Cart</button>
+                    <button class="glass-button">Learn More</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="placeholder-image">
+                        [Product Image 2]<br>
+                        Organic cotton towels<br>
+                        Soft & sustainable<br>
+                        800x800px
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Organic Cotton Basics</h3>
+                    <span class="product-price">£29.99</span>
+                </div>
+                <p class="product-description">Soft, sustainable, and ethically made. Premium organic cotton towels and cloths for every room in your home.</p>
+                <div class="product-features">
+                    <span class="feature-tag">🌱 100% Organic</span>
+                    <span class="feature-tag">✨ Ultra-Soft</span>
+                    <span class="feature-tag">🌍 Fair Trade</span>
+                </div>
+                <div class="product-cta">
+                    <button class="primary-button">Add to Cart</button>
+                    <button class="glass-button">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantees Section -->
+    <section class="guarantees-section">
+        <div class="guarantees-content">
+            <div class="section-header">
+                <h2>Our Promise to You</h2>
+                <p>We're committed to your satisfaction and the planet's wellbeing.</p>
+            </div>
+            <div class="guarantees-grid">
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">✓</div>
+                    <h3>Quality Guarantee</h3>
+                    <p>Every product is carefully tested and built to last. If you're not satisfied, we'll make it right.</p>
+                </div>
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">🌍</div>
+                    <h3>Carbon Neutral Shipping</h3>
+                    <p>We offset 100% of our shipping emissions and use plastic-free packaging.</p>
+                </div>
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">❤️</div>
+                    <h3>Give Back Program</h3>
+                    <p>5% of every purchase supports environmental conservation projects worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="section-header">
+            <h2>Loved by Customers</h2>
+            <p>Join our community making sustainable choices every day.</p>
+        </div>
+        <div class="placeholder-reviews">
+            <div class="placeholder-reviews-title">Customer Reviews Will Appear Here</div>
+            <p>Once you have customer reviews, they will be displayed in this section to build trust and social proof.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Bello</h3>
+                    <p>Making sustainable living simple, beautiful, and accessible for everyone.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Facebook">👍</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="v2-homepage.html">All Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="v2-contact.html">Contact Us</a></li>
+                        <li><a href="v2-shipping.html">Shipping Info</a></li>
+                        <li><a href="v2-returns.html">Returns</a></li>
+                        <li><a href="v2-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="v2-about.html">About Us</a></li>
+                        <li><a href="v2-privacy.html">Privacy Policy</a></li>
+                        <li><a href="v2-privacy.html">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bello. All rights reserved.</p>
+                <p>Made with 💚 for the planet</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

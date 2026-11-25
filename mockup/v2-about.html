@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - Bello</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-v2.css">
+    <style>
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 140px 20px 80px;
+            position: relative;
+            z-index: 1;
+        }
+        .about-hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .about-hero h1 {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+        }
+        .about-hero p {
+            font-size: 20px;
+            color: var(--color-mid-gray);
+            line-height: 1.6;
+        }
+        .about-section {
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(32px);
+            border: 3px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 48px;
+            margin-bottom: 40px;
+            box-shadow: var(--glass-shadow-strong);
+        }
+        .about-section h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--color-sage-green);
+        }
+        .about-section p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--color-charcoal);
+            margin-bottom: 16px;
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+        .value-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 28px;
+        }
+        .value-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .value-card p {
+            font-size: 15px;
+            color: var(--color-mid-gray);
+        }
+        @media (max-width: 768px) {
+            .about-hero h1 { font-size: 42px; }
+            .values-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-wrapper">
+        <nav>
+            <a href="v2-homepage.html" class="logo">Bello</a>
+            <ul class="nav-links">
+                <li><a href="v2-homepage.html">Home</a></li>
+                <li><a href="v2-about.html">Our Story</a></li>
+                <li><a href="v2-contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></button>
+                <button class="icon-btn cart-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg><span class="cart-count">0</span></button>
+            </div>
+        </nav>
+    </div>
+
+    <div class="about-container">
+        <div class="about-hero">
+            <h1>Our Story</h1>
+            <p>Making sustainable living simple, beautiful, and accessible for everyone.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Why We Exist</h2>
+            <p>Bello was born from a simple belief: sustainable living shouldn't be complicated, expensive, or boring. We saw too many people wanting to make eco-friendly choices but feeling overwhelmed by greenwashing, high prices, and products that just didn't work.</p>
+            <p>So we set out to change that. We curate only the best sustainable essentials—products that actually make your life better while caring for the planet. No guilt-tripping, no compromises on quality, just honest, beautiful products that work.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>How We Choose Products</h2>
+            <p>Every product in our collection is carefully vetted. We look for three things:</p>
+            <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--glass-border);">🌿 <strong>Genuinely sustainable</strong> — certified materials, ethical production, minimal waste</li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--glass-border);">✨ <strong>Actually better</strong> — superior quality and function compared to conventional options</li>
+                <li style="padding: 10px 0;">🏡 <strong>Real-life useful</strong> — products people actually use and love every day</li>
+            </ul>
+            <p>If a product doesn't meet all three, it doesn't make the cut.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>🌍 Planet First</h3>
+                    <p>100% of our products are eco-certified. We offset all shipping emissions and use plastic-free packaging.</p>
+                </div>
+                <div class="value-card">
+                    <h3>💯 Radical Honesty</h3>
+                    <p>No greenwashing, no fake reviews, no hidden fees. What you see is what you get.</p>
+                </div>
+                <div class="value-card">
+                    <h3>✓ Quality Always</h3>
+                    <p>We only sell products we'd use ourselves. Every item is tested and backed by our guarantee.</p>
+                </div>
+                <div class="value-card">
+                    <h3>❤️ Give Back</h3>
+                    <p>5% of every purchase supports environmental conservation projects around the world.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Join the Movement</h2>
+            <p>Thousands of people have already made the switch to sustainable living with Bello. Every product you choose makes a difference—for your home, your health, and our planet.</p>
+            <p style="text-align: center; margin-top: 32px;">
+                <a href="v2-homepage.html"><button class="primary-button">Shop Our Essentials</button></a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Bello</h3>
+                    <p>Making sustainable living simple, beautiful, and accessible for everyone.</p>
+                    <div class="social-links">
+                        <a href="#">📷</a>
+                        <a href="#">👍</a>
+                        <a href="#">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul><li><a href="v2-homepage.html">All Products</a></li></ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="v2-contact.html">Contact Us</a></li>
+                        <li><a href="v2-shipping.html">Shipping Info</a></li>
+                        <li><a href="v2-returns.html">Returns</a></li>
+                        <li><a href="v2-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="v2-about.html">About Us</a></li>
+                        <li><a href="v2-privacy.html">Privacy Policy</a></li>
+                        <li><a href="v2-privacy.html">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bello. All rights reserved.</p>
+                <p>Made with 💚 for the planet</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
