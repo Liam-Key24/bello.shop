@@ -1,20 +1,7 @@
 /**
- * Main barrel export for product components
- * Provides clean imports: import { ProductCard, ProductsGrid, FilterHead } from '@/app/components/products'
+ * Product component exports for the v5 rebuild
  */
 
-// Cards
-export * from './cards';
-
-// Layouts
-export * from './layouts';
-
-// Banners
-export * from './banners';
-
-// Filters
-export * from './filters';
-
-// Shared utilities
-export * from './shared';
-
+export { FeaturedProductCard } from "./FeaturedProductCard";
+export { FloatingProductCard } from "./FloatingProductCard";
+export { ProductMedia } from "./ProductMedia";

@@ -148,3 +148,58 @@ export async function getAllProductsSimple(first: number = 12): Promise<ShopifyP
   const response = await getAllProducts(first);
   return response.products;
 }
+
+/**
+ * Get products by Shopify product tag via Storefront API query filter.
+ * Example: getProductsByTag("featured", 2)
+ */
+export async function getProductsByTag(
+  tag: string,
+  first: number = 2
+): Promise<ShopifyProduct[]> {
+  if (!tag.trim()) {
+    throw new Error("Tag is required");
+  }
+  if (first < 1 || first > 250) {
+    throw new Error("First parameter must be between 1 and 250");
+  }
+
+  const query = `
+    ${PRODUCT_BASE_FRAGMENT}
+    ${PRODUCT_IMAGE_FRAGMENT}
+    ${PRODUCT_PRICE_FRAGMENT}
+    ${PRODUCT_VARIANT_FRAGMENT}
+    query getProductsByTag($first: Int!, $query: String!) {
+      products(first: $first, query: $query) {
+        edges {
+          node {
+            ...ProductBase
+            images(first: 3) {
+              edges {
+                node {
+                  ...ProductImage
+                }
+              }
+            }
+            ...ProductPrice
+            variants(first: 10) {
+              edges {
+                node {
+                  ...ProductVariant
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await shopifyFetch<ProductsResponseType>(
+    query,
+    { first, query: `tag:${tag}` },
+    CACHE_CONFIG.default
+  );
+
+  return (data.products.edges || []).map((edge) => parseProductNode(edge.node));
+}

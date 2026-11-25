@@ -33,10 +33,10 @@ export default function Unauthorized() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
-            href="/account/login"
-            className="px-6 py-3 bg-[var(--color-green-primary)] text-[var(--color-black)] rounded-lg hover:opacity-90 transition-opacity font-medium"
+            href="/"
+            className="px-6 py-3 bg-brand-button text-white rounded-sm hover:opacity-90 transition-opacity font-medium"
           >
-            Log In
+            Back Home
           </Link>
           
           <Link

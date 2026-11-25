@@ -35,10 +35,11 @@ export async function POST(req: NextRequest) {
       const cart = await createShopifyCart(items);
       const response = NextResponse.json({ checkoutUrl: cart.checkoutUrl });
       response.cookies.set("shopifyCartId", cart.id, {
-        maxAge: 60 * 60 * 24 * 7,
+        maxAge: 60 * 60 * 24 * 30, // 30 days — persist between visits
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
+        path: "/",
       });
       return response;
     }

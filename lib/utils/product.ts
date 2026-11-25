@@ -10,7 +10,9 @@ export const formatPrice = (price: number): string => {
   const formatted = `£${price.toFixed(2)}`;
   if (priceCache.size > 1000) {
     const firstKey = priceCache.keys().next().value;
-    priceCache.delete(firstKey);
+    if (firstKey !== undefined) {
+      priceCache.delete(firstKey);
+    }
   }
   priceCache.set(price, formatted);
   return formatted;
@@ -53,7 +55,7 @@ export function hasProductImages(product: ShopifyProduct): boolean {
 }
 
 export function isProductAvailable(product: ShopifyProduct): boolean {
-  return product.variants && product.variants.length > 0;
+  return !!(product.variants && product.variants.length > 0);
 }
 
 export interface NormalizedProductData {

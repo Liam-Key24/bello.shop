@@ -1,37 +1,61 @@
-import HeroCard from "./components/products/cards/HeroCard";
-import ProductOfTheWeekCard from "./components/products/cards/ProductOfTheWeekCard";
-import PromiseCard from "./components/products/PromiseCard";
-import CategoryBanner from "./components/products/banners/CategoryBanner";
-import PopularBanner from "./components/products/banners/PopularBanner";
-
 import { Metadata } from "next";
 import { getHomePageData } from "@/lib/shopify/home-data";
+import { HeroSection } from "@/app/components/sections/HeroSection";
+import { ProductsSection } from "@/app/components/sections/ProductsSection";
+import { ContentBlock } from "@/app/components/sections/ContentBlock";
+import { GuaranteesSection } from "@/app/components/sections/GuaranteesSection";
+import { PromisesSection } from "@/app/components/sections/PromisesSection";
+import { ReviewsPlaceholder } from "@/app/components/sections/ReviewsPlaceholder";
+import type { ShopifyProduct } from "@/lib/shopify/types";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Home | Bello Shop",
-  description: "Discover the best health and beauty products. Shop premium healthcare, wellness, and beauty products at Bello Shop.",
-  keywords: ["health", "beauty", "wellness", "products", "shop", "bello", "shop"],
-  authors: [{ name: "Bello Shop", url: "https://bello.shop" }],
-  robots: {
-    index: true,
-    follow: true,
-  },
+  title: "Bello - Sustainable Kitchen Essentials",
+  description:
+    "Discover sustainable kitchen essentials designed to elevate your everyday life while caring for the planet.",
 };
 
 export default async function Home() {
-  const { heroProducts, newProducts, productOfWeek } = await getHomePageData();
+  let featuredProducts: ShopifyProduct[] = [];
+  let loadError = false;
+
+  try {
+    const data = await getHomePageData();
+    featuredProducts = data.featuredProducts;
+  } catch (error) {
+    console.error("Error loading homepage data:", error);
+    loadError = true;
+  }
+
+  if (loadError) {
+    return (
+      <div className="text-center py-20 px-6">
+        <h1 className="mb-4">Welcome to Bello</h1>
+        <p className="text-mid-gray">
+          Products will appear once Shopify credentials are configured and
+          products are tagged <code className="text-brand-deep">featured</code>.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
-      <div className="gap-y-10 mt-20">
-        <HeroCard product={heroProducts[0]} />
-        <div className="w-full h-auto flex flex-col gap-6 my-3">
-        <PopularBanner />
-        <ProductOfTheWeekCard product={productOfWeek[0]} />
-        <CategoryBanner />
-        </div>
-        <PromiseCard />
-      </div>
+      <HeroSection featuredProduct={featuredProducts[0] ?? null} />
+      <ProductsSection products={featuredProducts} />
+      <ContentBlock
+        title="Thoughtfully Made for Everyday Life"
+        paragraphs={[
+          "Every product we offer is carefully selected with both quality and sustainability in mind. We believe that the small choices we make in our kitchens can create meaningful change.",
+          "From the materials we source to the partners we work with, everything is designed to help you live more sustainably without compromise.",
+        ]}
+        linkHref="/about"
+        linkText="Learn More About Our Values"
+      />
+      <GuaranteesSection />
+      <PromisesSection />
+      <ReviewsPlaceholder />
     </>
   );
 }

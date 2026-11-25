@@ -56,7 +56,7 @@ export function validateCartRequest(body: unknown): { valid: boolean; data?: Car
     if (obj.items && !Array.isArray(obj.items)) {
       return { valid: false, error: 'Items must be an array' };
     }
-    if (obj.items) {
+    if (obj.items && Array.isArray(obj.items)) {
       for (const item of obj.items) {
         if (!item || typeof item !== 'object') {
           return { valid: false, error: 'Each item must be an object' };

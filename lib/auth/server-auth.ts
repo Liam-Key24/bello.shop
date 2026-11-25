@@ -13,11 +13,11 @@ interface AddressEdge {
 }
 
 function transformAddresses(
-  addresses: GetCustomerResponse['customer']['addresses']
+  addresses: any
 ): CustomerAddress[] {
   if (!addresses) return [];
   if (Array.isArray(addresses)) return addresses;
-  if ('edges' in addresses && Array.isArray(addresses.edges)) {
+  if (typeof addresses === 'object' && 'edges' in addresses && Array.isArray(addresses.edges)) {
     return addresses.edges.map((edge: AddressEdge) => edge.node);
   }
   return [];
@@ -49,7 +49,7 @@ export async function getServerAuth(): Promise<ServerAuthResult> {
     const transformedCustomer = {
       ...customer,
       addresses: transformAddresses(customer.addresses),
-    };
+    } as unknown as GetCustomerResponse['customer'];
 
     return {
       isAuthenticated: true,

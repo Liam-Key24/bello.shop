@@ -2,8 +2,8 @@ import ErrorPage from './edgecases/components/ErrorPage';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '404 - Page Not Found | Bello Shop',
-  description: 'The page you are looking for could not be found.',
+  title: "404 - Page Not Found | Bello",
+  description: "The page you are looking for could not be found.",
 };
 
 /**
