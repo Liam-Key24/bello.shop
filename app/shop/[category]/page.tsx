@@ -1,10 +1,9 @@
 import { redirect } from "next/navigation";
 
 /**
- * Category page - redirects to main shop page
- * This route is reserved for future category filtering
+ * Category routes are not used in the 2-product store.
+ * Keep the path for old links, redirect to the simple shop grid.
  */
 export default function CategoryPage() {
   redirect("/shop");
 }
-
