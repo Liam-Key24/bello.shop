@@ -84,8 +84,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <span className="inline-block mb-6 px-3.5 py-1.5 rounded-sm bg-brand-pale text-charcoal text-[11px] font-bold uppercase tracking-wide">
             Sustainable Essential
           </span>
-          <h1 className="text-4xl md:text-5xl mb-5">{title}</h1>
-          <p className="font-display text-3xl md:text-4xl font-extrabold text-charcoal mb-7">
+          <h1 className="text-3xl md:text-4xl mb-5">{title}</h1>
+          <p className="font-body text-2xl md:text-3xl font-bold text-charcoal mb-7">
             {formatPrice(price)}
           </p>
 
@@ -100,7 +100,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
           {featureLines.length > 0 && (
             <GlassCard padding="md" className="mb-8">
-              <h3 className="font-display text-lg font-bold text-charcoal mb-5">
+              <h3 className="text-lg text-charcoal mb-5">
                 What&apos;s Included
               </h3>
               <ul className="space-y-3">

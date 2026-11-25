@@ -31,7 +31,7 @@ export function CartSummary() {
 
   return (
     <GlassCard padding="lg" className="space-y-6">
-      <h2 className="font-display text-xl font-bold text-charcoal">Order Summary</h2>
+      <h2 className="text-xl text-charcoal">Order Summary</h2>
 
       <div className="space-y-4 text-[15px]">
         <div className="flex justify-between">
@@ -47,8 +47,8 @@ export function CartSummary() {
           </span>
         </div>
         <div className="flex justify-between pt-4 border-t border-light-gray">
-          <span className="font-display text-lg font-bold text-charcoal">Total</span>
-          <span className="font-display text-lg font-bold text-charcoal">
+          <span className="font-body text-lg font-bold text-charcoal">Total</span>
+          <span className="font-body text-lg font-bold text-charcoal">
             {formatPrice(total)}
           </span>
         </div>

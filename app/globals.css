@@ -35,11 +35,12 @@
   /* ===== Max Width ===== */
   --max-width: 1280px;
 
-  /* ===== Typography ===== */
-  /* Prefer Next.js font CSS variables when present; fall back to system stacks */
-  --font-family-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  --font-family-body: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
-  --font-family-display: var(--font-dm-sans), 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Font tokens reference next/font vars at use-time (not baked on :root) */
+@theme inline {
+  --font-heading: var(--font-young-serif), "Young Serif", Georgia, serif;
+  --font-body: var(--font-nunito-sans), "Nunito Sans", system-ui, -apple-system, sans-serif;
 }
 
 /* ===== Base Styles ===== */
@@ -50,12 +51,12 @@ html {
 }
 
 body {
-  font-family: var(--font-family-body);
+  @apply font-body;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   color: var(--color-charcoal);
-  line-height: 1.7;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -75,39 +76,39 @@ footer {
 /* ===== Typography ===== */
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family-serif);
-  font-weight: 500;
-  line-height: 1.2;
+  @apply font-heading;
+  font-weight: 400;
+  line-height: 1.15;
   color: var(--color-charcoal);
 }
 
+/* Young Serif runs wide — slightly tighter scale than Playfair */
 h1 {
-  font-size: 72px;
-  letter-spacing: -1.5px;
+  font-size: 64px;
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: 48px;
-  letter-spacing: -0.8px;
+  font-size: 42px;
+  letter-spacing: -0.015em;
 }
 
 h3 {
-  font-size: 32px;
-  letter-spacing: -0.5px;
+  font-size: 28px;
+  letter-spacing: -0.01em;
 }
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 48px;
-    letter-spacing: -1px;
+    font-size: 42px;
   }
 
   h2 {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   h3 {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 

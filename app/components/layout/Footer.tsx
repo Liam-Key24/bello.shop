@@ -28,7 +28,7 @@ export function Footer() {
       <div className="max-w-[var(--max-width)] mx-auto px-6 md:px-[var(--spacing-horizontal)] py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 mb-12 md:mb-16">
           <div>
-            <h3 className="font-serif text-2xl mb-4 text-charcoal">Bello</h3>
+            <h3 className="font-heading text-2xl mb-4 text-charcoal">Bello</h3>
             <p className="text-sm text-charcoal/80 leading-relaxed mb-6">
               Making sustainable living simple, beautiful, and accessible for everyone.
             </p>
@@ -49,7 +49,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-sm font-bold mb-5 uppercase tracking-wide text-charcoal">
+            <h4 className="font-body text-sm font-bold mb-5 uppercase tracking-wide text-charcoal">
               Shop
             </h4>
             <ul className="space-y-3">
@@ -67,7 +67,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-sm font-bold mb-5 uppercase tracking-wide text-charcoal">
+            <h4 className="font-body text-sm font-bold mb-5 uppercase tracking-wide text-charcoal">
               Support
             </h4>
             <ul className="space-y-3">
@@ -85,7 +85,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-sm font-bold mb-5 uppercase tracking-wide text-charcoal">
+            <h4 className="font-body text-sm font-bold mb-5 uppercase tracking-wide text-charcoal">
               Company
             </h4>
             <ul className="space-y-3">

@@ -35,7 +35,7 @@ export function GuaranteesSection() {
               <div className="mx-auto mb-6 text-brand flex justify-center">
                 <Icon name={item.icon} size={56} strokeWidth={1.5} />
               </div>
-              <h3 className="font-display text-xl font-bold text-charcoal mb-4">
+              <h3 className="text-xl text-charcoal mb-4">
                 {item.title}
               </h3>
               <p className="text-base text-mid-gray leading-relaxed">

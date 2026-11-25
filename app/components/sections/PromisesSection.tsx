@@ -16,7 +16,7 @@ export function PromisesSection() {
             <div className="mx-auto mb-4 text-brand flex justify-center">
               <Icon name={item.icon} size={40} strokeWidth={1.5} />
             </div>
-            <h3 className="font-display text-base font-semibold text-charcoal mb-1.5">
+            <h3 className="text-base text-charcoal mb-1.5">
               {item.title}
             </h3>
             <p className="text-sm text-mid-gray">{item.description}</p>

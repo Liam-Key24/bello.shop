@@ -31,10 +31,10 @@ export function CartLineItem({ item }: CartLineItemProps) {
 
       <div className="flex-1 flex flex-col gap-4">
         <div className="flex justify-between gap-4">
-          <h3 className="font-display text-lg font-bold text-charcoal">
+          <h3 className="text-lg text-charcoal">
             {item.title}
           </h3>
-          <p className="font-display font-bold text-charcoal shrink-0">
+          <p className="font-body font-bold text-charcoal shrink-0">
             {formatPrice(item.price * item.quantity)}
           </p>
         </div>

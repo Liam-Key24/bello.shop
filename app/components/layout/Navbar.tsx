@@ -24,7 +24,7 @@ export function Navbar() {
         <nav className="max-w-[var(--max-width)] mx-auto px-6 md:px-[var(--spacing-horizontal)] py-5 md:py-6 flex justify-between items-center">
           <Link
             href="/"
-            className="font-serif text-2xl md:text-[28px] font-semibold text-charcoal tracking-tight"
+            className="font-heading text-2xl md:text-[26px] text-charcoal tracking-tight"
           >
             Bello
           </Link>

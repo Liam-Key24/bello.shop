@@ -22,10 +22,10 @@ export function FeaturedProductCard({ product }: FeaturedProductCardProps) {
         className="w-full h-80 md:h-[400px]"
       />
       <div className="p-6 md:p-8">
-        <h3 className="font-display text-2xl font-bold text-charcoal mb-3">
+        <h3 className="text-2xl text-charcoal mb-3">
           {product.title}
         </h3>
-        <p className="font-display text-[28px] font-extrabold text-charcoal mb-5">
+        <p className="font-body text-2xl font-bold text-charcoal mb-5">
           {formatPrice(product.price)}
         </p>
         <p className="text-base text-mid-gray mb-6 leading-relaxed">

@@ -23,10 +23,10 @@ export function FloatingProductCard({ product }: FloatingProductCardProps) {
         className="w-full h-60 rounded-sm mb-5"
         priority
       />
-      <h3 className="font-display text-xl font-bold text-charcoal mb-2.5">
+      <h3 className="text-xl text-charcoal mb-2.5">
         {product.title}
       </h3>
-      <p className="font-display text-[28px] font-extrabold text-charcoal mb-5">
+      <p className="font-body text-2xl font-bold text-charcoal mb-5">
         {formatPrice(product.price)}
       </p>
       <Link href={`/product/${product.handle}`} className="block">
