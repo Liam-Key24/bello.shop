@@ -28,7 +28,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
       />
       <nav
         aria-label="Mobile navigation"
-        className="fixed top-20 right-4 z-[70] w-72 rounded-md border border-light-gray/70 bg-white/95 p-6 shadow-lg backdrop-blur-2xl md:hidden"
+        className="fixed top-20 right-4 z-[70] w-72 rounded-md border border-light-gray/70 bg-white p-6 shadow-lg backdrop-blur-2xl md:hidden"
       >
         <div className="flex justify-end mb-4">
           <button
