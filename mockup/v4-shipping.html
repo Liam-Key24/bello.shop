@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping & Delivery - Bello</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-v4.css">
+    <style>
+        .page-container { max-width: 900px; margin: 0 auto; padding: 140px 20px 80px; position: relative; z-index: 1; }
+        .page-header { text-align: center; margin-bottom: 50px; }
+        .page-header h1 { font-size: 56px; font-weight: 900; margin-bottom: 16px; letter-spacing: -1px; }
+        .page-header p { font-size: 18px; color: var(--color-mid-gray); }
+        .content-section { background: var(--glass-bg-strong); backdrop-filter: blur(32px); border: 3px solid var(--glass-border); border-radius: 24px; padding: 40px; margin-bottom: 32px; box-shadow: var(--glass-shadow-strong); }
+        .content-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; color: var(--color-sage-green); }
+        .content-section p { font-size: 16px; line-height: 1.7; color: var(--color-charcoal); margin-bottom: 16px; }
+        .info-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .info-table th, .info-table td { padding: 16px; text-align: left; border-bottom: 2px solid var(--glass-border); }
+        .info-table th { font-weight: 700; color: var(--color-charcoal); background: var(--glass-bg); }
+        .info-table td { color: var(--color-mid-gray); }
+    </style>
+</head>
+<body>
+    <div class="nav-wrapper">
+        <nav>
+            <a href="v4-homepage.html" class="logo">Bello</a>
+            <ul class="nav-links">
+                <li><a href="v4-homepage.html">Home</a></li>
+                <li><a href="v4-about.html">Our Story</a></li>
+                <li><a href="v4-contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></button>
+                <button class="icon-btn cart-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg><span class="cart-count">0</span></button>
+            </div>
+        </nav>
+    </div>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1>Shipping & Delivery</h1>
+            <p>Fast, reliable, carbon-neutral delivery to your door.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>🚚 Delivery Times</h2>
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Standard Delivery</th>
+                        <th>Express Delivery</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>UK Mainland</td>
+                        <td>3-5 business days</td>
+                        <td>1-2 business days</td>
+                    </tr>
+                    <tr>
+                        <td>Northern Ireland</td>
+                        <td>5-7 business days</td>
+                        <td>2-3 business days</td>
+                    </tr>
+                    <tr>
+                        <td>Scottish Highlands & Islands</td>
+                        <td>5-7 business days</td>
+                        <td>3-4 business days</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Orders placed before 2pm Monday-Friday are dispatched the same day. Weekend orders are processed Monday morning.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>💷 Shipping Costs</h2>
+            <p><strong>Standard Delivery:</strong> FREE on orders over £30. £3.99 for orders under £30.</p>
+            <p><strong>Express Delivery:</strong> £7.99 (available at checkout)</p>
+            <p><strong>Saturday Delivery:</strong> £9.99 (order before Thursday 2pm)</p>
+            <p style="margin-top: 20px; padding: 16px; background: var(--glass-bg); border-radius: 12px; border: 2px solid var(--glass-border);">
+                💚 <strong>Carbon Neutral Shipping:</strong> We offset 100% of our delivery emissions at no extra cost to you.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>📦 Order Tracking</h2>
+            <p>Once your order is dispatched, you'll receive a tracking number via email. You can track your parcel in real-time using our shipping partner's website.</p>
+            <p>If you haven't received tracking information within 24 hours of your order confirmation, please <a href="v4-contact.html" style="color: var(--color-sage-green); font-weight: 600;">contact us</a>.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>📋 Packaging</h2>
+            <p><strong>100% Plastic-Free:</strong> All our packaging is recyclable or compostable. We use recycled cardboard boxes, paper tape, and biodegradable packing materials.</p>
+            <p><strong>Minimal Waste:</strong> We only use what's necessary to protect your products during transit. No excess packaging, no plastic fillers.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>❓ Need Help?</h2>
+            <p>Questions about your delivery? Check our <a href="v4-faq.html" style="color: var(--color-sage-green); font-weight: 600;">FAQ</a> or <a href="v4-contact.html" style="color: var(--color-sage-green); font-weight: 600;">get in touch</a>.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Bello</h3>
+                    <p>Making sustainable living simple, beautiful, and accessible for everyone.</p>
+                    <div class="social-links">
+                        <a href="#">📷</a>
+                        <a href="#">👍</a>
+                        <a href="#">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul><li><a href="v4-homepage.html">All Products</a></li></ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="v4-contact.html">Contact Us</a></li>
+                        <li><a href="v4-shipping.html">Shipping Info</a></li>
+                        <li><a href="v4-returns.html">Returns</a></li>
+                        <li><a href="v4-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="v4-about.html">About Us</a></li>
+                        <li><a href="v4-privacy.html">Privacy Policy</a></li>
+                        <li><a href="v4-privacy.html">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bello. All rights reserved.</p>
+                <p>Made with 💚 for the planet</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
