@@ -1,25 +1,36 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
 
 import Providers from "./providers";
-import NavBar from "./layout/NavBar";
-import Footer from "./layout/Footer";
+import { Navbar } from "./components/layout/Navbar";
+import { Footer } from "./components/layout/Footer";
+import { BackgroundBlobs } from "./components/layout/BackgroundBlobs";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-playfair",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-dm-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Bello Shop - Premium Health & Beauty Products",
-  description: "Discover the best health and beauty products. Shop premium skincare, wellness, and beauty essentials at Bello Shop.",
+  title: "Bello - Sustainable Kitchen Essentials",
+  description: "Discover sustainable kitchen essentials designed to elevate your everyday life while caring for the planet.",
 };
 
 export default function RootLayout({
@@ -30,11 +41,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-full`}
+        className={`${playfairDisplay.variable} ${inter.variable} ${dmSans.variable} antialiased`}
       >
+        <BackgroundBlobs />
         <Providers>
-          <NavBar />
-          <main className="flex-1">
+          <Navbar />
+          <main>
             {children}
           </main>
           <Footer />

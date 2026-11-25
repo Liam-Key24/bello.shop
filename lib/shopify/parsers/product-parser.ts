@@ -13,7 +13,7 @@ import type {
 export const parseImages = (edges: GraphQLImageEdge[], fallbackAlt?: string): ShopifyImage[] =>
   (edges || []).map((edge) => ({
     url: edge.node.url,
-    altText: edge.node.altText || fallbackAlt || null,
+    altText: edge.node.altText || fallbackAlt || undefined,
   }));
 
 /**

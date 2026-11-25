@@ -1,7 +1,5 @@
 /**
- * Next.js Error page
- * This file must be at the app root level for Next.js to use it
- * It imports the actual implementation from edgecases
+ * Next.js Error page (root level - redirects to app/error.tsx)
  */
-export { default } from './app/edgecases/error';
+export { default } from './app/error';
 

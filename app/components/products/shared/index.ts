@@ -3,6 +3,4 @@
  */
 
 export { default as ProductImage } from './ProductImage';
-export * from './utils';
-export * from './types';
 

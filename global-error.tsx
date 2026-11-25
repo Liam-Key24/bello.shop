@@ -1,7 +1,5 @@
 /**
- * Next.js Global Error page
- * This file must be at the app root level for Next.js to use it
- * It imports the actual implementation from edgecases
+ * Next.js Global Error page (root level - redirects to app/global-error.tsx)
  */
-export { default } from './app/edgecases/global-error';
+export { default } from './app/global-error';
 
