@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${playfairDisplay.variable} ${inter.variable} ${dmSans.variable} antialiased`}
+        className={`${playfairDisplay.variable} ${inter.variable} ${dmSans.variable} font-body antialiased`}
       >
         <BackgroundBlobs />
         <Providers>
