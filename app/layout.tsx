@@ -7,6 +7,8 @@ import Providers from "./providers";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { BackgroundBlobs } from "./components/layout/BackgroundBlobs";
+import { DecorativeLines } from "./components/layout/DecorativeLines";
+import { DecorativeSparkles } from "./components/layout/DecorativeSparkles";
 
 const youngSerif = Young_Serif({
   subsets: ["latin"],
@@ -39,6 +41,8 @@ export default function RootLayout({
     >
       <body className="font-body antialiased">
         <BackgroundBlobs />
+        <DecorativeLines />
+        <DecorativeSparkles />
         <Providers>
           <Navbar />
           <main>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Icon } from "@/app/components/ui/Icon";
+import { Sparkle } from "@/app/components/ui/Sparkle";
 
 const shopLinks = [{ href: "/shop", label: "All Products" }];
 
@@ -24,8 +25,12 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-brand text-charcoal mt-auto relative z-10">
-      <div className="max-w-[var(--max-width)] mx-auto px-6 md:px-[var(--spacing-horizontal)] py-16 md:py-20">
+    <footer className="bg-brand text-charcoal mt-auto relative z-10 overflow-hidden">
+      <Sparkle
+        size="lg"
+        className="pointer-events-none absolute top-6 right-6 text-charcoal/20 md:top-10 md:right-12 md:text-charcoal/25"
+      />
+      <div className="max-w-[var(--max-width)] mx-auto px-6 md:px-[var(--spacing-horizontal)] py-16 md:py-20 relative">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 mb-12 md:mb-16">
           <div>
             <h3 className="font-heading text-2xl mb-4 text-charcoal">Bello</h3>
