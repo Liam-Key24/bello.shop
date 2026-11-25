@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bello - Sustainable Living Made Simple</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-v3.css">
+    <style>
+        /* Refined Beauty Care-inspired layout */
+        .hero-refined { background: linear-gradient(135deg, #C8D5B9 0%, #98A65D 100%); padding: 120px 20px 100px; position: relative; overflow: hidden; }
+        .hero-refined-content { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+        .hero-refined-text h1 { font-family: 'Playfair Display', serif; font-size: 68px; font-weight: 500; line-height: 1.1; color: white; margin-bottom: 28px; letter-spacing: -0.5px; }
+        .hero-refined-text p { font-size: 18px; color: rgba(255,255,255,0.95); margin-bottom: 40px; max-width: 500px; line-height: 1.7; font-weight: 400; }
+        .hero-refined-cta { display: flex; gap: 14px; }
+        .hero-floating-card { background: white; border-radius: 20px; padding: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); max-width: 280px; margin-left: auto; }
+        .floating-card-badge { background: var(--color-sun-yellow); color: var(--color-deep-teal); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px; border-radius: 999px; display: inline-block; margin-bottom: 16px; }
+        .floating-card-image { width: 100%; height: 200px; background: var(--color-soft-sand); border-radius: 12px; margin-bottom: 16px; }
+        .floating-card-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--color-charcoal); }
+        .floating-card-price { font-size: 24px; font-weight: 800; color: var(--color-sage-green); margin-bottom: 16px; }
+        .floating-card-btn { width: 100%; padding: 12px; background: var(--color-sage-green); color: white; border: none; border-radius: 999px; font-weight: 600; cursor: pointer; font-size: 14px; }
+        
+        .editorial-section { padding: 100px 20px; max-width: var(--max-width); margin: 0 auto; }
+        .editorial-heading { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 500; text-align: center; margin-bottom: 16px; color: var(--color-charcoal); letter-spacing: -0.3px; }
+        .editorial-subheading { text-align: center; font-size: 17px; color: var(--color-mid-gray); max-width: 600px; margin: 0 auto 60px; line-height: 1.6; }
+        
+        .product-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 60px; }
+        .product-tile { text-align: center; }
+        .product-tile-image { width: 100%; aspect-ratio: 1; border-radius: 20px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .tile-sage { background: #C8D5B9; }
+        .tile-peach { background: #F4D9C6; }
+        .tile-cream { background: #F5F1E8; }
+        .tile-soft-blue { background: #D4E5E8; }
+        .product-tile-name { font-size: 16px; font-weight: 600; color: var(--color-charcoal); margin-bottom: 6px; }
+        .product-tile-price { font-size: 18px; font-weight: 700; color: var(--color-sage-green); }
+        
+        .trust-bar-refined { background: linear-gradient(135deg, var(--color-sun-yellow) 0%, var(--color-sage-green) 100%); padding: 60px 20px; }
+        .trust-content-refined { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        
+        .content-block { max-width: 1100px; margin: 80px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .content-block-image { width: 100%; height: 400px; background: var(--color-soft-sand); border-radius: 20px; }
+        .content-block-text h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 500; margin-bottom: 20px; color: var(--color-charcoal); }
+        .content-block-text p { font-size: 16px; line-height: 1.7; color: var(--color-mid-gray); margin-bottom: 16px; }
+        .content-block-link { color: var(--color-sage-green); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+        
+        @media (max-width: 768px) {
+            .hero-refined-content { grid-template-columns: 1fr; gap: 40px; }
+            .hero-refined-text h1 { font-size: 42px; }
+            .hero-floating-card { max-width: 100%; margin: 0; }
+            .product-tiles { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .content-block { grid-template-columns: 1fr; gap: 40px; }
+            .trust-content-refined { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-wrapper">
+        <nav>
+            <a href="v3-homepage-refined.html" class="logo">Bello</a>
+            <ul class="nav-links">
+                <li><a href="v3-homepage-refined.html">Home</a></li>
+                <li><a href="v3-about.html">Our Story</a></li>
+                <li><a href="v3-contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn" aria-label="Search">
+                    <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+                </button>
+                <button class="icon-btn cart-badge" aria-label="Cart">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" x2="21" y1="6" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Refined Hero with Floating Card -->
+        <section class="hero-refined">
+            <div class="hero-refined-content">
+                <div class="hero-refined-text">
+                    <h1>Live Better,<br>Waste Less</h1>
+                    <p>Discover sustainable essentials for your everyday life. Quality products that care for you and the planet.</p>
+                    <div class="hero-refined-cta">
+                        <button class="primary-button">See All Products</button>
+                    </div>
+                </div>
+                <div class="hero-floating-card">
+                    <span class="floating-card-badge">100% Natural</span>
+                    <div class="floating-card-image">
+                        <div class="placeholder-image" style="height: 100%; font-size: 13px;">
+                            [Featured Product]<br>400x400px
+                        </div>
+                    </div>
+                    <h3 class="floating-card-title">Reusable Kitchen Set</h3>
+                    <div class="floating-card-price">£34.99</div>
+                    <button class="floating-card-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Bar (Smooth Gradient) -->
+        <div class="trust-bar-refined">
+            <div class="trust-content-refined">
+                <div class="trust-item">
+                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="13" x="6" y="4" rx="2"></rect><path d="m22 7-7.1 3.78c-.57.3-1.23.3-1.8 0L6 7"></path><path d="M2 8v11c0 1.1.9 2 2 2h14"></path></svg>
+                    <h3>Free Shipping</h3>
+                    <p>On orders over £30</p>
+                </div>
+                <div class="trust-item">
+                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 6v6l4 2"></path></svg>
+                    <h3>Eco-Certified</h3>
+                    <p>100% sustainable materials</p>
+                </div>
+                <div class="trust-item">
+                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <h3>Highly Rated</h3>
+                    <p>By happy customers</p>
+                </div>
+                <div class="trust-item">
+                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11 12 14 22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                    <h3>30-Day Returns</h3>
+                    <p>Hassle-free guarantee</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Editorial Product Section -->
+        <section class="editorial-section">
+            <h2 class="editorial-heading">Discover Our Premium Essentials Collection</h2>
+            <p class="editorial-subheading">Carefully curated products to help you live more sustainably without compromising on quality or style</p>
+            
+            <div class="product-tiles">
+                <div class="product-tile">
+                    <div class="product-tile-image tile-sage">
+                        <div class="placeholder-image" style="width: 100%; height: 100%; font-size: 12px;">
+                            [Product]<br>Kitchen Set
+                        </div>
+                    </div>
+                    <h3 class="product-tile-name">Reusable Kitchen Set</h3>
+                    <p class="product-tile-price">£34.99</p>
+                </div>
+                <div class="product-tile">
+                    <div class="product-tile-image tile-peach">
+                        <div class="placeholder-image" style="width: 100%; height: 100%; font-size: 12px;">
+                            [Product]<br>Cotton Towels
+                        </div>
+                    </div>
+                    <h3 class="product-tile-name">Organic Cotton Basics</h3>
+                    <p class="product-tile-price">£29.99</p>
+                </div>
+                <div class="product-tile">
+                    <div class="product-tile-image tile-cream">
+                        <div class="placeholder-image" style="width: 100%; height: 100%; font-size: 12px;">
+                            [Product]<br>Storage Set
+                        </div>
+                    </div>
+                    <h3 class="product-tile-name">Bamboo Storage</h3>
+                    <p class="product-tile-price">£24.99</p>
+                </div>
+                <div class="product-tile">
+                    <div class="product-tile-image tile-soft-blue">
+                        <div class="placeholder-image" style="width: 100%; height: 100%; font-size: 12px;">
+                            [Product]<br>Cloth Set
+                        </div>
+                    </div>
+                    <h3 class="product-tile-name">Cleaning Cloths</h3>
+                    <p class="product-tile-price">£19.99</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Block -->
+        <div class="content-block">
+            <div class="content-block-image">
+                <div class="placeholder-image" style="height: 100%;">
+                    [Editorial Image]<br>
+                    Sustainable living<br>
+                    800x600px
+                </div>
+            </div>
+            <div class="content-block-text">
+                <h2>Latest Innovations for Radiant and Healthy Living</h2>
+                <p>Experience the elegance of sustainable living with our carefully curated collection of eco-friendly essentials designed to elevate your everyday life.</p>
+                <p>Every product is crafted with care, using 100% natural and sustainably sourced materials that are gentle on you and kind to the planet.</p>
+                <a href="#" class="content-block-link">
+                    Explore The Collection
+                    <svg class="icon" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Guarantees Section -->
+        <section class="editorial-section" style="background: var(--color-soft-sand); padding: 80px 20px;">
+            <h2 class="editorial-heading">Our Promise to You</h2>
+            <p class="editorial-subheading">We're committed to your satisfaction and the planet's wellbeing</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: var(--max-width); margin: 0 auto; margin-top: 50px;">
+                <div class="guarantee-card">
+                    <svg style="width: 56px; height: 56px; margin: 0 auto 20px; color: var(--color-sage-green);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11 12 14 22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                    <h3 style="font-size: 18px; margin-bottom: 12px; font-weight: 700;">Quality Guarantee</h3>
+                    <p style="color: var(--color-mid-gray); font-size: 15px; line-height: 1.6;">Every product is carefully tested and built to last. If you're not satisfied, we'll make it right.</p>
+                </div>
+                <div class="guarantee-card">
+                    <svg style="width: 56px; height: 56px; margin: 0 auto 20px; color: var(--color-sage-green);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M2 12h20"></path><ellipse cx="12" cy="12" rx="4" ry="10"></ellipse></svg>
+                    <h3 style="font-size: 18px; margin-bottom: 12px; font-weight: 700;">Carbon Neutral</h3>
+                    <p style="color: var(--color-mid-gray); font-size: 15px; line-height: 1.6;">We offset 100% of our shipping emissions and use plastic-free packaging.</p>
+                </div>
+                <div class="guarantee-card">
+                    <svg style="width: 56px; height: 56px; margin: 0 auto 20px; color: var(--color-sage-green);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                    <h3 style="font-size: 18px; margin-bottom: 12px; font-weight: 700;">Give Back</h3>
+                    <p style="color: var(--color-mid-gray); font-size: 15px; line-height: 1.6;">5% of every purchase supports environmental conservation projects worldwide.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Placeholder -->
+        <section class="editorial-section">
+            <h2 class="editorial-heading">Loved by Customers</h2>
+            <p class="editorial-subheading">Join our community making sustainable choices every day</p>
+            <div class="placeholder-reviews" style="margin-top: 40px;">
+                <div class="placeholder-reviews-title">Customer Reviews Will Appear Here</div>
+                <p>Once you have customer reviews, they will be displayed to build trust and social proof.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Bello</h3>
+                    <p>Making sustainable living simple, beautiful, and accessible for everyone.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                        </a>
+                        <a href="#" aria-label="Facebook">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul><li><a href="v3-homepage-refined.html">All Products</a></li></ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="v3-contact.html">Contact Us</a></li>
+                        <li><a href="v3-shipping.html">Shipping</a></li>
+                        <li><a href="v3-returns.html">Returns</a></li>
+                        <li><a href="v3-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="v3-about.html">About</a></li>
+                        <li><a href="v3-privacy.html">Privacy</a></li>
+                        <li><a href="v3-privacy.html">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bello. All rights reserved.</p>
+                <p>Made with 💚 for the planet</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
