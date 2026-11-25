@@ -16,7 +16,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
         <div className="glass-bg glass-border glass-shadow rounded-md p-10 text-center text-mid-gray">
           <p>No featured products yet.</p>
           <p className="text-sm mt-2">
-            Tag Shopify products with <code className="text-brand-deep">featured</code> to show them here.
+            Tag Shopify products with <code className="text-charcoal">featured</code> to show them here.
           </p>
           {/* TODO: AutoDS — sync will populate Shopify; keep the featured tag on launch SKUs */}
         </div>

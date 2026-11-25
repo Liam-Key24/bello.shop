@@ -42,7 +42,7 @@ export default async function ShopPage() {
           <p>No products found in Shopify yet.</p>
           <p className="text-sm mt-2">
             {/* TODO: AutoDS — products will sync into Shopify; tag launch SKUs with featured for homepage */}
-            Add products in Shopify (and tag launch items <code className="text-brand-deep">featured</code>).
+            Add products in Shopify (and tag launch items <code className="text-charcoal">featured</code>).
           </p>
         </div>
       ) : (

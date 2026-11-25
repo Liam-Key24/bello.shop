@@ -36,7 +36,7 @@ export function ProductGuarantees() {
     <div className="mt-12 pt-8 border-t border-light-gray space-y-5">
       {items.map((item, index) => (
         <div key={index} className="flex items-center gap-4">
-          <span className="text-brand-mid shrink-0">
+          <span className="text-brand shrink-0">
             <Icon name={item.icon} size={24} />
           </span>
           <span className="text-sm text-mid-gray">{item.label}</span>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Icon } from "@/app/components/ui/Icon";
+import { Sparkle } from "@/app/components/ui/Sparkle";
 
 const shopLinks = [{ href: "/shop", label: "All Products" }];
 
@@ -24,12 +25,16 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-brand-deep text-white mt-auto relative z-10">
-      <div className="max-w-[var(--max-width)] mx-auto px-6 md:px-[var(--spacing-horizontal)] py-16 md:py-20">
+    <footer className="bg-brand text-charcoal mt-auto relative z-10 overflow-hidden">
+      <Sparkle
+        size="lg"
+        className="pointer-events-none absolute top-6 right-6 text-charcoal/20 md:top-10 md:right-12 md:text-charcoal/25"
+      />
+      <div className="max-w-[var(--max-width)] mx-auto px-6 md:px-[var(--spacing-horizontal)] py-16 md:py-20 relative">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 mb-12 md:mb-16">
           <div>
-            <h3 className="font-serif text-2xl mb-4 text-white">Bello</h3>
-            <p className="text-sm text-white/80 leading-relaxed mb-6">
+            <h3 className="font-heading text-2xl mb-4 text-charcoal">Bello</h3>
+            <p className="text-sm text-charcoal/80 leading-relaxed mb-6">
               Making sustainable living simple, beautiful, and accessible for everyone.
             </p>
             <div className="flex gap-4">
@@ -40,7 +45,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="text-white hover:opacity-70 transition-opacity"
+                  className="text-charcoal hover:opacity-70 transition-opacity"
                 >
                   <Icon name={social.icon} size={20} />
                 </a>
@@ -49,7 +54,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-sm font-bold mb-5 uppercase tracking-wide text-white">
+            <h4 className="font-body text-sm font-bold mb-5 uppercase tracking-wide text-charcoal">
               Shop
             </h4>
             <ul className="space-y-3">
@@ -57,7 +62,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/80 hover:text-white transition-colors"
+                    className="text-sm text-charcoal/80 hover:text-charcoal transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -67,7 +72,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-sm font-bold mb-5 uppercase tracking-wide text-white">
+            <h4 className="font-body text-sm font-bold mb-5 uppercase tracking-wide text-charcoal">
               Support
             </h4>
             <ul className="space-y-3">
@@ -75,7 +80,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/80 hover:text-white transition-colors"
+                    className="text-sm text-charcoal/80 hover:text-charcoal transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -85,7 +90,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-sm font-bold mb-5 uppercase tracking-wide text-white">
+            <h4 className="font-body text-sm font-bold mb-5 uppercase tracking-wide text-charcoal">
               Company
             </h4>
             <ul className="space-y-3">
@@ -93,7 +98,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/80 hover:text-white transition-colors"
+                    className="text-sm text-charcoal/80 hover:text-charcoal transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -103,7 +108,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/15 flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-white/70">
+        <div className="pt-8 border-t border-charcoal/15 flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-charcoal/70">
           <p>&copy; {new Date().getFullYear()} Bello. All rights reserved.</p>
           <p>Made with care for the planet</p>
         </div>

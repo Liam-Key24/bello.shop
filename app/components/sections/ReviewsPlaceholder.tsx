@@ -20,7 +20,7 @@ export function ReviewsPlaceholder() {
         <h2>Loved by Customers</h2>
       </div>
       <div className="max-w-3xl mx-auto glass-bg glass-border glass-shadow rounded-md p-10 md:p-12 text-center">
-        <p className="font-display text-lg font-bold text-charcoal mb-3">
+        <p className="font-body text-lg font-bold text-charcoal mb-3">
           Customer Reviews Will Appear Here
         </p>
         <p className="text-mid-gray text-sm leading-relaxed">

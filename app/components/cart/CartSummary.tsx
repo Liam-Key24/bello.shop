@@ -31,7 +31,7 @@ export function CartSummary() {
 
   return (
     <GlassCard padding="lg" className="space-y-6">
-      <h2 className="font-display text-xl font-bold text-charcoal">Order Summary</h2>
+      <h2 className="text-xl text-charcoal">Order Summary</h2>
 
       <div className="space-y-4 text-[15px]">
         <div className="flex justify-between">
@@ -47,8 +47,8 @@ export function CartSummary() {
           </span>
         </div>
         <div className="flex justify-between pt-4 border-t border-light-gray">
-          <span className="font-display text-lg font-bold text-charcoal">Total</span>
-          <span className="font-display text-lg font-bold text-brand-deep">
+          <span className="font-body text-lg font-bold text-charcoal">Total</span>
+          <span className="font-body text-lg font-bold text-charcoal">
             {formatPrice(total)}
           </span>
         </div>
@@ -65,11 +65,11 @@ export function CartSummary() {
 
       <ul className="space-y-3 pt-2">
         <li className="flex items-center gap-3 text-sm text-mid-gray">
-          <Icon name="truck" size={18} className="text-brand-mid" />
+          <Icon name="truck" size={18} className="text-brand" />
           Free shipping on orders over £30
         </li>
         <li className="flex items-center gap-3 text-sm text-mid-gray">
-          <Icon name="check" size={18} className="text-brand-mid" />
+          <Icon name="check" size={18} className="text-brand" />
           Secure Shopify checkout
         </li>
       </ul>

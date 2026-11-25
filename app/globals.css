@@ -2,44 +2,45 @@
 
 @theme {
   /* ===== V5 Brand Colors ===== */
-  
-  /* Brand Greens */
-  --color-brand-deep: #2d5f3f;
-  --color-brand-button: #3f7d5a;
-  --color-brand-mid: #5b8c6e;
-  --color-brand-light: #8fb89d;
-  --color-brand-pale: #e8f4ed;
-  --color-brand-soft: #d4e8dc;
-  
+
+  /* Brand green — #ACDAAA is the only brand green */
+  --color-brand: #acdaaa;
+  --color-brand-hover: #8fcf8c;
+  --color-brand-soft: #d6edd5;
+  --color-brand-pale: #f0f8f0;
+  --color-brand-blob: #acdaaa;
+  --color-brand-blob-soft: #c2e1c1;
+
   /* Accent Blues */
   --color-accent-blue: #a0d7e7;
   --color-accent-soft-blue: #c8e8f5;
-  
+
   /* Neutrals */
   --color-white: #ffffff;
   --color-off-white: #f9fbfa;
   --color-light-gray: #e8eaed;
   --color-mid-gray: #6b7280;
   --color-charcoal: #1f2937;
-  
+
   /* ===== Spacing Scale (Custom Extensions) ===== */
   --spacing-section: 140px;
   --spacing-section-mobile: 80px;
   --spacing-horizontal: 60px;
   --spacing-horizontal-mobile: 24px;
-  
+
   /* ===== Border Radius ===== */
   --radius-sm: 6px;
   --radius-md: 8px;
-  
+
   /* ===== Max Width ===== */
   --max-width: 1280px;
-  
-  /* ===== Typography ===== */
-  /* Prefer Next.js font CSS variables when present; fall back to system stacks */
-  --font-family-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  --font-family-body: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
-  --font-family-display: var(--font-dm-sans), 'DM Sans', system-ui, -apple-system, sans-serif;
+
+}
+
+/* Font tokens reference next/font vars at use-time (not baked on :root) */
+@theme inline {
+  --font-heading: var(--font-young-serif), "Young Serif", Georgia, serif;
+  --font-body: var(--font-nunito-sans), "Nunito Sans", system-ui, -apple-system, sans-serif;
 }
 
 /* ===== Base Styles ===== */
@@ -50,12 +51,12 @@ html {
 }
 
 body {
-  font-family: var(--font-family-body);
+  @apply font-body;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   color: var(--color-charcoal);
-  line-height: 1.7;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -75,39 +76,39 @@ footer {
 /* ===== Typography ===== */
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family-serif);
-  font-weight: 500;
-  line-height: 1.2;
-  color: var(--color-brand-deep);
+  @apply font-heading;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-charcoal);
 }
 
+/* Young Serif runs wide — slightly tighter scale than Playfair */
 h1 {
-  font-size: 72px;
-  letter-spacing: -1.5px;
+  font-size: 64px;
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: 48px;
-  letter-spacing: -0.8px;
+  font-size: 42px;
+  letter-spacing: -0.015em;
 }
 
 h3 {
-  font-size: 32px;
-  letter-spacing: -0.5px;
+  font-size: 28px;
+  letter-spacing: -0.01em;
 }
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 48px;
-    letter-spacing: -1px;
+    font-size: 42px;
   }
-  
+
   h2 {
-    font-size: 36px;
+    font-size: 32px;
   }
-  
+
   h3 {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 
@@ -147,6 +148,22 @@ h3 {
   opacity: 0.45;
   pointer-events: none;
   z-index: 0;
+}
+
+.blob-brand {
+  background: radial-gradient(circle, var(--color-brand-blob) 0%, transparent 65%);
+}
+
+.blob-brand-soft {
+  background: radial-gradient(circle, var(--color-brand-blob-soft) 0%, transparent 65%);
+}
+
+.blob-accent {
+  background: radial-gradient(circle, var(--color-accent-blue) 0%, transparent 65%);
+}
+
+.blob-accent-soft {
+  background: radial-gradient(circle, var(--color-accent-soft-blue) 0%, transparent 65%);
 }
 
 @media (max-width: 768px) {

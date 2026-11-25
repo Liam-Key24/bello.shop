@@ -1,30 +1,26 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, DM_Sans } from "next/font/google";
+import { Young_Serif, Nunito_Sans } from "next/font/google";
 import "./globals.css";
 
 import Providers from "./providers";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { BackgroundBlobs } from "./components/layout/BackgroundBlobs";
+import { DecorativeLines } from "./components/layout/DecorativeLines";
+import { DecorativeSparkles } from "./components/layout/DecorativeSparkles";
 
-const playfairDisplay = Playfair_Display({
+const youngSerif = Young_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-young-serif",
+  display: "swap",
+});
+
+const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-dm-sans",
+  variable: "--font-nunito-sans",
   display: "swap",
 });
 
@@ -39,11 +35,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body
-        className={`${playfairDisplay.variable} ${inter.variable} ${dmSans.variable} font-body antialiased`}
-      >
+    <html
+      lang="en"
+      className={`h-full ${youngSerif.variable} ${nunitoSans.variable}`}
+    >
+      <body className="font-body antialiased">
         <BackgroundBlobs />
+        <DecorativeLines />
+        <DecorativeSparkles />
         <Providers>
           <Navbar />
           <main>

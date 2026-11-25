@@ -18,9 +18,9 @@ const sizeClasses: Record<ButtonSize, string> = {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-brand-button text-white hover:bg-brand-mid border border-transparent",
+    "bg-brand text-charcoal hover:bg-brand-hover border border-transparent",
   glass:
-    "glass-bg glass-border glass-shadow text-brand-deep hover:border-brand-mid/40",
+    "glass-bg glass-border glass-shadow text-charcoal hover:border-brand/40",
 };
 
 export function Button({

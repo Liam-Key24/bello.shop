@@ -34,7 +34,7 @@ export default async function Home() {
         <h1 className="mb-4">Welcome to Bello</h1>
         <p className="text-mid-gray">
           Products will appear once Shopify credentials are configured and
-          products are tagged <code className="text-brand-deep">featured</code>.
+          products are tagged <code className="text-charcoal">featured</code>.
         </p>
       </div>
     );

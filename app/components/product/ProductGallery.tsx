@@ -32,8 +32,8 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
               onClick={() => setActiveIndex(index)}
               className={`rounded-sm overflow-hidden border transition-colors ${
                 index === activeIndex
-                  ? "border-brand-mid"
-                  : "border-light-gray hover:border-brand-mid"
+                  ? "border-brand"
+                  : "border-light-gray hover:border-brand"
               }`}
               aria-label={`View image ${index + 1}`}
             >

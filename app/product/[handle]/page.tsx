@@ -49,7 +49,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <div className="text-center py-20 px-6">
         <h1 className="text-2xl font-bold mb-2">Product Not Found</h1>
         <p className="text-mid-gray">The product you&apos;re looking for doesn&apos;t exist.</p>
-        <Link href="/shop" className="inline-block mt-6 text-brand-deep font-semibold">
+        <Link href="/shop" className="inline-block mt-6 text-charcoal font-semibold">
           Back to shop
         </Link>
       </div>
@@ -72,7 +72,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <div className="max-w-[var(--max-width)] mx-auto px-6 md:px-[var(--spacing-horizontal)] py-16 md:py-24">
       <Link
         href="/shop"
-        className="inline-flex items-center gap-2 text-sm text-mid-gray hover:text-brand-deep mb-10 transition-colors"
+        className="inline-flex items-center gap-2 text-sm text-mid-gray hover:text-charcoal mb-10 transition-colors"
       >
         ← Back to shop
       </Link>
@@ -81,11 +81,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <ProductGallery images={images || []} title={title} />
 
         <div>
-          <span className="inline-block mb-6 px-3.5 py-1.5 rounded-sm bg-brand-pale text-brand-deep text-[11px] font-bold uppercase tracking-wide">
+          <span className="inline-block mb-6 px-3.5 py-1.5 rounded-sm bg-brand-pale text-charcoal text-[11px] font-bold uppercase tracking-wide">
             Sustainable Essential
           </span>
-          <h1 className="text-4xl md:text-5xl mb-5">{title}</h1>
-          <p className="font-display text-3xl md:text-4xl font-extrabold text-brand-deep mb-7">
+          <h1 className="text-3xl md:text-4xl mb-5">{title}</h1>
+          <p className="font-body text-2xl md:text-3xl font-bold text-charcoal mb-7">
             {formatPrice(price)}
           </p>
 
@@ -100,13 +100,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
           {featureLines.length > 0 && (
             <GlassCard padding="md" className="mb-8">
-              <h3 className="font-display text-lg font-bold text-charcoal mb-5">
+              <h3 className="text-lg text-charcoal mb-5">
                 What&apos;s Included
               </h3>
               <ul className="space-y-3">
                 {featureLines.map((line) => (
                   <li key={line} className="flex items-start gap-3 text-[15px] text-mid-gray">
-                    <span className="text-brand-mid mt-0.5 shrink-0">
+                    <span className="text-brand mt-0.5 shrink-0">
                       <Icon name="check" size={20} />
                     </span>
                     <span>{line}</span>

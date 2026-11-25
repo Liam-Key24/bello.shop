@@ -37,7 +37,7 @@ export function ContentBlock({
           {linkHref && linkText && (
             <Link
               href={linkHref}
-              className="inline-flex items-center gap-2 text-brand-deep font-semibold hover:gap-3 transition-all"
+              className="inline-flex items-center gap-2 text-charcoal font-semibold hover:gap-3 transition-all"
             >
               {linkText}
               <Icon name="arrowRight" size={16} />

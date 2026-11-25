@@ -13,7 +13,7 @@ export default function CartPage() {
     <div className="max-w-[var(--max-width)] mx-auto px-6 md:px-[var(--spacing-horizontal)] py-16 md:py-24">
       <Link
         href="/shop"
-        className="inline-flex text-sm text-mid-gray hover:text-brand-deep mb-8 transition-colors"
+        className="inline-flex text-sm text-mid-gray hover:text-charcoal mb-8 transition-colors"
       >
         ← Continue shopping
       </Link>
