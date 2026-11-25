@@ -14,7 +14,7 @@ export function FloatingProductCard({ product }: FloatingProductCardProps) {
 
   return (
     <GlassCard padding="md" className="max-w-sm w-full ml-auto glass-shadow-lg">
-      <span className="inline-block mb-5 px-3.5 py-1.5 rounded-sm bg-brand-pale/90 text-brand-deep text-[11px] font-bold uppercase tracking-wide">
+      <span className="inline-block mb-5 px-3.5 py-1.5 rounded-sm bg-brand-pale/90 text-charcoal text-[11px] font-bold uppercase tracking-wide">
         Featured
       </span>
       <ProductMedia
@@ -26,7 +26,7 @@ export function FloatingProductCard({ product }: FloatingProductCardProps) {
       <h3 className="font-display text-xl font-bold text-charcoal mb-2.5">
         {product.title}
       </h3>
-      <p className="font-display text-[28px] font-extrabold text-brand-deep mb-5">
+      <p className="font-display text-[28px] font-extrabold text-charcoal mb-5">
         {formatPrice(product.price)}
       </p>
       <Link href={`/product/${product.handle}`} className="block">

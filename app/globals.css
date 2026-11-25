@@ -2,39 +2,39 @@
 
 @theme {
   /* ===== V5 Brand Colors ===== */
-  
-  /* Brand Greens */
-  --color-brand-deep: #2d5f3f;
-  --color-brand-button: #3f7d5a;
-  --color-brand-mid: #5b8c6e;
-  --color-brand-light: #8fb89d;
-  --color-brand-pale: #e8f4ed;
-  --color-brand-soft: #d4e8dc;
-  
+
+  /* Brand green — #ACDAAA is the only brand green */
+  --color-brand: #acdaaa;
+  --color-brand-hover: #8fcf8c;
+  --color-brand-soft: #d6edd5;
+  --color-brand-pale: #f0f8f0;
+  --color-brand-blob: #acdaaa;
+  --color-brand-blob-soft: #c2e1c1;
+
   /* Accent Blues */
   --color-accent-blue: #a0d7e7;
   --color-accent-soft-blue: #c8e8f5;
-  
+
   /* Neutrals */
   --color-white: #ffffff;
   --color-off-white: #f9fbfa;
   --color-light-gray: #e8eaed;
   --color-mid-gray: #6b7280;
   --color-charcoal: #1f2937;
-  
+
   /* ===== Spacing Scale (Custom Extensions) ===== */
   --spacing-section: 140px;
   --spacing-section-mobile: 80px;
   --spacing-horizontal: 60px;
   --spacing-horizontal-mobile: 24px;
-  
+
   /* ===== Border Radius ===== */
   --radius-sm: 6px;
   --radius-md: 8px;
-  
+
   /* ===== Max Width ===== */
   --max-width: 1280px;
-  
+
   /* ===== Typography ===== */
   /* Prefer Next.js font CSS variables when present; fall back to system stacks */
   --font-family-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-serif);
   font-weight: 500;
   line-height: 1.2;
-  color: var(--color-brand-deep);
+  color: var(--color-charcoal);
 }
 
 h1 {
@@ -101,11 +101,11 @@ h3 {
     font-size: 48px;
     letter-spacing: -1px;
   }
-  
+
   h2 {
     font-size: 36px;
   }
-  
+
   h3 {
     font-size: 24px;
   }
@@ -147,6 +147,22 @@ h3 {
   opacity: 0.45;
   pointer-events: none;
   z-index: 0;
+}
+
+.blob-brand {
+  background: radial-gradient(circle, var(--color-brand-blob) 0%, transparent 65%);
+}
+
+.blob-brand-soft {
+  background: radial-gradient(circle, var(--color-brand-blob-soft) 0%, transparent 65%);
+}
+
+.blob-accent {
+  background: radial-gradient(circle, var(--color-accent-blue) 0%, transparent 65%);
+}
+
+.blob-accent-soft {
+  background: radial-gradient(circle, var(--color-accent-soft-blue) 0%, transparent 65%);
 }
 
 @media (max-width: 768px) {

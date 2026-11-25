@@ -13,10 +13,10 @@ export function PromisesSection() {
       <div className="max-w-[var(--max-width)] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
         {promises.map((item) => (
           <div key={item.title} className="text-center">
-            <div className="mx-auto mb-4 text-brand-mid flex justify-center">
+            <div className="mx-auto mb-4 text-brand flex justify-center">
               <Icon name={item.icon} size={40} strokeWidth={1.5} />
             </div>
-            <h3 className="font-display text-base font-semibold text-brand-deep mb-1.5">
+            <h3 className="font-display text-base font-semibold text-charcoal mb-1.5">
               {item.title}
             </h3>
             <p className="text-sm text-mid-gray">{item.description}</p>

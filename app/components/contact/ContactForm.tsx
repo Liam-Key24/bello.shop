@@ -64,7 +64,7 @@ export function ContactForm() {
           type="text"
           required
           autoComplete="name"
-          className="w-full rounded-sm border border-light-gray bg-white/80 px-4 py-3 text-charcoal focus:outline-none focus:border-brand-mid"
+          className="w-full rounded-sm border border-light-gray bg-white/80 px-4 py-3 text-charcoal focus:outline-none focus:border-brand"
         />
       </div>
 
@@ -78,7 +78,7 @@ export function ContactForm() {
           type="email"
           required
           autoComplete="email"
-          className="w-full rounded-sm border border-light-gray bg-white/80 px-4 py-3 text-charcoal focus:outline-none focus:border-brand-mid"
+          className="w-full rounded-sm border border-light-gray bg-white/80 px-4 py-3 text-charcoal focus:outline-none focus:border-brand"
         />
       </div>
 
@@ -91,7 +91,7 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
-          className="w-full rounded-sm border border-light-gray bg-white/80 px-4 py-3 text-charcoal focus:outline-none focus:border-brand-mid resize-y"
+          className="w-full rounded-sm border border-light-gray bg-white/80 px-4 py-3 text-charcoal focus:outline-none focus:border-brand resize-y"
         />
       </div>
 
@@ -102,7 +102,7 @@ export function ContactForm() {
       {message && (
         <p
           className={`text-sm ${
-            status === "success" ? "text-brand-deep" : "text-red-600"
+            status === "success" ? "text-charcoal" : "text-red-600"
           }`}
           role="status"
         >

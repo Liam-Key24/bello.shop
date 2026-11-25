@@ -35,7 +35,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="p-2 text-charcoal hover:text-brand-deep transition-colors"
+            className="p-2 text-charcoal hover:opacity-70 transition-opacity"
           >
             <Icon name="close" size={20} />
           </button>
@@ -46,7 +46,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               <Link
                 href={link.href}
                 onClick={onClose}
-                className="block text-base font-medium text-charcoal hover:text-brand-deep transition-colors py-2"
+                className="block text-base font-medium text-charcoal hover:opacity-70 transition-opacity py-2"
               >
                 {link.label}
               </Link>

@@ -34,7 +34,7 @@ export function CartLineItem({ item }: CartLineItemProps) {
           <h3 className="font-display text-lg font-bold text-charcoal">
             {item.title}
           </h3>
-          <p className="font-display font-bold text-brand-deep shrink-0">
+          <p className="font-display font-bold text-charcoal shrink-0">
             {formatPrice(item.price * item.quantity)}
           </p>
         </div>
@@ -47,7 +47,7 @@ export function CartLineItem({ item }: CartLineItemProps) {
         <button
           type="button"
           onClick={() => cartActions.removeItem(item.variantId)}
-          className="self-start text-sm text-mid-gray hover:text-brand-deep transition-colors"
+          className="self-start text-sm text-mid-gray hover:text-charcoal transition-colors"
         >
           Remove
         </button>

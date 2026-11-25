@@ -19,7 +19,7 @@ export default function ContactPage() {
           </p>
           <p className="text-sm">
             Form delivery uses Vercel Forms / webhook. Liam needs to enable Forms
-            or set <code className="text-brand-deep">CONTACT_WEBHOOK_URL</code>.
+            or set <code className="text-charcoal">CONTACT_WEBHOOK_URL</code>.
           </p>
         </div>
         <ContactForm />

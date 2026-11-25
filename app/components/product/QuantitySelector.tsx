@@ -22,7 +22,7 @@ export function QuantitySelector({
         <button
           type="button"
           aria-label="Decrease quantity"
-          className="p-1 text-mid-gray hover:text-brand-deep transition-colors"
+          className="p-1 text-mid-gray hover:text-charcoal transition-colors"
           onClick={() => onChange(Math.max(min, value - 1))}
           disabled={value <= min}
         >
@@ -32,7 +32,7 @@ export function QuantitySelector({
         <button
           type="button"
           aria-label="Increase quantity"
-          className="p-1 text-mid-gray hover:text-brand-deep transition-colors"
+          className="p-1 text-mid-gray hover:text-charcoal transition-colors"
           onClick={() => onChange(Math.min(max, value + 1))}
           disabled={value >= max}
         >

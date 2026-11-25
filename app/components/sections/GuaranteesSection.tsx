@@ -32,7 +32,7 @@ export function GuaranteesSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
           {guarantees.map((item) => (
             <GlassCard key={item.title} padding="lg" className="text-center">
-              <div className="mx-auto mb-6 text-brand-mid flex justify-center">
+              <div className="mx-auto mb-6 text-brand flex justify-center">
                 <Icon name={item.icon} size={56} strokeWidth={1.5} />
               </div>
               <h3 className="font-display text-xl font-bold text-charcoal mb-4">

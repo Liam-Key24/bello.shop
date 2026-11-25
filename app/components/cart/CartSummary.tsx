@@ -48,7 +48,7 @@ export function CartSummary() {
         </div>
         <div className="flex justify-between pt-4 border-t border-light-gray">
           <span className="font-display text-lg font-bold text-charcoal">Total</span>
-          <span className="font-display text-lg font-bold text-brand-deep">
+          <span className="font-display text-lg font-bold text-charcoal">
             {formatPrice(total)}
           </span>
         </div>
@@ -65,11 +65,11 @@ export function CartSummary() {
 
       <ul className="space-y-3 pt-2">
         <li className="flex items-center gap-3 text-sm text-mid-gray">
-          <Icon name="truck" size={18} className="text-brand-mid" />
+          <Icon name="truck" size={18} className="text-brand" />
           Free shipping on orders over £30
         </li>
         <li className="flex items-center gap-3 text-sm text-mid-gray">
-          <Icon name="check" size={18} className="text-brand-mid" />
+          <Icon name="check" size={18} className="text-brand" />
           Secure Shopify checkout
         </li>
       </ul>

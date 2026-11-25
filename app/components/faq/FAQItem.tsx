@@ -20,7 +20,7 @@ export function FAQItem({ question, answer }: FAQItemProps) {
         onClick={() => setOpen((value) => !value)}
       >
         <span className="font-display font-semibold text-charcoal">{question}</span>
-        <span className="text-brand-mid shrink-0">
+        <span className="text-brand shrink-0">
           <Icon name={open ? "close" : "plus"} size={18} />
         </span>
       </button>

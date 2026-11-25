@@ -34,7 +34,7 @@ export default function Unauthorized() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
             href="/"
-            className="px-6 py-3 bg-brand-button text-white rounded-sm hover:opacity-90 transition-opacity font-medium"
+            className="px-6 py-3 bg-brand text-charcoal rounded-sm hover:bg-brand-hover transition-colors font-medium"
           >
             Back Home
           </Link>

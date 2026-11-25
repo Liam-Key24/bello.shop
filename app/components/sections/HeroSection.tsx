@@ -40,7 +40,7 @@ export function HeroSection({ featuredProduct }: HeroSectionProps) {
         ) : (
           <div className="glass-bg glass-border glass-shadow rounded-md p-8 text-mid-gray text-sm">
             Featured product will appear here once a Shopify product is tagged
-            with <code className="text-brand-deep">featured</code>.
+            with <code className="text-charcoal">featured</code>.
           </div>
         )}
       </div>
