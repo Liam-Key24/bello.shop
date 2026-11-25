@@ -8,15 +8,16 @@
 
 :root {
     /* Lighter Green Palette (accessibility-safe) */
-    --color-deep-green: #2D5F3F;      /* Buttons, headings (AA compliant) */
+    --color-deep-green: #2D5F3F;      /* Headings (AA compliant) */
+    --color-button-green: #3F7D5A;    /* Buttons - lighter, fresher (AA with white text) */
     --color-mid-green: #5B8C6E;       /* Hover, borders */
     --color-light-green: #8FB89D;     /* Accents, icons */
     --color-pale-green: #E8F4ED;      /* Tints */
     --color-soft-green: #D4E8DC;      /* Light backgrounds */
     
-    /* Light Blue Accents */
-    --color-accent-blue: #B8E0E8;
-    --color-soft-blue: #E0F2F7;
+    /* Light Blue Accents (more saturated) */
+    --color-accent-blue: #A0D7E7;
+    --color-soft-blue: #C8E8F5;
     
     /* Neutrals */
     --color-white: #FFFFFF;
@@ -52,7 +53,7 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--color-white);
+    background: transparent;
     color: var(--color-charcoal);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
@@ -61,49 +62,53 @@ body {
     overflow-x: hidden;
 }
 
+html {
+    background: var(--color-white);
+}
+
 main { flex: 1; position: relative; z-index: 1; }
 footer { margin-top: auto; position: relative; z-index: 1; }
 
-/* Gradient Blob Backgrounds */
+/* Gradient Blob Backgrounds - Visible & Soft */
 .gradient-blob {
     position: fixed;
     border-radius: 50%;
     filter: blur(100px);
-    opacity: 0.15;
+    opacity: 0.45;
     pointer-events: none;
     z-index: 0;
 }
 
 .blob-1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, #5B8C6E 0%, transparent 70%);
-    top: -100px;
-    right: -100px;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, #6FAA82 0%, transparent 65%);
+    top: -120px;
+    right: -80px;
 }
 
 .blob-2 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, #B8E0E8 0%, transparent 70%);
-    top: 300px;
-    left: -150px;
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, #A0D7E7 0%, transparent 65%);
+    top: 280px;
+    left: -120px;
 }
 
 .blob-3 {
-    width: 550px;
-    height: 550px;
-    background: radial-gradient(circle, #8FB89D 0%, transparent 70%);
-    top: 800px;
-    right: 10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #7DB694 0%, transparent 65%);
+    top: 850px;
+    right: 8%;
 }
 
 .blob-4 {
-    width: 480px;
-    height: 480px;
-    background: radial-gradient(circle, #E0F2F7 0%, transparent 70%);
-    top: 1400px;
-    left: 15%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, #B5E3F3 0%, transparent 65%);
+    top: 1450px;
+    left: 12%;
 }
 
 /* Typography */
@@ -287,7 +292,7 @@ nav {
 /* Buttons */
 .primary-button {
     padding: 16px 40px;
-    background: var(--color-deep-green);
+    background: var(--color-button-green);
     color: white;
     border: none;
     border-radius: var(--radius-sm);
@@ -306,7 +311,7 @@ nav {
 /* True Frosted Glass Button */
 .glass-button {
     padding: 16px 40px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     color: var(--color-deep-green);
@@ -327,7 +332,7 @@ nav {
 
 /* Frosted Hero Card */
 .hero-card {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
     border: 1px solid var(--glass-border);
@@ -337,7 +342,7 @@ nav {
 }
 
 .hero-card-badge {
-    background: var(--color-pale-green);
+    background: rgba(232, 244, 237, 0.85);
     color: var(--color-deep-green);
     font-size: 11px;
     font-weight: 700;
@@ -352,7 +357,7 @@ nav {
 .hero-card-image {
     width: 100%;
     height: 240px;
-    background: rgba(248, 251, 249, 0.6);
+    background: rgba(248, 251, 249, 0.3);
     border-radius: var(--radius-sm);
     margin-bottom: 20px;
 }
@@ -393,7 +398,7 @@ nav {
 
 /* Frosted Product Card */
 .product-card {
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
     border: 1px solid var(--glass-border);
@@ -412,7 +417,7 @@ nav {
 .product-card-image {
     width: 100%;
     height: 400px;
-    background: rgba(248, 251, 249, 0.4);
+    background: rgba(248, 251, 249, 0.25);
 }
 
 .product-card-content {
@@ -444,7 +449,7 @@ nav {
 
 /* Trust Section - Frosted */
 .trust-section {
-    background: rgba(232, 244, 237, 0.4);
+    background: rgba(232, 244, 237, 0.3);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 80px 60px;
@@ -498,7 +503,7 @@ nav {
 .content-block-image {
     width: 100%;
     height: 480px;
-    background: rgba(248, 251, 249, 0.5);
+    background: rgba(248, 251, 249, 0.3);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
@@ -530,9 +535,7 @@ nav {
 
 /* Guarantees - Frosted Cards */
 .guarantees-section {
-    background: rgba(249, 251, 250, 0.3);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: transparent;
     padding: var(--section-padding) 60px;
 }
 
@@ -546,7 +549,7 @@ nav {
 }
 
 .guarantee-card {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid var(--glass-border);
@@ -602,7 +605,7 @@ nav {
     margin: 0 auto;
     text-align: center;
     padding: 60px 40px;
-    background: rgba(249, 251, 250, 0.5);
+    background: rgba(249, 251, 250, 0.4);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: var(--radius-md);
@@ -849,8 +852,9 @@ footer {
     
     /* Gradient blobs - smaller on mobile */
     .blob-1, .blob-2, .blob-3, .blob-4 {
-        width: 350px;
-        height: 350px;
-        filter: blur(80px);
+        width: 400px;
+        height: 400px;
+        filter: blur(90px);
+        opacity: 0.4;
     }
 }
