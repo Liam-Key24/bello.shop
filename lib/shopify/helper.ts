@@ -5,7 +5,7 @@ const getShopifyConfig = () => {
 
   if (!domain || !token) {
     throw new Error(
-      "Shopify environment variables are not defined. Make sure SHOPIFY_STORE_DOMAIN and SHOPIFY_STOREFRONT_ACCESS_TOKEN are set in .env.local"
+      "Shopify environment variables are not defined. Make sure NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN and NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN are set in .env.local"
     );
   }
 

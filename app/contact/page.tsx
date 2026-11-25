@@ -17,10 +17,6 @@ export default function ContactPage() {
             Questions about an order, a product, or our sustainability practices?
             Send a message and we&apos;ll reply by email.
           </p>
-          <p className="text-sm">
-            Form delivery uses Vercel Forms / webhook. Liam needs to enable Forms
-            or set <code className="text-charcoal">CONTACT_WEBHOOK_URL</code>.
-          </p>
         </div>
         <ContactForm />
       </div>

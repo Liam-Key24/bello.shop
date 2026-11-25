@@ -4,15 +4,13 @@ import { useState, FormEvent } from "react";
 import { Button } from "@/app/components/ui/Button";
 
 /**
- * Contact form wired for Vercel Forms.
- * On Vercel: enable Forms for the project; submissions POST to /api/contact
- * and can be viewed / forwarded from the Vercel dashboard once Forms is on.
- * No fake success without a real submit attempt.
+ * Contact form POSTs to /api/contact.
+ * "Sent" only when the webhook actually delivered; otherwise an honest fallback.
  */
 export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
-    "idle"
-  );
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "pending" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -35,8 +33,17 @@ export function ContactForm() {
         throw new Error(data.error || "Failed to send message");
       }
 
+      if (data.pendingSetup) {
+        setStatus("pending");
+        setMessage(
+          data.message ||
+            "Thanks — we received your details, but email delivery isn’t connected yet. Please try again later."
+        );
+        return;
+      }
+
       setStatus("success");
-      setMessage(data.message || "Thanks — we'll get back to you soon.");
+      setMessage(data.message || "Thanks — your message was sent. We'll reply by email.");
       form.reset();
     } catch (error) {
       setStatus("error");
@@ -102,7 +109,7 @@ export function ContactForm() {
       {message && (
         <p
           className={`text-sm ${
-            status === "success" ? "text-charcoal" : "text-red-600"
+            status === "error" ? "text-red-600" : "text-charcoal"
           }`}
           role="status"
         >

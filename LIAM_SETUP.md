@@ -8,7 +8,7 @@ Add to `.env.local` and Vercel project env:
 
 ```
 NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
-NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=shpat_or_storefront_token_here
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your_storefront_access_token
 ```
 
 Without these, homepage/shop/product pages show honest empty states (no fake products).
