@@ -17,11 +17,13 @@ const companyLinks = [
   { href: "/terms", label: "Terms" },
 ];
 
-const socialLinks = [
-  { href: "https://instagram.com", label: "Instagram", icon: "instagram" as const },
-  { href: "https://facebook.com", label: "Facebook", icon: "facebook" as const },
-  { href: "https://twitter.com", label: "Twitter", icon: "twitter" as const },
-];
+/** Add real profile URLs when ready — empty until then so we don't ship bare domain links. */
+const socialLinks: Array<{
+  href: string;
+  label: string;
+  icon: "instagram" | "facebook" | "twitter";
+}> = [];
+
 
 export function Footer() {
   return (
@@ -37,20 +39,22 @@ export function Footer() {
             <p className="text-sm text-charcoal/80 leading-relaxed mb-6">
               Making sustainable living simple, beautiful, and accessible for everyone.
             </p>
-            <div className="flex gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="text-charcoal hover:opacity-70 transition-opacity"
-                >
-                  <Icon name={social.icon} size={20} />
-                </a>
-              ))}
-            </div>
+            {socialLinks.length > 0 && (
+              <div className="flex gap-4">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="text-charcoal hover:opacity-70 transition-opacity"
+                  >
+                    <Icon name={social.icon} size={20} />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
           <div>

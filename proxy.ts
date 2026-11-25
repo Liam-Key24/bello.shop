@@ -3,9 +3,10 @@ import type { NextRequest } from "next/server";
 
 /**
  * Guest-checkout rebuild: no account route protection.
- * Middleware only applies security headers.
+ * Proxy only applies security headers.
  */
-export function middleware(_request: NextRequest) {
+export function proxy(_request: NextRequest) {
+  void _request;
   const response = NextResponse.next();
 
   response.headers.set("X-Content-Type-Options", "nosniff");

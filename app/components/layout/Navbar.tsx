@@ -53,15 +53,6 @@ export function Navbar() {
               <Icon name="menu" size={20} />
             </button>
 
-            <button
-              type="button"
-              className="hidden md:inline-flex p-2 text-charcoal hover:opacity-70 transition-opacity"
-              aria-label="Search"
-              // TODO: Wire search when product catalogue grows beyond 2 items
-            >
-              <Icon name="search" size={20} />
-            </button>
-
             <Link
               href="/cart"
               className="relative p-2 text-charcoal hover:opacity-70 transition-opacity"

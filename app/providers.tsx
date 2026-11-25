@@ -8,10 +8,7 @@ function CartSyncProvider({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-/**
- * AuthProvider removed from the guest-checkout rebuild.
- * Account routes are deleted in Stage 7; cart sync uses checkAuthStatus util only.
- */
+/** Guest-checkout providers — cart sync only, no account auth. */
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ErrorBoundary>

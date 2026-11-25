@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       message:
-        "Thanks — we received your details. Email delivery will activate once Vercel Forms / CONTACT_WEBHOOK_URL is configured.",
+        "Thanks — we received your details, but email delivery isn’t connected yet. Please try again later or email us directly.",
       pendingSetup: true,
     });
   } catch (error) {

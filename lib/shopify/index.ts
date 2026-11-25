@@ -30,13 +30,6 @@ export {
   type ShopifyCart,
 } from "./cart";
 export {
-  customerCreate,
-  customerLogin,
-  customerAccessTokenRenew,
-  getCustomer,
-  customerLogout,
-} from "./customer";
-export {
   mapShopifyToProductItem,
   applyFilters,
   parseFiltersFromParams,
