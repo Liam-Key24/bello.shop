@@ -1,43 +1,40 @@
 "use client";
 
-import BackButton from "@/app/components/common/navigation/BackButton";
-import CartItemCard from "./components/CartItemCard";
-import OrderSummary from "./components/OrderSummary";
-import ContinueCheckout from "./components/ContinueCheckout";
 import Link from "next/link";
 import { useCartStore } from "@/lib/store/cart";
-import { ArrowRight } from "@phosphor-icons/react";
+import { CartLineItem } from "@/app/components/cart/CartLineItem";
+import { CartSummary } from "@/app/components/cart/CartSummary";
+import { EmptyCart } from "@/app/components/cart/EmptyCart";
 
 export default function CartPage() {
-  const cart = useCartStore((state) => state.items);
+  const items = useCartStore((state) => state.items);
 
   return (
+    <div className="max-w-[var(--max-width)] mx-auto px-6 md:px-[var(--spacing-horizontal)] py-16 md:py-24">
+      <Link
+        href="/shop"
+        className="inline-flex text-sm text-mid-gray hover:text-brand-deep mb-8 transition-colors"
+      >
+        ← Continue shopping
+      </Link>
 
-    <div className="mt-20 space-y-4 mb-6 flex flex-col items-center neumorphism-bg pb-20">
-      <div className="w-full flex justify-start p-2">
-        <BackButton useIcon />
-      </div>
-
-      <h1 className="text-2xl font-semibold">Cart</h1>
-
-      {cart.length > 0 ? (
-        <>
-          {cart.map((item) => <CartItemCard key={item.variantId} item={item} />)}
-          <OrderSummary/>
-          <ContinueCheckout/>
-        </>
+      {items.length === 0 ? (
+        <EmptyCart />
       ) : (
         <>
-        <p>Your cart is empty.</p>
-        <Link href="/shop" className="underline flex items-center gap-2">
-          <span>
-          Continue Shopping!
-          </span>
-          <ArrowRight className="w-4 h-4" />
-        </Link> 
+          <h1 className="mb-10">Cart</h1>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-12">
+            <div className="lg:col-span-2 space-y-5">
+              {items.map((item) => (
+                <CartLineItem key={item.variantId} item={item} />
+              ))}
+            </div>
+            <div>
+              <CartSummary />
+            </div>
+          </div>
         </>
       )}
     </div>
-
   );
 }

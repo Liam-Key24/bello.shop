@@ -4,6 +4,10 @@ import { useSyncExternalStore } from "react";
 import { createCartItem, performCheckout } from "@/lib/shopify/cart";
 import { createCheckoutClient } from "@/lib/shopify/cart-client";
 import { checkAuthStatus } from "@/lib/utils/auth-check";
+import {
+  getStoredCartId,
+  persistCartIdFromResponse,
+} from "@/lib/shopify/cart-id";
 import type { ShopifyCartItem, CartButtonProps, CartItem } from "@/lib/shopify/types";
 
 type CartStore = {
@@ -61,15 +65,12 @@ const convertToCartItems = (items: ShopifyCartItem[]): CartItem[] => {
   }));
 };
 
-// Sync a single new item to Shopify (when logged in)
+// Sync a single new item to Shopify Storefront cart (guest or logged-in).
+// Persists shopifyCartId via httpOnly cookie + localStorage for return visits.
 const syncSingleItemToShopify = async (item: ShopifyCartItem): Promise<void> => {
   try {
-    const isAuthenticated = await checkAuthStatus();
-    if (!isAuthenticated) {
-      return;
-    }
-
     const cartItem = convertToCartItems([item])[0];
+    const storedCartId = getStoredCartId();
 
     const res = await fetch("/api/shopify/cart", {
       method: "POST",
@@ -77,6 +78,7 @@ const syncSingleItemToShopify = async (item: ShopifyCartItem): Promise<void> => 
       credentials: "include",
       body: JSON.stringify({
         action: "add",
+        cartId: storedCartId || undefined,
         items: [cartItem],
       }),
     });
@@ -84,20 +86,28 @@ const syncSingleItemToShopify = async (item: ShopifyCartItem): Promise<void> => 
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({}));
       console.error("Failed to sync item to Shopify:", errorData.error || "Unknown error");
-    } else {
-      // Update sync timestamp
-      try {
-        localStorage.setItem("cartLastShopifySync", Date.now().toString());
-      } catch {
-        // Ignore
-      }
-      
-      // After successful sync, reload from Shopify to get updated lineIds
+      return;
+    }
+
+    const data = await res.json().catch(() => ({}));
+    persistCartIdFromResponse(data);
+
+    try {
+      localStorage.setItem("cartLastShopifySync", Date.now().toString());
+    } catch {
+      // Ignore
+    }
+
+    // Prefer merging Shopify lines when available (logged-in reload path);
+    // guests keep local items and rely on cookie/localStorage cart ID.
+    const isAuthenticated = await checkAuthStatus();
+    if (isAuthenticated) {
       const shopifyItems = await loadFromShopify();
       if (shopifyItems.length > 0) {
-        // Merge: Keep local items that aren't in Shopify, update those that are
-        const shopifyVariantIds = new Set(shopifyItems.map(item => item.variantId));
-        const localOnlyItems = state.items.filter(item => !shopifyVariantIds.has(item.variantId));
+        const shopifyVariantIds = new Set(shopifyItems.map((i) => i.variantId));
+        const localOnlyItems = state.items.filter(
+          (i) => !shopifyVariantIds.has(i.variantId)
+        );
         state.items = [...shopifyItems, ...localOnlyItems];
         persistStore(state);
         emitChange();
@@ -258,62 +268,40 @@ export const cartActions = {
       );
       persistStore(state);
       emitChange();
-      
-      // Sync to Shopify if logged in - use update if we have lineId, otherwise add
-      const isAuthenticated = await checkAuthStatus();
-      if (isAuthenticated) {
-        const updatedItem = state.items.find((i) => i.variantId === item.variantId);
-        if (updatedItem?.lineId) {
-          // Use update action
-          try {
-            const res = await fetch("/api/shopify/cart", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              credentials: "include",
-              body: JSON.stringify({
-                action: "update",
-                updates: [{ id: updatedItem.lineId, quantity: updatedItem.quantity }],
-              }),
-            });
-            if (!res.ok) {
-              // Fallback to single item add
-              await syncSingleItemToShopify(item);
-            } else {
-              // Update sync timestamp
-              try {
-                localStorage.setItem("cartLastShopifySync", Date.now().toString());
-              } catch {
-                // Ignore
-              }
-              // Reload to get updated state and merge
-              const shopifyItems = await loadFromShopify();
-              if (shopifyItems.length > 0) {
-                const shopifyVariantIds = new Set(shopifyItems.map(item => item.variantId));
-                const localOnlyItems = state.items.filter(item => !shopifyVariantIds.has(item.variantId));
-                state.items = [...shopifyItems, ...localOnlyItems];
-                persistStore(state);
-                emitChange();
-              }
-            }
-          } catch (error) {
-            console.error("Error updating item in Shopify:", error);
+
+      // Sync to Shopify cart (persists cart ID for return visits)
+      const updatedItem = state.items.find((i) => i.variantId === item.variantId);
+      if (updatedItem?.lineId) {
+        try {
+          const res = await fetch("/api/shopify/cart", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({
+              action: "update",
+              cartId: getStoredCartId() || undefined,
+              updates: [{ id: updatedItem.lineId, quantity: updatedItem.quantity }],
+            }),
+          });
+          if (!res.ok) {
             await syncSingleItemToShopify(item);
+          } else {
+            const data = await res.json().catch(() => ({}));
+            persistCartIdFromResponse(data);
           }
-        } else {
-          // No lineId, add the item (Shopify will merge if it exists)
+        } catch (error) {
+          console.error("Error updating item in Shopify:", error);
           await syncSingleItemToShopify(item);
         }
+      } else {
+        await syncSingleItemToShopify(item);
       }
     } else {
-      // New item, add to local state
+      // New item, add to local state then sync to Shopify Storefront cart
       state.items = [...state.items, item];
       persistStore(state);
       emitChange();
-      // Sync single new item to Shopify if logged in
-      const isAuthenticated = await checkAuthStatus();
-      if (isAuthenticated) {
-        await syncSingleItemToShopify(item);
-      }
+      await syncSingleItemToShopify(item);
     }
   },
 
